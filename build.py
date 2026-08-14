@@ -81,6 +81,10 @@ ul.list li{{padding:1rem 0;border-bottom:1px solid var(--tan)}}
 ul.list a{{text-decoration:none;font-size:1.15rem}}
 ul.list a:hover{{text-decoration:underline}}
 ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
+.welcome p{{margin:1.5rem 0 2rem}}
+.today h3{{margin:0 0 .3rem;font-size:1.4rem}}
+.today h3 a{{text-decoration:none;color:var(--green)}}
+.today h3 a:hover{{text-decoration:underline}}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}}
 </style>
@@ -138,17 +142,25 @@ def build():
             page(it["title"], content, it["body"][:160]), encoding="utf-8")
 
     latest = items[0]
-    lbody = "".join(f"<p>{html.escape(p)}</p>"
-                    for p in latest["body"].split("\n\n") if p.strip())
-    home = f"""<article>
-<h1>{html.escape(latest['title'])}</h1>
+    home = f"""<section class="welcome">
+<p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
+invitation to linger in Scripture long enough to notice who God is, what He is saying,
+and what He may be drawing your attention to today. I&rsquo;m not here to tell you what
+to think; I hope to help you grow more comfortable opening the Bible for yourself,
+asking questions, following the threads that make you pause, and carrying something
+from His Word with you into the rest of your day.</p>
+</section>
+
+<h2>Today&rsquo;s reflection</h2>
+<article class="today">
+<h3><a href="/{latest['slug']}/">{html.escape(latest['title'])}</a></h3>
 <div class="meta">{pretty(latest['date'])} &middot; <span class="scripture">{html.escape(latest['scripture'])}</span></div>
 <audio controls preload="none" src="{AUDIO_BASE}/{latest['audio']}"></audio>
-{lbody}
 </article>
+
 <h2>Recent reflections</h2>
 <ul class="list">"""
-    for it in items[1:11]:
+    for it in items[1:6]:
         home += (f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
                  f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
     home += '</ul><p><a href="/reflections/">See all reflections &rarr;</a></p>'
