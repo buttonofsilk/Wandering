@@ -86,7 +86,7 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3 a{{text-decoration:none;color:var(--green)}}
 .today h3 a:hover{{text-decoration:underline}}
 .welcome p{{margin:1.5rem 0}}
-.hero{{width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);height:22rem;object-fit:cover;object-position:center 42%;display:block;margin-top:1.5rem}}
+.hero{{width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);height:22rem;object-fit:cover;object-position:center 62%;display:block;margin-top:1.5rem}}
 .enter{{text-align:center;margin-top:2.5rem;font-size:1.15rem}}
 .enter a{{text-decoration:none;border-bottom:1px solid var(--sage)}}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
