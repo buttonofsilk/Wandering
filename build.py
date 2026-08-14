@@ -63,7 +63,7 @@ body{{margin:0;background:var(--cream);color:var(--ink);
 .wrap{{max-width:40rem;margin:0 auto;padding:2rem 1.25rem 4rem}}
 a{{color:var(--green)}}
 header.site{{text-align:center;padding:0.5rem 0 0.5rem}}
-header.site img{{max-width:12rem;width:100%;height:auto;padding:8px;border:1px solid #3D6B80;outline:2px solid #2E4A32;outline-offset:5px;box-shadow:0 2px 10px rgba(26,45,29,0.12)}}
+header.site img{{max-width:26rem;width:100%;height:auto}}
 header.site .tag{{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}}
 nav{{text-align:center;padding:.5rem 0 2rem;border-bottom:1px solid var(--tan)}}
 nav a{{margin:0 .7rem;text-decoration:none;font-size:.95rem}}
@@ -96,7 +96,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <body>
 <div class="wrap">
 <header class="site">
-  <a href="/"><img src="/cover.png" alt="{html.escape(SITE_TITLE)}"></a>
+  <a href="/"><img src="/wordmark.png" alt="{html.escape(SITE_TITLE)}"></a>
   <div class="tag">{html.escape(SITE_DESC)}</div>
 </header>
 <nav>
