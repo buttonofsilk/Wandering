@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+<title>Wandering Through God&#x27;s Word with Wonder</title>
+<link>https://buttonofsilk.org</link>
+<description>Daily Scripture reflections that invite you to slow down, linger, and wonder through God&#x27;s Word.</description>
+<language>en-us</language>
+<lastBuildDate>Fri, 14 Aug 2026 21:52:10 +0000</lastBuildDate>
+<itunes:author>Hope Little</itunes:author>
+<itunes:summary>Daily Scripture reflections that invite you to slow down, linger, and wonder through God&#x27;s Word.</itunes:summary>
+<itunes:type>episodic</itunes:type>
+<itunes:explicit>false</itunes:explicit>
+<itunes:image href="https://buttonofsilk.org/cover.png"/>
+<itunes:category text="Religion &amp; Spirituality"><itunes:category text="Christianity"/></itunes:category>
+<itunes:owner><itunes:name>Hope Little</itunes:name><itunes:email>hope@buttonofsilk.org</itunes:email></itunes:owner>
+<item>
+<title>When You Cannot Bear It Yet</title>
+<link>https://buttonofsilk.org/2026-08-10-john-16-1-15/</link>
+<guid isPermaLink="true">https://buttonofsilk.org/2026-08-10-john-16-1-15/</guid>
+<pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+<description>John 16:1-15 - Jesus prepares His disciples for hardship with compassion, promising that although He is leaving, the Holy Spirit will come to guide, teach, and remain with them. He gives them enough to hold onto now, knowing they cannot bear everything at once, and reminds them that remembering His words will help steady them when hard things come.</description>
+<itunes:summary>John 16:1-15 - Jesus prepares His disciples for hardship with compassion, promising that although He is leaving, the Holy Spirit will come to guide, teach, and remain with them. He gives them enough to hold onto now, knowing they cannot bear everything at once, and reminds them that remembering His words will help steady them when hard things come.</itunes:summary>
+<itunes:duration></itunes:duration>
+<itunes:explicit>false</itunes:explicit>
+<enclosure url="https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev/2026-08-10.mp3" length="0" type="audio/mpeg"/>
+</item>
+</channel></rss>
