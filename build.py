@@ -85,6 +85,9 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3{{margin:0 0 .3rem;font-size:1.4rem}}
 .today h3 a{{text-decoration:none;color:var(--green)}}
 .today h3 a:hover{{text-decoration:underline}}
+.welcome p{{margin:1.5rem 0}}
+.enter{{text-align:center;margin-top:2.5rem;font-size:1.15rem}}
+.enter a{{text-decoration:none;border-bottom:1px solid var(--sage)}}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}}
 </style>
@@ -141,29 +144,15 @@ def build():
         (d / "index.html").write_text(
             page(it["title"], content, it["body"][:160]), encoding="utf-8")
 
-    latest = items[0]
-    home = f"""<section class="welcome">
+    home = """<section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
 invitation to linger in Scripture long enough to notice who God is, what He is saying,
 and what He may be drawing your attention to today. I&rsquo;m not here to tell you what
 to think; I hope to help you grow more comfortable opening the Bible for yourself,
 asking questions, following the threads that make you pause, and carrying something
 from His Word with you into the rest of your day.</p>
-</section>
-
-<h2>Today&rsquo;s reflection</h2>
-<article class="today">
-<h3><a href="/{latest['slug']}/">{html.escape(latest['title'])}</a></h3>
-<div class="meta">{pretty(latest['date'])} &middot; <span class="scripture">{html.escape(latest['scripture'])}</span></div>
-<audio controls preload="none" src="{AUDIO_BASE}/{latest['audio']}"></audio>
-</article>
-
-<h2>Recent reflections</h2>
-<ul class="list">"""
-    for it in items[1:6]:
-        home += (f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
-                 f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
-    home += '</ul><p><a href="/reflections/">See all reflections &rarr;</a></p>'
+<p class="enter"><a href="/reflections/">Begin wandering &rarr;</a></p>
+</section>"""
     (OUT / "index.html").write_text(page(SITE_TITLE, home), encoding="utf-8")
 
     arch = '<h1>All Reflections</h1><ul class="list">'
