@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wandering Through God&#x27;s Word with Wonder</title>
 <meta name="description" content="Daily Scripture reflections that invite you to slow down, linger, and wonder through God&#x27;s Word.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="Wandering Through God&#x27;s Word with Wonder" href="/feed.xml">
 <style>
 :root {
@@ -15,12 +18,13 @@
 body{margin:0;background:var(--cream);color:var(--ink);
  font:1.05rem/1.7 Georgia,"Times New Roman",serif}
 .wrap{max-width:40rem;margin:0 auto;padding:2rem 1.25rem 4rem}
+body.home .wrap{max-width:min(90vw,60rem)}
 a{color:var(--green)}
 header.site{text-align:center;padding:0.5rem 0 0.5rem}
-header.site img{max-width:26rem;width:100%;height:auto}
+header.site img{max-width:44rem;width:100%;height:auto}
 header.site .tag{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}
-nav{text-align:center;padding:.5rem 0 2rem;border-bottom:1px solid var(--tan)}
-nav a{margin:0 .7rem;text-decoration:none;font-size:.95rem}
+nav{text-align:center;padding:.5rem 0 .8rem;border-bottom:1px solid var(--tan)}
+nav a{margin:0 1.6rem;text-decoration:none;font-size:1.1rem;font-style:italic}
 nav a:hover{text-decoration:underline}
 h1{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0 0 .3rem}
 h2{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}
@@ -40,25 +44,25 @@ ul.list .sub{color:var(--muted);font-size:.88rem;margin-top:.2rem}
 .today h3 a{text-decoration:none;color:var(--green)}
 .today h3 a:hover{text-decoration:underline}
 .welcome p{margin:1.5rem 0}
-.hero{width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);height:30rem;object-fit:cover;object-position:center 80%;display:block;margin-top:1.5rem}
-.enter{text-align:center;margin-top:2.5rem;font-size:1.15rem}
-.enter a{text-decoration:none;border-bottom:1px solid var(--sage)}
-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
+.hero{width:100%;max-width:none;margin-top:0.8rem;height:26rem;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}
+.sprig{width:2.2rem;height:1.1rem;vertical-align:middle;color:var(--sage);display:inline-block}
+.sprig.flip{transform:scaleX(-1)}
+.enter{text-align:center;margin:1.2rem 0 1.4rem}
+.enter a{display:inline-block;text-decoration:none;font-size:1.5rem;color:var(--green)}
+.enter a:hover{color:var(--sage)}
+.enter a:hover .sprig{color:var(--green)}
+footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}
 </style>
 </head>
-<body>
+<body class="home">
 <div class="wrap">
 <header class="site">
   <a href="/"><img src="/wordmark.png" alt="Wandering Through God&#x27;s Word with Wonder"></a>
   <div class="tag">Daily Scripture reflections that invite you to slow down, linger, and wonder through God&#x27;s Word.</div>
 </header>
-<nav>
-  <a href="/">Home</a>
-  <a href="/reflections/">All Reflections</a>
-  <a href="/about/">About</a>
-  <a href="/feed.xml">Podcast</a>
-</nav>
+
+<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>
 <img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
@@ -67,7 +71,7 @@ and what He may be drawing your attention to today. I&rsquo;m not here to tell y
 to think; I hope to help you grow more comfortable opening the Bible for yourself,
 asking questions, following the threads that make you pause, and carrying something
 from His Word with you into the rest of your day.</p>
-<p class="enter"><a href="/reflections/">Begin wandering &rarr;</a></p>
+
 </section>
 <footer>Button of Silk &middot; Hope Little</footer>
 </div>
