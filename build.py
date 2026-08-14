@@ -86,6 +86,7 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3 a{{text-decoration:none;color:var(--green)}}
 .today h3 a:hover{{text-decoration:underline}}
 .welcome p{{margin:1.5rem 0}}
+.hero{{width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);height:auto;display:block;margin-top:1.5rem}}
 .enter{{text-align:center;margin-top:2.5rem;font-size:1.15rem}}
 .enter a{{text-decoration:none;border-bottom:1px solid var(--sage)}}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
@@ -144,7 +145,8 @@ def build():
         (d / "index.html").write_text(
             page(it["title"], content, it["body"][:160]), encoding="utf-8")
 
-    home = """<section class="welcome">
+    home = """<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+<section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
 invitation to linger in Scripture long enough to notice who God is, what He is saying,
 and what He may be drawing your attention to today. I&rsquo;m not here to tell you what
