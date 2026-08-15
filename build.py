@@ -78,6 +78,7 @@ header.site img{{max-width:44rem;width:100%;height:auto}}
 header.site .tag{{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}}
 nav{{text-align:center;padding:.5rem 0 .8rem;border-bottom:1px solid var(--tan)}}
 nav a{{margin:0 1.6rem;text-decoration:none;font-size:1.1rem;font-style:italic}}
+@media (max-width:600px){{nav a{{margin:0 .6rem;font-size:.95rem}}}}
 nav a:hover{{text-decoration:underline}}
 h1{{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0 0 .3rem}}
 h2{{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}}
