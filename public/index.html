@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="Wandering Through God&#x27;s Word with Wonder" href="/feed.xml">
+<script src="/trail.js" defer></script>
 <style>
 :root {
   --green:#1A2D1D; --sage:#3D6B80; --cream:#FCFCFB;
@@ -23,10 +24,6 @@ a{color:var(--green)}
 header.site{text-align:center;padding:0.5rem 0 0.5rem}
 header.site img{max-width:44rem;width:100%;height:auto}
 header.site .tag{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}
-nav{text-align:center;padding:.5rem 0 .8rem;border-bottom:1px solid var(--tan)}
-nav a{margin:0 1.6rem;text-decoration:none;font-size:1.1rem;font-style:italic}
-@media (max-width:600px){nav a{margin:0 .6rem;font-size:.95rem}}
-nav a:hover{text-decoration:underline}
 h1{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0 0 .3rem}
 h2{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}
 .meta{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
@@ -40,12 +37,11 @@ ul.list li{padding:1rem 0;border-bottom:1px solid var(--tan)}
 ul.list a{text-decoration:none;font-size:1.15rem}
 ul.list a:hover{text-decoration:underline}
 ul.list .sub{color:var(--muted);font-size:.88rem;margin-top:.2rem}
-.welcome p{margin:1.5rem 0 2rem}
+.welcome p{margin:1.5rem 0}
 .today h3{margin:0 0 .3rem;font-size:1.4rem}
 .today h3 a{text-decoration:none;color:var(--green)}
 .today h3 a:hover{text-decoration:underline}
-.welcome p{margin:1.5rem 0}
-.hero{width:100%;max-width:none;margin-top:0;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}
+.hero{width:100%;max-width:none;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}
 .strip{width:100%;aspect-ratio:7/2;height:auto;object-fit:cover;object-position:center 30%;display:block;margin:0 0 1.5rem}
 .sprig{width:2.2rem;height:1.1rem;vertical-align:middle;color:var(--sage);display:inline-block}
 .sprig.flip{transform:scaleX(-1)}
@@ -53,6 +49,22 @@ ul.list .sub{color:var(--muted);font-size:.88rem;margin-top:.2rem}
 .enter a{display:inline-block;text-decoration:none;font-size:1.5rem;color:var(--green)}
 .enter a:hover{color:var(--sage)}
 .enter a:hover .sprig{color:var(--green)}
+.enter-row{text-align:center;margin:0.6rem 0 0}
+.enter-row + p.enter{margin-top:0.2rem}
+.trail-wrap{position:relative;display:inline-block}
+.trail-toggle{display:inline-flex;align-items:center;gap:.4rem;
+ background:var(--cream);border:1px solid var(--tan);padding:.5rem .9rem;border-radius:2rem;
+ font-family:Georgia,serif;font-size:.85rem;font-style:italic;color:var(--green);cursor:pointer}
+.trail-toggle:hover{border-color:var(--sage);color:var(--sage)}
+.trail-panel{position:absolute;top:calc(100% + .5rem);left:50%;
+ transform:translateX(-50%) translateY(-8px);
+ width:14rem;background:var(--cream);border:1px solid var(--tan);
+ box-shadow:0 8px 24px rgba(0,0,0,.10);z-index:50;padding:1rem 1.2rem;
+ display:flex;flex-direction:column;gap:.8rem;
+ opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.trail-panel.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.trail-panel a{font-size:1.05rem;font-style:italic;color:var(--green);text-decoration:none}
+.trail-panel a:hover{color:var(--sage)}
 footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}
 </style>
@@ -63,7 +75,21 @@ footer{margin-top:5rem;padding-top:1.5rem;border-top:1px solid var(--tan);
   <a href="/"><img src="/wordmark.png" alt="Wandering Through God&#x27;s Word with Wonder"></a>
   <div class="tag">Daily Scripture reflections that invite you to slow down, linger, and wonder through God&#x27;s Word.</div>
 </header>
-
+<div class="enter-row">
+<div class="trail-wrap">
+<button class="trail-toggle" aria-label="Open trail guide">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7l2.2 4.8L9 14.2z"/></svg>
+  Trail Guide
+</button>
+<div id="trail-panel" class="trail-panel">
+  <a href="/">Home</a>
+  <a href="/reflections/">Reflections</a>
+  <a href="/exploration/">Exploration</a>
+  <a href="/about/">Learn about your guide</a>
+  <a href="/podcast/">Podcast</a>
+</div>
+</div>
+</div>
 <p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>
 <img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
@@ -73,7 +99,6 @@ and what He may be drawing your attention to today. I&rsquo;m not here to tell y
 to think; I hope to help you grow more comfortable opening the Bible for yourself,
 asking questions, following the threads that make you pause, and carrying something
 from His Word with you into the rest of your day.</p>
-
 </section>
 <footer>Button of Silk &middot; Hope Little</footer>
 </div>
