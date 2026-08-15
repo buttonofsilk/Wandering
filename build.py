@@ -98,6 +98,7 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3 a:hover{{text-decoration:underline}}
 .welcome p{{margin:1.5rem 0}}
 .hero{{width:100%;max-width:none;margin-top:0;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}}
+.strip{{width:100%;aspect-ratio:7/2;height:auto;object-fit:cover;object-position:center 30%;display:block;margin:0 0 1.5rem}}
 .sprig{{width:2.2rem;height:1.1rem;vertical-align:middle;color:var(--sage);display:inline-block}}
 .sprig.flip{{transform:scaleX(-1)}}
 .enter{{text-align:center;margin:0.4rem 0 0.8rem}}
@@ -167,11 +168,20 @@ from His Word with you into the rest of your day.</p>
 </section>"""
     (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home", nav=""), encoding="utf-8")
 
-    arch = '<h1>All Reflections</h1><ul class="list">'
-    for it in items:
-        arch += (f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
-                 f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
-    arch += "</ul>"
+    l = items[0]
+    arch = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+<h1>Reflections</h1>
+<article class="today">
+<h3><a href="/{l['slug']}/">{html.escape(l['title'])}</a></h3>
+<div class="meta">{pretty(l['date'])} &middot; <span class="scripture">{html.escape(l['scripture'])}</span></div>
+<audio controls preload="none" src="{AUDIO_BASE}/{l['audio']}"></audio>
+</article>"""
+    if len(items) > 1:
+        arch += '<h2>Earlier reflections</h2><ul class="list">'
+        for it in items[1:]:
+            arch += (f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
+                     f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
+        arch += "</ul>"
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("All Reflections", arch), encoding="utf-8")
 
