@@ -13,7 +13,7 @@ SITE_URL    = "https://buttonofsilk.org"
 AUDIO_BASE  = "https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev"
 AUTHOR      = "Hope Little"
 EMAIL       = "hope@buttonofsilk.org"
-COVER       = SITE_URL + "/cover.png"
+COVER       = SITE_URL + "/cover.jpg"
 
 ROOT   = Path(__file__).parent
 SRC    = ROOT / "reflections"
