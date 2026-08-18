@@ -17,10 +17,16 @@ COVER       = SITE_URL + "/cover.jpg"
 
 ROOT   = Path(__file__).parent
 SRC    = ROOT / "reflections"
+PAGES  = ROOT / "pages"
 OUT    = ROOT / "public"
 STATIC = ROOT / "static"
 
-# ---- Front matter ---------------------------------------------------------
+def slugify(s):
+    s = s.lower().strip()
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    return s.strip("-")
+
+# ---- Front matter (reflections) -------------------------------------------
 def parse(path):
     raw = path.read_text(encoding="utf-8")
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", raw, re.S)
@@ -40,6 +46,60 @@ def parse(path):
     for req in ("date", "title", "scripture", "audio"):
         if req not in meta:
             raise ValueError(f"{path.name} is missing '{req}'")
+    return meta
+
+# ---- Front matter + simple markdown (standalone pages) --------------------
+def parse_simple_page(path):
+    """Parses a pages/*.md file: front matter + simple markdown.
+    Blank line = new paragraph. '## ' = heading. '> ' = pull-quote."""
+    raw = path.read_text(encoding="utf-8")
+    m = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", raw, re.S)
+    if not m:
+        raise ValueError(f"Missing front matter in {path.name}")
+    meta = {}
+    for line in m.group(1).split("\n"):
+        if not line.strip() or ":" not in line:
+            continue
+        k, v = line.split(":", 1)
+        meta[k.strip()] = v.strip()
+    body_raw = m.group(2).strip()
+
+    def render_text(s):
+        links = []
+        def stash(m):
+            links.append((m.group(1), m.group(2)))
+            return f"\x00LINK{len(links)-1}\x00"
+        stashed = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", stash, s)
+        escaped = html.escape(stashed)
+        for i, (t, u) in enumerate(links):
+            anchor = f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{html.escape(t)}</a>'
+            escaped = escaped.replace(f"\x00LINK{i}\x00", anchor)
+        return escaped
+
+    html_parts = []
+    sections = []
+    for block in body_raw.split("\n\n"):
+        block = block.strip()
+        if not block:
+            continue
+        if block.startswith("### "):
+            html_parts.append(f"<h3>{render_text(block[4:].strip())}</h3>")
+        elif block.startswith("## "):
+            _title = block[3:].strip()
+            _anchor = slugify(_title)
+            sections.append((_title, _anchor))
+            html_parts.append(f'<h2 id="{_anchor}">{render_text(_title)}</h2>')
+        elif block.startswith("> "):
+            html_parts.append(f"<blockquote>{render_text(block[2:].strip())}</blockquote>")
+        elif block.startswith("- "):
+            items = "".join(f"<li>{render_text(line[2:].strip())}</li>"
+                            for line in block.split("\n") if line.strip().startswith("- "))
+            html_parts.append(f"<ul>{items}</ul>")
+        else:
+            html_parts.append(f"<p>{render_text(block)}</p>")
+    meta["body_html"] = "\n".join(html_parts)
+    meta["sections"] = sections
+    meta.setdefault("slug", path.stem)
     return meta
 
 # ---- Page shell -----------------------------------------------------------
@@ -125,6 +185,29 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .trail-panel.open{{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}}
 .trail-panel a{{font-size:1.05rem;font-style:italic;color:var(--green);text-decoration:none}}
 .trail-panel a:hover{{color:var(--sage)}}
+blockquote{{margin:2rem 0;padding:1rem 1.5rem;border-left:3px solid var(--sage);
+ color:var(--sage);font-style:italic;font-size:1.1rem}}
+h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
+.wrap ul:not(.list){{margin:.5rem 0 1.5rem;padding-left:1.4rem}}
+.wrap ul:not(.list) li{{margin-bottom:.4rem}}
+.split{{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;margin-top:1.5rem}}
+.split img{{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}}
+.split-menu h1{{margin-top:0}}
+.split-menu ul{{list-style:none;padding:0;margin:1.5rem 0 0}}
+.split-menu li{{padding:.9rem 0;border-bottom:1px solid var(--tan)}}
+.split-menu li a{{font-size:1.2rem;text-decoration:none}}
+.split-menu li a:hover{{color:var(--sage)}}
+.split-menu li.soon{{color:var(--muted);opacity:.55}}
+.split-menu li.soon span{{font-size:1.2rem}}
+.split-menu .tag-small{{display:block;font-size:.85rem;font-style:italic;color:var(--sage);margin-top:.2rem}}
+.split-menu .sub-list{{list-style:none;padding:0 0 0 1.2rem;margin:.5rem 0 0;border:none}}
+.split-menu .sub-list li{{padding:.4rem 0;border:none}}
+.split-menu .sub-list li a{{font-size:1rem;color:var(--sage)}}
+.split-menu .sub-list li a:hover{{color:var(--green)}}
+@media (max-width:640px){{
+  .split{{grid-template-columns:1fr}}
+  .split img{{aspect-ratio:16/9}}
+}}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}}
 </style>
@@ -146,6 +229,13 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 
 def pretty(d):
     return datetime.strptime(d, "%Y-%m-%d").strftime("%B %-d, %Y")
+
+def strip_page(title, crop, body_html, aspect=None):
+    """Shared template for secondary pages: strip image + heading + content."""
+    ratio_style = f"aspect-ratio:{aspect};" if aspect else ""
+    return f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="{ratio_style}object-position:center {crop}%">
+<h1>{html.escape(title)}</h1>
+{body_html}"""
 
 # ---- Build ----------------------------------------------------------------
 def build():
@@ -206,28 +296,57 @@ the rest of your day.</p>
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Reflections", arch, bodyclass="home"), encoding="utf-8")
 
-    about = f"""<h1>Learn About Your Guide</h1>
-<p>{html.escape(SITE_DESC)}</p>
+    about_body = f"""<p>{html.escape(SITE_DESC)}</p>
 <p>Each weekday morning I spend time in Scripture and share what I find.
 These reflections are part of Button of Silk.</p>
 <p>You can listen here, subscribe in any podcast app, or write to me at
 <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
+    about = strip_page("Learn About Your Guide", 55, about_body)
     d = OUT / "about"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Learn About Your Guide", about), encoding="utf-8")
+    (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="home"), encoding="utf-8")
 
-    podcast = """<h1>Listen as a Podcast</h1>
-<p>Wandering Through God&rsquo;s Word with Wonder will soon be available wherever you
+    podcast_body = """<p>Wandering Through God&rsquo;s Word with Wonder will soon be available wherever you
 listen to podcasts&mdash;subscribe once, and each new reflection arrives on its own.</p>
 <p><em>Guide coming soon. Apple Podcasts and Spotify links will appear here once the
 show is approved on those platforms.</em></p>"""
+    podcast = strip_page("Listen as a Podcast", 82, podcast_body, aspect="9/4")
     d = OUT / "podcast"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Listen as a Podcast", podcast), encoding="utf-8")
+    (d / "index.html").write_text(page("Listen as a Podcast", podcast, bodyclass="home"), encoding="utf-8")
 
-    exploration = """<h1>Exploration</h1>
-<p><em>Guide coming soon.</em> This will be a place to learn how to SOAP through
-Scripture on your own, along with books and studies worth your time.</p>"""
+    resource_sections = ""
+    resources_path = PAGES / "resources.md"
+    if resources_path.exists():
+        _rm = parse_simple_page(resources_path)
+        resource_sections = "".join(
+            f'<li><a href="/resources/#{a}">{html.escape(t)}</a></li>'
+            for t, a in _rm.get("sections", []))
+
+    exploration = f"""<div class="split">
+<img src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
+<div class="split-menu">
+<h1>Exploration</h1>
+<p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
+this wandering has gone so far.</p>
+<ul>
+<li><a href="/soap/">How to SOAP<span class="tag-small">a simple way to study Scripture</span></a></li>
+<li class="soon"><span>Books of the Bible</span><span class="tag-small">coming soon</span></li>
+<li><a href="/resources/">Resources<span class="tag-small">books, guides, and studies worth your time</span></a>
+<ul class="sub-list">{resource_sections}</ul></li>
+</ul>
+</div>
+</div>"""
     d = OUT / "exploration"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Exploration", exploration), encoding="utf-8")
+    (d / "index.html").write_text(page("Exploration", exploration, bodyclass="home"), encoding="utf-8")
+
+    if PAGES.exists():
+        for p in PAGES.glob("*.md"):
+            meta = parse_simple_page(p)
+            crop = meta.get("crop", "50")
+            aspect = meta.get("aspect")
+            content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
+            d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
+            (d / "index.html").write_text(
+                page(meta["title"], content, bodyclass="home"), encoding="utf-8")
 
     write_feed(items)
     print(f"Built {len(items)} reflection(s) into public/")
