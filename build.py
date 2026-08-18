@@ -257,7 +257,8 @@ def build():
         chips = "".join(f"<span>{html.escape(t)}</span>" for t in themes)
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
-        content = f"""<article>
+        content = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+<article>
 <h1>{html.escape(it['title'])}</h1>
 <div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{html.escape(it['scripture'])}</span></div>
 <audio controls preload="none" src="{AUDIO_BASE}/{it['audio']}"></audio>
