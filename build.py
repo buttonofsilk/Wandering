@@ -8,7 +8,7 @@ from pathlib import Path
 
 # ---- Settings -------------------------------------------------------------
 SITE_TITLE  = "Wandering Through God's Word with Wonder"
-SITE_DESC   = "Daily Scripture reflections that invite you to slow down, linger, and wonder through God's Word."
+SITE_DESC   = "Daily Scripture reflections that invite you to slow down, linger, and wander through God's Word."
 SITE_URL    = "https://buttonofsilk.org"
 AUDIO_BASE  = "https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev"
 AUTHOR      = "Hope Little"
