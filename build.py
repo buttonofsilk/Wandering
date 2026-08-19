@@ -117,7 +117,7 @@ NAV = """<div class="trail-wrap">
 </div>
 </div>"""
 
-def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None):
+def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None, new_here=False):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -174,6 +174,9 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .back{{text-align:center;margin:0.8rem 0 0}}
 .back a{{font-size:.95rem;font-style:italic;color:var(--sage);text-decoration:none}}
 .back a:hover{{color:var(--green)}}
+.new-here{{text-align:center;margin:.4rem 0 1.2rem}}
+.new-here a{{font-size:.9rem;font-style:italic;color:var(--muted);text-decoration:none;opacity:.75}}
+.new-here a:hover{{color:var(--sage);opacity:1}}
 .trail-wrap{{position:relative;display:inline-block}}
 .trail-toggle{{display:inline-flex;align-items:center;gap:.4rem;
  background:var(--cream);border:1px solid var(--tan);padding:.5rem .9rem;border-radius:2rem;
@@ -225,6 +228,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {nav}
 </div>
 {f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a></p>' if back_link else ''}
+{'<p class="new-here"><a href="/exploration/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
 <footer>Button of Silk &middot; {html.escape(AUTHOR)}</footer>
 </div>
@@ -271,7 +275,7 @@ def build():
 </article>"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
-            page(it["title"], content, it["body"][:160], bodyclass="home", back_link=("&larr; All Reflections", "/reflections/")), encoding="utf-8")
+            page(it["title"], content, it["body"][:160], bodyclass="home", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
     home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
@@ -299,7 +303,7 @@ the rest of your day.</p>
                      f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
         arch += "</ul>"
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
+    (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/"), new_here=True), encoding="utf-8")
 
     about_body = f"""<p>{html.escape(SITE_DESC)}</p>
 <p>Each weekday morning I spend time in Scripture and share what I find.
@@ -333,6 +337,7 @@ show is approved on those platforms.</em></p>"""
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
+<li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
 <li><a href="/soap/">How to SOAP<span class="tag-small">a simple way to study Scripture</span></a></li>
 <li class="soon"><span>Books of the Bible</span><span class="tag-small">coming soon</span></li>
 <li><a href="/resources/">Resources<span class="tag-small">books, guides, and studies worth your time</span></a>
