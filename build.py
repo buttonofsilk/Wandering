@@ -91,6 +91,15 @@ def parse_simple_page(path):
             html_parts.append(f'<h2 id="{_anchor}">{render_text(_title)}</h2>')
         elif block.startswith("> "):
             html_parts.append(f"<blockquote>{render_text(block[2:].strip())}</blockquote>")
+        elif block.startswith("~") and block.endswith("~") and len(block) > 1:
+            html_parts.append(f'<p class="signature">{render_text(block[1:-1].strip())}</p>')
+        elif block.startswith("!["):
+            _m = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", block)
+            if _m:
+                _alt, _src = _m.groups()
+                html_parts.append(f'<img class="content-photo" src="{html.escape(_src)}" alt="{html.escape(_alt)}">')
+            else:
+                html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("- "):
             items = "".join(f"<li>{render_text(line[2:].strip())}</li>"
                             for line in block.split("\n") if line.strip().startswith("- "))
@@ -113,6 +122,7 @@ NAV = """<div class="trail-wrap">
   <a href="/reflections/">Reflections</a>
   <a href="/exploration/">Exploration</a>
   <a href="/about/">Learn about your guide</a>
+  <a href="/why-button-of-silk/">Why Button of Silk</a>
   <a href="/podcast/">Podcast</a>
 </div>
 </div>"""
@@ -127,7 +137,7 @@ def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_
 <meta name="description" content="{html.escape(desc or SITE_DESC)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="{html.escape(SITE_TITLE)}" href="/feed.xml">
 <script src="/trail.js" defer></script>
 <style>
@@ -183,6 +193,22 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .new-here{{text-align:center;margin:.4rem 0 1.2rem}}
 .new-here a{{font-size:.9rem;font-style:italic;color:var(--muted);text-decoration:none;opacity:.75}}
 .new-here a:hover{{color:var(--sage);opacity:1}}
+.content-photo{{max-width:22rem;width:100%;height:auto;display:block;margin:1.5rem auto;
+ border:1px solid var(--tan)}}
+#but-why-buttonofsilk-org{{font-family:"Great Vibes",cursive;font-size:2.4rem;font-weight:normal;color:var(--green);text-align:center}}
+.signature{{font-family:"Great Vibes",cursive;font-size:4rem;color:var(--green);text-align:right;margin-top:1.5rem}}
+.about-intro{{display:flex;gap:2.5rem;align-items:center;margin:2rem 0}}
+.about-photo{{width:9rem;height:11rem;object-fit:cover;border-radius:6px;
+ border:1px solid var(--tan);flex-shrink:0}}
+.about-intro-text p{{margin:0 0 .8rem}}
+.about-footer{{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}}
+.about-footer p{{color:var(--muted);font-size:.95rem}}
+.welcome-script{{font-family:"Great Vibes",cursive;font-size:4rem;color:var(--green);margin:0}}
+.letter p{{margin:0 0 1rem}}
+@media (max-width:600px){{
+  .about-intro{{flex-direction:column;align-items:center;text-align:center}}
+  .about-photo{{width:11rem;height:13rem}}
+}}
 .trail-wrap{{position:relative;display:inline-block}}
 .trail-toggle{{display:inline-flex;align-items:center;gap:.4rem;
  background:var(--cream);border:1px solid var(--tan);padding:.5rem .9rem;border-radius:2rem;
@@ -312,11 +338,37 @@ the rest of your day.</p>
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/"), new_here=True), encoding="utf-8")
 
-    about_body = f"""<p>{html.escape(SITE_DESC)}</p>
-<p>Each weekday morning I spend time in Scripture and share what I find.
-These reflections are part of Button of Silk.</p>
+    about_body = f"""<div class="about-intro">
+<img class="about-photo" src="/hope-photo.jpeg" alt="A photo of Hope">
+<p class="welcome-script">Welcome!</p>
+</div>
+<div class="letter">
+<p>I'm a wife, mom, reader, question-asker, pattern-chaser, and most importantly, a woman
+who loves Jesus and His Word. I tend to follow the glittery threads an idea presents,
+notice connections, linger over things that make me wonder, and occasionally take much
+longer to get through a book of the Bible than I ever planned.</p>
+<p>Over the years, God has taught me that some of the sweetest places with Him are found
+when we slow down long enough to notice what He is showing us.</p>
+<p>I have been transformed by Jesus from the inside out, much like a monarch butterfly.
+Who I once was is gone, and I&rsquo;m still learning what it looks like to live the
+abundant life Jesus came to give us.</p>
+</div>
+<blockquote>Therefore, if anyone is in Christ, he is a new creature; the old things
+passed away; behold, new things have come. &mdash; 2 Corinthians 5:17, NASB</blockquote>
+<blockquote>The thief comes only to steal and kill and destroy; I came that they may
+have life, and have it abundantly. &mdash; John 10:10, NASB</blockquote>
+<div class="letter">
+<p>I don&rsquo;t have all the answers, and I don&rsquo;t expect to. But I trust God to
+keep teaching me as I spend time with Him. I simply love opening God&rsquo;s Word,
+following the threads that make me pause, and inviting others to come wander with me.</p>
+<p>If you&rsquo;d like some company while you do the same, you&rsquo;re very welcome here.</p>
+</div>
+<p class="signature">Hope</p>
+<p>Curious about the name Button of Silk? <a href="/why-button-of-silk/">Read the story here</a>.</p>
+<div class="about-footer">
 <p>You can listen here, subscribe in any podcast app, or write to me at
-<a href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
+<a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+</div>"""
     about = strip_page("Learn About Your Guide", 55, about_body)
     d = OUT / "about"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
@@ -360,9 +412,12 @@ this wandering has gone so far.</p>
     if PAGES.exists():
         for p in PAGES.glob("*.md"):
             meta = parse_simple_page(p)
-            crop = meta.get("crop", "50")
-            aspect = meta.get("aspect")
-            content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
+            if meta.get("no_banner", "").lower() == "true":
+                content = meta["body_html"]
+            else:
+                crop = meta.get("crop", "50")
+                aspect = meta.get("aspect")
+                content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
                 page(meta["title"], content, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
