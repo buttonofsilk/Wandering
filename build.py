@@ -117,7 +117,7 @@ NAV = """<div class="trail-wrap">
 </div>
 </div>"""
 
-def page(title, content, desc=None, bodyclass="", nav=NAV):
+def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -171,6 +171,9 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .enter a:hover .sprig{{color:var(--green)}}
 .enter-row{{text-align:center;margin:0.6rem 0 0}}
 .enter-row + p.enter{{margin-top:0.2rem}}
+.back{{text-align:center;margin:0.8rem 0 0}}
+.back a{{font-size:.95rem;font-style:italic;color:var(--sage);text-decoration:none}}
+.back a:hover{{color:var(--green)}}
 .trail-wrap{{position:relative;display:inline-block}}
 .trail-toggle{{display:inline-flex;align-items:center;gap:.4rem;
  background:var(--cream);border:1px solid var(--tan);padding:.5rem .9rem;border-radius:2rem;
@@ -216,11 +219,12 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <div class="wrap">
 <header class="site">
   <a href="/"><img src="/wordmark.png" alt="{html.escape(SITE_TITLE)}"></a>
-  <div class="tag">{html.escape(SITE_DESC)}</div>
+  {f'<div class="tag">{html.escape(SITE_DESC)}</div>' if show_tag else ''}
 </header>
 <div class="enter-row">
 {nav}
 </div>
+{f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a></p>' if back_link else ''}
 {content}
 <footer>Button of Silk &middot; {html.escape(AUTHOR)}</footer>
 </div>
@@ -267,7 +271,7 @@ def build():
 </article>"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
-            page(it["title"], content, it["body"][:160]), encoding="utf-8")
+            page(it["title"], content, it["body"][:160], back_link=("&larr; All Reflections", "/reflections/")), encoding="utf-8")
 
     home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
@@ -278,7 +282,7 @@ you grow more comfortable opening the Bible for yourself, asking questions, foll
 the trails that make you pause, and carrying something from His Word with you into
 the rest of your day.</p>
 </section>"""
-    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home"), encoding="utf-8")
+    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home", show_tag=True), encoding="utf-8")
 
     l = items[0]
     arch = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
@@ -295,7 +299,7 @@ the rest of your day.</p>
                      f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
         arch += "</ul>"
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Reflections", arch, bodyclass="home"), encoding="utf-8")
+    (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     about_body = f"""<p>{html.escape(SITE_DESC)}</p>
 <p>Each weekday morning I spend time in Scripture and share what I find.
@@ -304,7 +308,7 @@ These reflections are part of Button of Silk.</p>
 <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>"""
     about = strip_page("Learn About Your Guide", 55, about_body)
     d = OUT / "about"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="home"), encoding="utf-8")
+    (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     podcast_body = """<p>Wandering Through God&rsquo;s Word with Wonder will soon be available wherever you
 listen to podcasts&mdash;subscribe once, and each new reflection arrives on its own.</p>
@@ -312,7 +316,7 @@ listen to podcasts&mdash;subscribe once, and each new reflection arrives on its 
 show is approved on those platforms.</em></p>"""
     podcast = strip_page("Listen as a Podcast", 82, podcast_body, aspect="9/4")
     d = OUT / "podcast"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Listen as a Podcast", podcast, bodyclass="home"), encoding="utf-8")
+    (d / "index.html").write_text(page("Listen as a Podcast", podcast, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     resource_sections = ""
     resources_path = PAGES / "resources.md"
@@ -337,7 +341,7 @@ this wandering has gone so far.</p>
 </div>
 </div>"""
     d = OUT / "exploration"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Exploration", exploration, bodyclass="home"), encoding="utf-8")
+    (d / "index.html").write_text(page("Exploration", exploration, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     if PAGES.exists():
         for p in PAGES.glob("*.md"):
@@ -347,7 +351,7 @@ this wandering has gone so far.</p>
             content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
-                page(meta["title"], content, bodyclass="home"), encoding="utf-8")
+                page(meta["title"], content, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     write_feed(items)
     print(f"Built {len(items)} reflection(s) into public/")
