@@ -174,6 +174,12 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .back{{text-align:center;margin:0.8rem 0 0}}
 .back a{{font-size:.95rem;font-style:italic;color:var(--sage);text-decoration:none}}
 .back a:hover{{color:var(--green)}}
+.podcast-links{{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0}}
+.podcast-links a{{display:inline-block;padding:.6rem 1.4rem;border:1px solid var(--sage);
+ color:var(--green);text-decoration:none;font-style:italic}}
+.podcast-links a:hover{{background:var(--tan)}}
+.home-verse{{text-align:center;font-style:italic;color:var(--green);font-size:.95rem;
+ max-width:32rem;margin:1rem auto 0;line-height:1.6}}
 .new-here{{text-align:center;margin:.4rem 0 1.2rem}}
 .new-here a{{font-size:.9rem;font-style:italic;color:var(--muted);text-decoration:none;opacity:.75}}
 .new-here a:hover{{color:var(--sage);opacity:1}}
@@ -223,6 +229,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <header class="site">
   <a href="/"><img src="/wordmark.png" alt="{html.escape(SITE_TITLE)}"></a>
   {f'<div class="tag">{html.escape(SITE_DESC)}</div>' if show_tag else ''}
+  {f'<p class="home-verse">Therefore as you have received Christ Jesus the Lord, so walk in Him, having been firmly rooted and now being built up in Him and established in your faith, just as you were instructed, and overflowing with gratitude.<br>&mdash; Colossians 2:6-7, NASB</p>' if show_tag else ''}
 </header>
 <div class="enter-row">
 {nav}
@@ -314,10 +321,12 @@ These reflections are part of Button of Silk.</p>
     d = OUT / "about"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")
 
-    podcast_body = """<p>Wandering Through God&rsquo;s Word with Wonder will soon be available wherever you
+    podcast_body = """<p>Wandering Through God&rsquo;s Word with Wonder is available wherever you
 listen to podcasts&mdash;subscribe once, and each new reflection arrives on its own.</p>
-<p><em>Guide coming soon. Apple Podcasts and Spotify links will appear here once the
-show is approved on those platforms.</em></p>"""
+<p class="podcast-links">
+<a href="https://podcasts.apple.com/us/podcast/wandering-through-gods-word-with-wonder/id6802110750" target="_blank" rel="noopener">Listen on Apple Podcasts</a>
+<a href="https://open.spotify.com/show/0348miqvVzowiYrzkywtW4" target="_blank" rel="noopener">Listen on Spotify</a>
+</p>"""
     podcast = strip_page("Listen as a Podcast", 82, podcast_body, aspect="9/4")
     d = OUT / "podcast"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Listen as a Podcast", podcast, bodyclass="home", back_link=("&larr; Home", "/")), encoding="utf-8")

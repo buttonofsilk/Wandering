@@ -26,4 +26,4 @@ Write out how you can apply this Scripture. Ask these questions: What is mine to
 
 Write out a short prayer asking Jesus to help you apply this in your life, guidance on what to do with the Scripture, or in response to anything you took from the Scripture. You can also use the Scripture as part of the prayer. Praying Scripture is a powerful way to pray.
 
-> Therefore, as you have received Christ Jesus the Lord, so walk in Him, rooted and being built up in Him and established in your faith, just as you were taught, abounding in thanksgiving. — Colossians 2:6-7
+> Therefore as you have received Christ Jesus the Lord, so walk in Him, having been firmly rooted and now being built up in Him and established in your faith, just as you were instructed, and overflowing with gratitude. — Colossians 2:6-7, NASB
