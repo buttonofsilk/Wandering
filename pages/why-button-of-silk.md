@@ -6,7 +6,7 @@ no_banner: true
 
 ![A blue and purple monarch chrysalis hanging from a tree branch against a sky background](/chrysalis.png)
 
-## But, why buttonofsilk.org?
+## But why Button of Silk?
 
 Years ago, God laid the desire on my heart to share about Him. At the time, blogs were the main way to do that. I really wanted a butterfly-themed blog, but all of the "typical" names were already taken.
 
@@ -16,7 +16,9 @@ Somewhere in that process, I came across the idea of a button of silk—the tiny
 
 And that image stuck with me.
 
-This tiny little button holds it in place while this amazing internal transformation is happening; what emerges looks almost nothing like what went in.
+This tiny little button holds it in place while this amazing internal transformation is happening.
+
+What emerges looks almost nothing like what went in.
 
 And I remember thinking...we need that too.
 
