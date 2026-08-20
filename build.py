@@ -366,7 +366,7 @@ following the threads that make me pause, and inviting others to come wander wit
 <p class="signature">Hope</p>
 <p>Curious about the name Button of Silk? <a href="/why-button-of-silk/">Read the story here</a>.</p>
 <div class="about-footer">
-<p>You can listen here, subscribe in any podcast app, or write to me at
+<p>You can <a href="/reflections/">listen here</a>, <a href="/podcast/">subscribe on Apple Podcasts or Spotify</a>, or write to me at
 <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 </div>"""
     about = strip_page("Learn About Your Guide", 55, about_body)
