@@ -169,8 +169,10 @@ header.site img{{max-width:44rem;width:100%;height:auto}}
 header.site .tag{{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}}
 h1{{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0 0 .3rem}}
 h2{{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}}
-.meta{{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}}
+.meta{{color:var(--muted);font-size:1.12rem;margin-bottom:1.5rem}}
 .scripture{{color:var(--sage);font-style:italic}}
+.alongside{{color:var(--muted);font-style:italic;font-size:.85rem;
+ opacity:.8;margin:-1.1rem 0 1.5rem}}
 audio{{width:100%;margin:1.5rem 0}}
 .themes{{margin-top:2rem}}
 .themes span{{display:inline-block;background:var(--tan);color:var(--green);
@@ -335,12 +337,16 @@ def build():
     for it in items:
         themes = it.get("themes") or []
         chips = "".join(f"<span>{html.escape(t)}</span>" for t in themes)
+        _also = it.get("alongside", "").strip()
+        alongside_html = (f'<div class="alongside">{html.escape(_also)}</div>'
+                          if _also else "")
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
         content = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <article>
 <h1>{html.escape(it['title'])}</h1>
 <div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{html.escape(it['scripture'])}</span></div>
+{alongside_html}
 <audio controls preload="none" src="{AUDIO_BASE}/{it['audio']}"></audio>
 {body}
 <div class="themes">{chips}</div>
