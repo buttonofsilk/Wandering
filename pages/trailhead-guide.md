@@ -22,7 +22,7 @@ We don't build our understanding on one isolated verse. We read a passage in lig
 
 We aren't only gathering information. God uses His Word to teach, correct, train, equip, and transform us.
 
-> All Scripture is inspired by God and profitable for teaching, for reproof, for correction, for training in righteousness; so that the man of God may be adequate, equipped for every good work. — 2 Timothy 3:16-17, NASB
+> All Scripture is inspired by God and profitable for teaching, for reproof, for correction, for training in righteousness; so that the man of God may be adequate, equipped for every good work. — 2 Timothy 3:16-17
 
 ## Read in relationship with God
 

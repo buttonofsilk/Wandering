@@ -273,7 +273,7 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 .split-menu .sub-list li{{padding:.4rem 0;border:none}}
 .split-menu .sub-list li a{{font-size:1rem;color:var(--sage)}}
 .split-menu .sub-list li a:hover{{color:var(--green)}}
-.translation-note{{font-size:.82rem;font-style:italic;color:var(--sage);opacity:.75;margin-top:1rem}}
+.translation-note{{display:block;font-size:.78rem;font-style:italic;opacity:.7;margin-top:.4rem}}
 @media (max-width:640px){{
   .split{{grid-template-columns:1fr}}
   .split img{{aspect-ratio:16/9}}
@@ -287,7 +287,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <header class="site">
   <a href="/"><img src="/wordmark.png" alt="{html.escape(SITE_TITLE)}"></a>
   {f'<div class="tag">{html.escape(SITE_DESC)}</div>' if show_tag else ''}
-  {f'<p class="home-verse">Therefore as you have received Christ Jesus the Lord, so walk in Him, having been firmly rooted and now being built up in Him and established in your faith, just as you were instructed, and overflowing with gratitude.<br>&mdash; Colossians 2:6-7, NASB</p>' if show_tag else ''}
+  {f'<p class="home-verse">Therefore as you have received Christ Jesus the Lord, so walk in Him, having been firmly rooted and now being built up in Him and established in your faith, just as you were instructed, and overflowing with gratitude.<br>&mdash; Colossians 2:6-7</p>' if show_tag else ''}
 </header>
 <div class="enter-row">
 {nav}
@@ -295,7 +295,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a></p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer>Button of Silk &middot; {html.escape(AUTHOR)}</footer>
+<footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quoted from the New American Standard Bible (NASB)</span></footer>
 </div>
 </body>
 </html>"""
@@ -386,9 +386,9 @@ Who I once was is gone, and I&rsquo;m still learning what it looks like to live 
 abundant life Jesus came to give us.</p>
 </div>
 <blockquote>Therefore, if anyone is in Christ, he is a new creature; the old things
-passed away; behold, new things have come. &mdash; 2 Corinthians 5:17, NASB</blockquote>
+passed away; behold, new things have come. &mdash; 2 Corinthians 5:17</blockquote>
 <blockquote>The thief comes only to steal and kill and destroy; I came that they may
-have life, and have it abundantly. &mdash; John 10:10, NASB</blockquote>
+have life, and have it abundantly. &mdash; John 10:10</blockquote>
 <div class="letter">
 <p>I don&rsquo;t have all the answers, and I don&rsquo;t expect to. But I trust God to
 keep teaching me as I spend time with Him. I simply love opening God&rsquo;s Word,
@@ -429,7 +429,6 @@ sent to your inbox.</p>
 <h1>Exploration</h1>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
-<p class="translation-note">Scripture throughout is quoted from the New American Standard Bible (NASB).</p>
 <ul>
 <li class="group"><span>How to Wander</span>
 <ul class="sub-list">
