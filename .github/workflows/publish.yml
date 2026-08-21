@@ -1,0 +1,51 @@
+name: Publish
+
+on:
+  schedule:
+    # 09:00 UTC = 3am Mountain Daylight Time (summer)
+    - cron: '0 9 * * *'
+    # 10:00 UTC = 3am Mountain Standard Time (winter)
+    - cron: '0 10 * * *'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install ffmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Fill in audio duration and file size
+        run: python3 fix_feed_metadata.py
+
+      - name: Build the site
+        run: python3 build.py
+
+      - name: Publish anything that changed
+        run: |
+          git config user.name "Button of Silk"
+          git config user.email "hope@buttonofsilk.org"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Nothing new to publish today."
+            exit 0
+          fi
+          git commit -m "Publish scheduled reflections"
+          git push
