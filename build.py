@@ -154,12 +154,10 @@ NAV = """<div class="trail-wrap">
   Trail Guide
 </button>
 <div id="trail-panel" class="trail-panel">
-  <a href="/">Home</a>
   <a href="/reflections/">Reflections</a>
-  <a href="/exploration/">Exploration</a>
-  <a href="/about/">Learn about your guide</a>
-  <a href="/why-button-of-silk/">Why Button of Silk</a>
+  <a href="/exploring/">Exploring</a>
   <a href="/ways-to-wander/">Ways to Wander</a>
+  <a href="/about/">About</a>
 </div>
 </div>"""
 
@@ -272,6 +270,16 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
  border:1px solid var(--tan);flex-shrink:0}}
 .about-intro-text p{{margin:0 0 .8rem}}
 .about-footer{{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}}
+.orientation{{margin-bottom:1rem}}
+.come-curious{{font-style:italic;margin-top:1rem}}
+.paths{{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;margin:2.5rem 0 1rem}}
+.paths a{{display:flex;flex-direction:column;align-items:center;gap:.7rem;
+ text-decoration:none;font-style:italic;font-size:1.05rem;color:var(--green);
+ width:11rem;text-align:center}}
+.paths img{{width:8rem;height:8rem;object-fit:cover;border-radius:50%;
+ border:1px solid var(--tan);display:block}}
+.paths a:hover{{color:var(--sage)}}
+.paths a:hover img{{border-color:var(--sage)}}
 .about-footer p{{color:var(--muted);font-size:.95rem}}
 .welcome-script{{font-family:"Great Vibes",cursive;font-size:4rem;color:var(--green);margin:0}}
 .letter p{{margin:0 0 1rem}}
@@ -421,7 +429,28 @@ the rest of your day.</p>
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/"), new_here=True), encoding="utf-8")
 
-    about_body = f"""<div class="about-intro">
+    about_body = """<div class="orientation">
+<p>Button of Silk is a place to slow down in Scripture through daily reflections
+&mdash; what we notice when we linger there, rather than another item on the
+to-do list.</p>
+<p class="come-curious">Come curious: willing to learn, willing to notice what Scripture
+has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
+</div>
+<div class="paths">
+<a href="/your-guide/">
+  <img src="/hope-photo.jpeg" alt="">
+  <span>Learn about your guide</span>
+</a>
+<a href="/why-button-of-silk/">
+  <img src="/chrysalis.png" alt="">
+  <span>Why Button of Silk?</span>
+</a>
+</div>"""
+    about = strip_page("About Button of Silk", 55, about_body)
+    d = OUT / "about"; d.mkdir(exist_ok=True)
+    (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
+
+    guide_body = f"""<div class="about-intro">
 <img class="about-photo" src="/hope-photo.jpeg" alt="A photo of Hope">
 <p class="welcome-script">Welcome!</p>
 </div>
@@ -447,14 +476,13 @@ following the threads that make me pause, and inviting others to come wander wit
 <p>If you&rsquo;d like some company while you do the same, you&rsquo;re very welcome here.</p>
 </div>
 <p class="signature">Hope</p>
-<p>Curious about the name Button of Silk? <a href="/why-button-of-silk/">Read the story here</a>.</p>
 <div class="about-footer">
 <p>You can <a href="/reflections/">listen here</a>, <a href="/ways-to-wander/">have each new reflection come to you</a>, or write to me at
 <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
 </div>"""
-    about = strip_page("Learn About Your Guide", 55, about_body)
-    d = OUT / "about"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Learn About Your Guide", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
+    guide = strip_page("Learn About Your Guide", 55, guide_body)
+    d = OUT / "your-guide"; d.mkdir(exist_ok=True)
+    (d / "index.html").write_text(page("Learn About Your Guide", guide, bodyclass="prose", back_link=("&larr; About", "/about/")), encoding="utf-8")
 
     podcast_body = """<p class="lead">Listen wherever you already listen. Or have each new reflection
 sent to your inbox.</p>
@@ -477,7 +505,7 @@ sent to your inbox.</p>
     exploration = f"""<div class="split">
 <img src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
 <div class="split-menu">
-<h1>Exploration</h1>
+<h1>Exploring</h1>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
@@ -492,8 +520,8 @@ this wandering has gone so far.</p>
 </ul>
 </div>
 </div>"""
-    d = OUT / "exploration"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Exploration", exploration, bodyclass="home wide", back_link=("&larr; Home", "/")), encoding="utf-8")
+    d = OUT / "exploring"; d.mkdir(exist_ok=True)
+    (d / "index.html").write_text(page("Exploring", exploration, bodyclass="home wide", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     if PAGES.exists():
         for p in PAGES.glob("*.md"):
@@ -506,7 +534,9 @@ this wandering has gone so far.</p>
                 content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
-                page(meta["title"], content, bodyclass="prose", back_link=("&larr; Home", "/"),
+                page(meta["title"], content, bodyclass="prose",
+                     back_link=("&larr; " + meta.get("back_to", "Home"),
+                                meta.get("back_url", "/")),
                      noindex=str(meta.get("noindex", "")).lower() in ("true", "yes", "1")), encoding="utf-8")
 
     write_feed(items)

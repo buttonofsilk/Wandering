@@ -88,6 +88,7 @@ def parse_simple_page(path):
         return escaped
 
     html_parts = []
+    _open = []
     sections = []
     for block in body_raw.split("\n\n"):
         block = block.strip()
@@ -104,6 +105,28 @@ def parse_simple_page(path):
             html_parts.append(f"<blockquote>{render_text(block[2:].strip())}</blockquote>")
         elif block.startswith("~") and block.endswith("~") and len(block) > 1:
             html_parts.append(f'<p class="signature">{render_text(block[1:-1].strip())}</p>')
+        elif block.startswith("@wide"):
+            html_parts.append('<div class="band-wide">'); _open.append("</div>")
+        elif block.startswith("@full"):
+            html_parts.append('<div class="band-full">'); _open.append("</div>")
+        elif block.startswith("@end"):
+            html_parts.append(_open.pop() if _open else "")
+        elif block.startswith("@details["):
+            _m = re.match(r"@details\[([^\]]*)\]", block)
+            _sum = _m.group(1) if _m else "Read more"
+            html_parts.append(f'<details><summary>{render_text(_sum)}</summary>')
+            _open.append("</details>")
+        elif block.startswith("@audio["):
+            _m = re.match(r"@audio\[([^\]]*)\]\(([^)]+)\)", block)
+            if _m:
+                _label, _file = _m.groups()
+                _url = _file if _file.startswith(("/", "http")) else f"{AUDIO_BASE}/{_file}"
+                _lab = f'<p class="audio-label">{render_text(_label)}</p>' if _label else ""
+                html_parts.append(
+                    f'<div class="page-audio">{_lab}'
+                    f'<audio controls preload="none" src="{html.escape(_url)}"></audio></div>')
+            else:
+                html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("!["):
             _m = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", block)
             if _m:
@@ -117,6 +140,8 @@ def parse_simple_page(path):
             html_parts.append(f"<ul>{items}</ul>")
         else:
             html_parts.append(f"<p>{render_text(block)}</p>")
+    while _open:
+        html_parts.append(_open.pop())
     meta["body_html"] = "\n".join(html_parts)
     meta["sections"] = sections
     meta.setdefault("slug", path.stem)
@@ -138,14 +163,14 @@ NAV = """<div class="trail-wrap">
 </div>
 </div>"""
 
-def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None, new_here=False):
+def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None, new_here=False, noindex=False):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
-<meta name="description" content="{html.escape(desc or SITE_DESC)}">
+<meta name="description" content="{html.escape(desc or SITE_DESC)}">{'<meta name="robots" content="noindex, nofollow">' if noindex else ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
@@ -157,7 +182,7 @@ def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_
   --tan:#E8E6DF; --ink:#1A2D1D; --muted:#1A2D1D;
 }}
 *{{box-sizing:border-box}}
-body{{margin:0;background:var(--cream);color:var(--ink);
+body{{margin:0;overflow-x:hidden;background:var(--cream);color:var(--ink);
  font:1.05rem/1.7 Georgia,"Times New Roman",serif}}
 .wrap{{max-width:40rem;margin:0 auto;padding:2rem 1.25rem 4rem}}
 body.home .wrap{{max-width:min(90vw,60rem)}}
@@ -171,6 +196,19 @@ h1{{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0
 h2{{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}}
 .meta{{color:var(--muted);font-size:1.12rem;margin-bottom:1.5rem}}
 .scripture{{color:var(--sage);font-style:italic}}
+.band-wide{{width:min(94vw,72rem);max-width:none;margin-left:50%;
+ transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}}
+.band-full{{width:100vw;max-width:none;margin-left:50%;
+ transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}}
+.page-audio{{margin:1.2rem 0 2rem}}
+.page-audio audio{{width:100%;max-width:32rem;display:block}}
+.audio-label{{font-style:italic;color:var(--sage);font-size:.95rem;margin:0 0 .5rem}}
+details{{margin:1rem 0 2rem}}
+details summary{{cursor:pointer;font-style:italic;color:var(--sage);
+ font-size:.95rem;list-style:none}}
+details summary::-webkit-details-marker{{display:none}}
+details summary::before{{content:"\203A  ";opacity:.7}}
+details[open] summary::before{{content:"\2039  "}}
 .alongside{{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}}
 audio{{width:100%;margin:1.5rem 0}}
@@ -468,7 +506,8 @@ this wandering has gone so far.</p>
                 content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
-                page(meta["title"], content, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
+                page(meta["title"], content, bodyclass="prose", back_link=("&larr; Home", "/"),
+                     noindex=str(meta.get("noindex", "")).lower() in ("true", "yes", "1")), encoding="utf-8")
 
     write_feed(items)
     print(f"Built {len(items)} reflection(s) into public/")
