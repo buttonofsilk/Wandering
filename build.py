@@ -302,6 +302,8 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .paths img{{width:8rem;height:8rem;object-fit:cover;object-position:center;
  border-radius:50%;border:1px solid var(--tan);display:block}}
 .paths a[href="/why-button-of-silk/"] img{{object-position:64% 48%}}
+.paths a[href="/your-guide/"] img{{object-position:center 32%}}
+.about-photo{{object-position:center 30%}}
 .paths a:hover{{color:var(--sage)}}
 .paths a:hover img{{border-color:var(--sage)}}
 .about-footer p{{color:var(--muted);font-size:.95rem}}
@@ -370,7 +372,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <div class="enter-row">
 {nav}
 </div>
-{f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a>' + ('' if back_link[1] == "/" else ' <span class="sep">&middot;</span> <a href="/">Home</a>') + '</p>' if back_link else ''}
+{f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
 <footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quoted from the New American Standard Bible (NASB)</span></footer>
@@ -468,7 +470,7 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
 </div>
 <div class="paths">
 <a href="/your-guide/">
-  <img src="/hope-photo.jpeg" alt="">
+  <img src="/hope-photo.png" alt="">
   <span>Learn about your guide</span>
 </a>
 <a href="/why-button-of-silk/">
@@ -481,7 +483,7 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
     (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     guide_body = f"""<div class="about-intro">
-<img class="about-photo" src="/hope-photo.jpeg" alt="A photo of Hope">
+<img class="about-photo" src="/hope-photo.png" alt="A photo of Hope">
 <p class="welcome-script">Welcome!</p>
 </div>
 <div class="letter">
