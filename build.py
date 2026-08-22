@@ -150,7 +150,7 @@ def parse_simple_page(path):
 # ---- Page shell -----------------------------------------------------------
 NAV = """<div class="trail-wrap">
 <button class="trail-toggle" aria-label="Open trail guide">
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7l2.2 4.8L9 14.2z"/></svg>
+  <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M12 1.6v2M12 20.4v2M1.6 12h2M20.4 12h2"/><path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z" fill="currentColor" stroke="none" opacity=".9"/><path d="M15.6 8.4l-2 5.2-5.2 2 2-5.2z"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
   Trail Guide
 </button>
 <div id="trail-panel" class="trail-panel">
@@ -182,10 +182,14 @@ def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_
 *{{box-sizing:border-box}}
 body{{margin:0;overflow-x:hidden;background:var(--cream);color:var(--ink);
  font:1.05rem/1.7 Georgia,"Times New Roman",serif}}
-.wrap{{max-width:40rem;margin:0 auto;padding:2rem 1.25rem 4rem}}
+.wrap{{max-width:40rem;margin:0 auto;padding:2rem 1.75rem 4rem;
+ background:rgba(252,252,251,.86);border-radius:2px}}
 body.home .wrap{{max-width:min(90vw,60rem)}}
 body.prose .wrap{{max-width:min(92vw,44rem)}}
-body.wide .wrap{{max-width:min(94vw,72rem)}}
+body::before{{content:"";position:fixed;inset:0;z-index:-1;
+ background:url("/hero.png") no-repeat center center;background-size:cover;
+ opacity:.08;pointer-events:none}}
+body.wide .wrap{{max-width:min(94vw,84rem)}}
 a{{color:var(--green)}}
 header.site{{text-align:center;padding:0.5rem 0 0.5rem}}
 header.site img{{max-width:44rem;width:100%;height:auto}}
@@ -223,6 +227,15 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3 a{{text-decoration:none;color:var(--green)}}
 .today h3 a:hover{{text-decoration:underline}}
 .hero{{width:100%;max-width:none;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}}
+.home-split{{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
+ align-items:center;margin-top:1.5rem}}
+.home-split .hero{{margin-top:0}}
+.home-split .welcome{{padding-left:1.5rem}}
+.home-split .welcome p{{margin:0;font-size:1.15rem;line-height:1.9;max-width:34rem;
+ text-indent:1.4rem}}
+@media (max-width:760px){{
+  .home-split{{grid-template-columns:1fr;gap:1.5rem}}
+}}
 .strip{{width:100%;aspect-ratio:7/2;height:auto;object-fit:cover;object-position:center 30%;display:block;margin:1.5rem 0 1.5rem}}
 body.prose .strip{{width:min(90vw,60rem);max-width:none;margin-left:50%;transform:translateX(-50%)}}
 .sprig{{width:2.2rem;height:1.1rem;vertical-align:middle;color:var(--sage);display:inline-block}}
@@ -233,9 +246,11 @@ body.prose .strip{{width:min(90vw,60rem);max-width:none;margin-left:50%;transfor
 .enter a:hover .sprig{{color:var(--green)}}
 .enter-row{{text-align:center;margin:0.6rem 0 0}}
 .enter-row + p.enter{{margin-top:0.2rem}}
-.back{{text-align:center;margin:0.8rem 0 0}}
-.back a{{font-size:.95rem;font-style:italic;color:var(--sage);text-decoration:none}}
+.back{{text-align:center;margin:.2rem 0 0}}
+.back a{{display:inline-block;padding:.4rem .6rem;font-size:1.1rem;
+ font-style:italic;color:var(--sage);text-decoration:none}}
 .back a:hover{{color:var(--green)}}
+.back .sep{{color:var(--tan);margin:0 .3rem}}
 .podcast-links{{display:flex;gap:2.2rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0 0}}
 .podcast-links a{{color:var(--green);text-decoration:none;font-style:italic;font-size:1.1rem}}
 .podcast-links a:hover{{color:var(--sage)}}
@@ -256,10 +271,13 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
  font-size:.95rem;cursor:pointer}}
 .subscribe button:hover{{color:var(--green);border-color:var(--sage)}}
 .subscribe .note{{color:var(--muted);font-size:.82rem;opacity:.7;margin-top:.9rem}}
-.home-verse{{text-align:center;font-style:italic;color:var(--green);font-size:.95rem;
- max-width:32rem;margin:1rem auto 0;line-height:1.6}}
-.new-here{{text-align:center;margin:.4rem 0 1.2rem}}
-.new-here a{{font-size:.9rem;font-style:italic;color:var(--muted);text-decoration:none;opacity:.75}}
+.home-verse{{text-align:center;font-style:italic;color:var(--green);font-size:1.15rem;
+ max-width:36rem;margin:1.2rem auto 0;line-height:1.7}}
+.new-here{{text-align:center;margin:1.4rem 0 1.2rem}}
+.new-here a{{display:inline-block;padding:.6rem 1.3rem;border:1px solid var(--tan);
+ border-radius:2rem;background:var(--cream);font-size:1.05rem;font-style:italic;
+ color:var(--green);text-decoration:none}}
+.new-here a:hover{{border-color:var(--sage);color:var(--sage)}}
 .new-here a:hover{{color:var(--sage);opacity:1}}
 .content-photo{{max-width:22rem;width:100%;height:auto;display:block;margin:1.5rem auto;
  border:1px solid var(--tan)}}
@@ -276,8 +294,9 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .paths a{{display:flex;flex-direction:column;align-items:center;gap:.7rem;
  text-decoration:none;font-style:italic;font-size:1.05rem;color:var(--green);
  width:11rem;text-align:center}}
-.paths img{{width:8rem;height:8rem;object-fit:cover;border-radius:50%;
- border:1px solid var(--tan);display:block}}
+.paths img{{width:8rem;height:8rem;object-fit:cover;object-position:center;
+ border-radius:50%;border:1px solid var(--tan);display:block}}
+.paths a[href="/why-button-of-silk/"] img{{object-position:64% 48%}}
 .paths a:hover{{color:var(--sage)}}
 .paths a:hover img{{border-color:var(--sage)}}
 .about-footer p{{color:var(--muted);font-size:.95rem}}
@@ -288,9 +307,9 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
   .about-photo{{width:11rem;height:13rem}}
 }}
 .trail-wrap{{position:relative;display:inline-block}}
-.trail-toggle{{display:inline-flex;align-items:center;gap:.4rem;
- background:var(--cream);border:1px solid var(--tan);padding:.5rem .9rem;border-radius:2rem;
- font-family:Georgia,serif;font-size:.85rem;font-style:italic;color:var(--green);cursor:pointer}}
+.trail-toggle{{display:inline-flex;align-items:center;gap:.55rem;
+ background:var(--cream);border:1px solid var(--sage);padding:.75rem 1.4rem;border-radius:2rem;
+ font-family:Georgia,serif;font-size:1.05rem;font-style:italic;color:var(--green);cursor:pointer}}
 .trail-toggle:hover{{border-color:var(--sage);color:var(--sage)}}
 .trail-panel{{position:absolute;top:calc(100% + .5rem);left:50%;
  transform:translateX(-50%) translateY(-8px);
@@ -311,17 +330,21 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 .split-menu h1{{margin-top:0}}
 .split-menu ul{{list-style:none;padding:0;margin:1.5rem 0 0}}
 .split-menu li{{padding:.9rem 0;border-bottom:1px solid var(--tan)}}
-.split-menu li a{{font-size:1.2rem;text-decoration:none}}
+.split-menu li a{{font-size:1.35rem;text-decoration:none}}
 .split-menu li a:hover{{color:var(--sage)}}
 .split-menu li.soon{{color:var(--muted);opacity:.55}}
-.split-menu li.soon span{{font-size:1.2rem}}
-.split-menu li.group > span{{font-size:1.2rem;color:var(--green)}}
-.split-menu li.group .sub-list li a{{font-size:1.1rem;color:var(--green)}}
+.split-menu li.soon span{{font-size:1.35rem}}
+.split-menu li.group > span{{font-size:1.35rem;color:var(--green)}}
+.split-menu li.group .sub-list li a{{font-size:1.2rem;color:var(--green)}}
 .split-menu li.group .sub-list li a:hover{{color:var(--sage)}}
-.split-menu .tag-small{{display:block;font-size:.85rem;font-style:italic;color:var(--sage);margin-top:.2rem}}
+.split-menu .tag-small{{display:block;font-size:.95rem;font-style:italic;color:var(--sage);margin-top:.25rem}}
 .split-menu .sub-list{{list-style:none;padding:0 0 0 1.2rem;margin:.5rem 0 0;border:none}}
-.split-menu .sub-list li{{padding:.4rem 0;border:none}}
-.split-menu .sub-list li a{{font-size:1rem;color:var(--sage)}}
+.split-menu .sub-list li{{padding:.4rem 0 .4rem 1.9rem;border:none;position:relative}}
+.split-menu .sub-list li::before{{content:"";position:absolute;left:0;top:.62rem;
+ width:1.05rem;height:1.05rem;opacity:.55;
+ background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%233D6B80'%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(45 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(45 12 12)'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(90 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(90 12 12)'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(135 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(135 12 12)'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='2.4' fill='%231A2D1D'/%3E%3C/svg%3E") no-repeat center/contain}}
+.split-menu .sub-list li:hover::before{{opacity:1}}
+.split-menu .sub-list li a{{font-size:1.1rem;color:var(--sage)}}
 .split-menu .sub-list li a:hover{{color:var(--green)}}
 .translation-note{{display:block;font-size:.78rem;font-style:italic;opacity:.7;margin-top:.4rem}}
 @media (max-width:640px){{
@@ -342,7 +365,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <div class="enter-row">
 {nav}
 </div>
-{f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a></p>' if back_link else ''}
+{f'<p class="back"><a href="{back_link[1]}">{back_link[0]}</a>' + ('' if back_link[1] == "/" else ' <span class="sep">&middot;</span> <a href="/">Home</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
 <footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quoted from the New American Standard Bible (NASB)</span></footer>
@@ -401,7 +424,8 @@ def build():
         (d / "index.html").write_text(
             page(it["title"], content, it["body"][:160], bodyclass="prose", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
-    home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+    home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<div class="home-split">
+<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
 invitation to linger in Scripture long enough to notice who God is, what He is saying,
@@ -409,8 +433,9 @@ and what He is drawing your attention to today. My desire is to walk alongside y
 you grow more comfortable opening the Bible for yourself, asking questions, following
 the trails that make you pause, and carrying something from His Word with you into
 the rest of your day.</p>
-</section>"""
-    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home", show_tag=True), encoding="utf-8")
+</section>
+</div>"""
+    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide", show_tag=True), encoding="utf-8")
 
     l = items[0]
     arch = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">

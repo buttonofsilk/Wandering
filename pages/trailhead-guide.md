@@ -2,6 +2,8 @@
 title: Trailhead Guide
 slug: trailhead-guide
 crop: 45
+back_to: Exploring
+back_url: /exploring/
 ---
 
 Important foundations for understanding God's Word.

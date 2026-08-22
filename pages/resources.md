@@ -2,6 +2,8 @@
 title: Resources
 slug: resources
 crop: 50
+back_to: Exploring
+back_url: /exploring/
 ---
 
 Tools and guides worth your time as you study Scripture on your own.

@@ -2,6 +2,8 @@
 title: A Simple Way to Study Scripture
 slug: soap
 crop: 45
+back_to: Exploring
+back_url: /exploring/
 ---
 
 ## How to SOAP
