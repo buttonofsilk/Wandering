@@ -302,7 +302,7 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .paths img{{width:8rem;height:8rem;object-fit:cover;object-position:center;
  border-radius:50%;border:1px solid var(--tan);display:block}}
 .paths a[href="/why-button-of-silk/"] img{{object-position:64% 48%}}
-.paths a[href="/your-guide/"] img{{object-position:center 32%}}
+.paths a[href="/your-guide/"] img{{object-position:center}}
 .about-photo{{object-position:center 30%}}
 .paths a:hover{{color:var(--sage)}}
 .paths a:hover img{{border-color:var(--sage)}}
@@ -470,7 +470,7 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
 </div>
 <div class="paths">
 <a href="/your-guide/">
-  <img src="/hope-photo.png" alt="">
+  <img src="/hope-thumb.png" alt="">
   <span>Learn about your guide</span>
 </a>
 <a href="/why-button-of-silk/">
