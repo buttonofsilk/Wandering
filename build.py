@@ -615,7 +615,11 @@ this wandering has gone so far.</p>
 
 # ---- Podcast feed ---------------------------------------------------------
 def write_feed(items):
-    now = format_datetime(datetime.now(timezone.utc))
+    # Based on the newest reflection, not the clock, so feed.xml only changes
+    # when content changes. A fresh timestamp every build guarantees a git
+    # conflict between local builds and the scheduled Action.
+    _newest = max((i["date"] for i in items), default="1970-01-01")
+    now = format_datetime(datetime.strptime(_newest, "%Y-%m-%d").replace(tzinfo=timezone.utc))
     e = html.escape
     x = [f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
