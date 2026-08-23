@@ -312,6 +312,11 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .about-intro-text p{{margin:0 0 .8rem}}
 .about-footer{{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}}
 .orientation{{margin-bottom:1rem}}
+.lost{{text-align:center;padding:3rem 0 4rem}}
+.lost h1{{font-size:2rem;font-weight:normal;margin:0 0 1rem}}
+.lost p{{color:var(--muted);opacity:.8}}
+.lost-links{{display:flex;gap:2rem;justify-content:center;margin-top:2.5rem}}
+.lost-links a{{font-style:italic;font-size:1.1rem;text-decoration:none}}
 .come-curious{{font-style:italic;margin-top:1rem}}
 .paths{{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;margin:2.5rem 0 1rem}}
 .paths a{{display:flex;flex-direction:column;align-items:center;gap:.7rem;
@@ -504,6 +509,14 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
   <span>Why Button of Silk?</span>
 </a>
 </div>"""
+    notfound = """<div class="lost">
+<h1>Lost wandering</h1>
+<p>This page doesn&rsquo;t exist &mdash; or it has moved.</p>
+<p class="lost-links"><a href="/">Home</a><a href="/reflections/">Reflections</a></p>
+</div>"""
+    (OUT / "404.html").write_text(
+        page("Lost wandering", notfound, bodyclass="prose", noindex=True), encoding="utf-8")
+
     about = strip_page("About Button of Silk", 55, about_body)
     d = OUT / "about"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
