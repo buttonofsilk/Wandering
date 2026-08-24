@@ -394,7 +394,9 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 .split-menu .sub-list li:hover::before{{opacity:1}}
 .split-menu .sub-list li a{{font-size:1.1rem;color:var(--sage)}}
 .split-menu .sub-list li a:hover{{color:var(--green)}}
-.translation-note{{display:block;font-size:.78rem;font-style:italic;opacity:.7;margin-top:.4rem}}
+.translation-note{{display:block;font-size:.72rem;font-style:italic;opacity:.65;
+ margin:.6rem auto 0;max-width:34rem;line-height:1.55}}
+.translation-note a{{color:inherit;text-decoration:underline}}
 @media (max-width:640px){{
   .split{{grid-template-columns:1fr}}
   .split img{{aspect-ratio:16/9}}
@@ -417,7 +419,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quoted from the New American Standard Bible (NASB)</span></footer>
+<footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 </body>
 </html>"""
@@ -702,6 +704,7 @@ def write_feed(items):
 <link>{SITE_URL}</link>
 <description>{e(SITE_DESC)}</description>
 <language>en-us</language>
+<copyright>Scripture quotations taken from the (NASB) New American Standard Bible, Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. www.Lockman.org</copyright>
 <lastBuildDate>{now}</lastBuildDate>
 <itunes:author>{e(AUTHOR)}</itunes:author>
 <itunes:summary>{e(SITE_DESC)}</itunes:summary>
