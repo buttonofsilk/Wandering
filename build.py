@@ -312,6 +312,9 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .about-intro-text p{{margin:0 0 .8rem}}
 .about-footer{{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}}
 .orientation{{margin-bottom:1rem}}
+.intro{{margin:1.5rem 0 2.5rem}}
+.intro p{{margin:0 0 .9rem;line-height:1.85}}
+.intro p:last-child{{margin-bottom:0}}
 .lost{{text-align:center;padding:3rem 0 4rem}}
 .lost h1{{font-size:2rem;font-weight:normal;margin:0 0 1rem}}
 .lost p{{color:var(--muted);opacity:.8}}
@@ -478,6 +481,15 @@ the rest of your day.</p>
     l = items[0]
     arch = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
 <h1>Reflections</h1>
+<div class="intro">
+<p>These are my spoken reflections from my own time in Scripture &mdash; questions I
+followed and glittery threads that caught my attention. Some days I wander, and some
+days I sit in awe of who God is and what He has done.</p>
+<p>My greatest prayer is that the reflections will invite you to open Scripture and
+see what He has to show you as well.</p>
+<p>If you want to listen along each day, you can find
+<a href="/ways-to-wander/">the different ways to wander</a> here.</p>
+</div>
 <article class="today">
 <h3><a href="/{l['slug']}/">{html.escape(l['title'])}</a></h3>
 <div class="meta">{pretty(l['date'])} &middot; <span class="scripture">{html.escape(l['scripture'])}</span></div>
