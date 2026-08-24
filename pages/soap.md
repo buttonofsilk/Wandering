@@ -14,7 +14,7 @@ SOAP is a simple framework that offers a place to start. As you grow, you can us
 
 ## S — Scripture
 
-Read the passage. Write down the verse(s) that stand out to you. Writing out scripture has several benefits including helping you notice every word, engages your brain in different ways, and moves it from passive intake to active engagement.
+Read the passage. Write down the verse(s) that stand out to you. Writing out Scripture has several benefits, including helping you notice every word, engaging your brain in different ways, and moving you from passive intake to active engagement.
 
 ## O — Observation
 
