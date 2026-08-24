@@ -6,7 +6,7 @@ back_to: Exploring
 back_url: /exploring/
 ---
 
-Important foundations for understanding God's Word.
+Foundations for understanding God's Word.
 
 ## 1. All Scripture is God-breathed
 
