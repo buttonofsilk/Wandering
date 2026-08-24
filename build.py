@@ -403,6 +403,24 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 }}
 footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
  text-align:center;color:var(--sage);font-size:.85rem}}
+@media print{{
+  body{{background:#fff;color:#000;font-size:11pt;line-height:1.5}}
+  body::before{{display:none}}
+  .wrap{{max-width:100%;background:none;padding:0;border-radius:0}}
+  body.prose .wrap,body.home .wrap,body.wide .wrap{{max-width:100%;
+   padding-left:0;padding-right:0}}
+  .menu-corner,.trail-wrap,.back,.new-here,.subscribe,.inbox-bridge,
+  .walk,.strip,.hero,.paths,.enter,.podcast-links,.lost-links{{display:none}}
+  header.site img{{max-width:11rem;filter:grayscale(1)}}
+  a{{color:#000;text-decoration:none}}
+  h1,h2,h3{{page-break-after:avoid;color:#000}}
+  li,blockquote,.card{{page-break-inside:avoid}}
+  details{{display:block}}
+  details>summary{{display:none}}
+  details>*{{display:block !important}}
+  footer{{border-top:1px solid #999;color:#000;font-size:8pt;margin-top:2rem}}
+  .translation-note{{opacity:1;max-width:100%}}
+}}
 </style>
 </head>
 <body class="{bodyclass}">
