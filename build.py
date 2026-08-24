@@ -214,8 +214,11 @@ details{{margin:1rem 0 2rem}}
 details summary{{cursor:pointer;font-style:italic;color:var(--sage);
  font-size:.95rem;list-style:none}}
 details summary::-webkit-details-marker{{display:none}}
-details summary::before{{content:"\203A  ";opacity:.7}}
-details[open] summary::before{{content:"\2039  "}}
+details summary::before{{content:"";display:inline-block;width:0;height:0;
+ border-left:.4rem solid var(--sage);border-top:.28rem solid transparent;
+ border-bottom:.28rem solid transparent;opacity:.55;flex-shrink:0;
+ margin-right:.5rem;transform-origin:.15rem 50%;transition:transform .15s}}
+details[open] > summary::before{{transform:rotate(90deg)}}
 .alongside{{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}}
 audio{{width:100%;margin:1.5rem 0}}
@@ -312,6 +315,18 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .about-intro-text p{{margin:0 0 .8rem}}
 .about-footer{{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}}
 .orientation{{margin-bottom:1rem}}
+.archive{{margin-top:1rem}}
+.archive details{{border:none;margin:0}}
+.archive .book > summary{{font-size:1.25rem;color:var(--green);
+ padding:.7rem 0;border-bottom:1px solid var(--tan);cursor:pointer;
+ list-style:none;display:flex;align-items:center}}
+.archive .chap > summary{{font-size:1.05rem;font-style:italic;color:var(--sage);
+ padding:.5rem 0 .5rem 1.4rem;cursor:pointer;list-style:none;
+ display:flex;align-items:center}}
+.archive summary::-webkit-details-marker{{display:none}}
+.archive .count{{margin-left:auto;font-size:.85rem;font-style:normal;
+ color:var(--muted);opacity:.5}}
+.archive .chap .list{{padding-left:2.6rem;margin:.2rem 0 .8rem}}
 .intro{{margin:1.5rem 0 2.5rem}}
 .intro p{{margin:0 0 .9rem;line-height:1.85}}
 .intro p:last-child{{margin-bottom:0}}
@@ -496,11 +511,8 @@ see what He has to show you as well.</p>
 <audio controls preload="none" src="{AUDIO_BASE}/{l['audio']}"></audio>
 </article>"""
     if len(items) > 1:
-        arch += '<h2>Earlier reflections</h2><ul class="list">'
-        for it in items[1:]:
-            arch += (f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
-                     f'<div class="sub">{pretty(it["date"])} &middot; {html.escape(it["scripture"])}</div></li>')
-        arch += "</ul>"
+        arch += '<h2>Earlier reflections</h2>'
+        arch += build_archive(items[1:])
     d = OUT / "reflections"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Reflections", arch, bodyclass="home", back_link=("&larr; Home", "/"), new_here=True), encoding="utf-8")
 
@@ -567,8 +579,8 @@ following the threads that make me pause, and inviting others to come wander wit
     d = OUT / "your-guide"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Learn About Your Guide", guide, bodyclass="prose", back_link=("&larr; About", "/about/")), encoding="utf-8")
 
-    podcast_body = """<p class="lead">Listen wherever you already listen. Or have each new reflection
-sent to your inbox.</p>
+    podcast_body = """<p class="lead">If you&rsquo;d like to keep wandering with me, here are the
+different ways you can listen or receive the reflections.</p>
 <p class="podcast-links">
 <a href="https://podcasts.apple.com/us/podcast/wandering-through-gods-word-with-wonder/id6802110750" target="_blank" rel="noopener">Apple Podcasts<svg class="leaf" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/><ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/><ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg></a>
 <a href="https://open.spotify.com/show/0348miqvVzowiYrzkywtW4" target="_blank" rel="noopener">Spotify<svg class="leaf" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/><ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/><ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg></a>
@@ -624,6 +636,54 @@ this wandering has gone so far.</p>
 
     write_feed(items)
     print(f"Built {len(items)} reflection(s) into public/")
+
+BOOK_RE = re.compile(r"^((?:[1-3]\s+)?[A-Za-z]+(?:\s+[A-Za-z]+)*?)\s+(\d+)")
+
+
+def book_chapter(ref):
+    """Pull the book name and chapter number out of a Scripture reference."""
+    m = BOOK_RE.match(ref.strip())
+    if not m:
+        return (ref.strip() or "Other", 0)
+    return (m.group(1).strip(), int(m.group(2)))
+
+
+def build_archive(rest):
+    """Reflections grouped book > chapter, collapsed. Current book and
+    chapter open so the page opens somewhere useful."""
+    books = {}
+    for it in rest:
+        b, c = book_chapter(it["scripture"])
+        books.setdefault(b, {}).setdefault(c, []).append(it)
+
+    order = sorted(books, key=lambda b: max(i["date"] for i in
+                   [x for ch in books[b].values() for x in ch]), reverse=True)
+
+    out = ['<div class="archive">']
+    for bi, b in enumerate(order):
+        chapters = books[b]
+        n = sum(len(v) for v in chapters.values())
+        newest_ch = max(chapters, key=lambda c: max(i["date"] for i in chapters[c]))
+        out.append(f'<details class="book"{" open" if bi == 0 else ""}>')
+        out.append(f'<summary><span class="bk">{html.escape(b)}</span>'
+                   f'<span class="count">{n}</span></summary>')
+        for c in sorted(chapters):
+            entries = sorted(chapters[c], key=lambda i: i["date"])
+            openc = " open" if (bi == 0 and c == newest_ch) else ""
+            label = f"{b} {c}" if c else b
+            out.append(f'<details class="chap"{openc}>')
+            out.append(f'<summary>{html.escape(label)}'
+                       f'<span class="count">{len(entries)}</span></summary>')
+            out.append('<ul class="list">')
+            for it in entries:
+                out.append(f'<li><a href="/{it["slug"]}/">{html.escape(it["title"])}</a>'
+                           f'<div class="sub">{pretty(it["date"])} &middot; '
+                           f'{html.escape(it["scripture"])}</div></li>')
+            out.append('</ul></details>')
+        out.append('</details>')
+    out.append('</div>')
+    return "".join(out)
+
 
 # ---- Podcast feed ---------------------------------------------------------
 def write_feed(items):

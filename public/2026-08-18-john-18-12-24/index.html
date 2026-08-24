@@ -50,8 +50,11 @@ details{margin:1rem 0 2rem}
 details summary{cursor:pointer;font-style:italic;color:var(--sage);
  font-size:.95rem;list-style:none}
 details summary::-webkit-details-marker{display:none}
-details summary::before{content:"A  ";opacity:.7}
-details[open] summary::before{content:"9  "}
+details summary::before{content:"";display:inline-block;width:0;height:0;
+ border-left:.4rem solid var(--sage);border-top:.28rem solid transparent;
+ border-bottom:.28rem solid transparent;opacity:.55;flex-shrink:0;
+ margin-right:.5rem;transform-origin:.15rem 50%;transition:transform .15s}
+details[open] > summary::before{transform:rotate(90deg)}
 .alongside{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}
 audio{width:100%;margin:1.5rem 0}
@@ -148,6 +151,18 @@ body.ways .podcast-links{margin:.7rem 0 0}
 .about-intro-text p{margin:0 0 .8rem}
 .about-footer{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}
 .orientation{margin-bottom:1rem}
+.archive{margin-top:1rem}
+.archive details{border:none;margin:0}
+.archive .book > summary{font-size:1.25rem;color:var(--green);
+ padding:.7rem 0;border-bottom:1px solid var(--tan);cursor:pointer;
+ list-style:none;display:flex;align-items:center}
+.archive .chap > summary{font-size:1.05rem;font-style:italic;color:var(--sage);
+ padding:.5rem 0 .5rem 1.4rem;cursor:pointer;list-style:none;
+ display:flex;align-items:center}
+.archive summary::-webkit-details-marker{display:none}
+.archive .count{margin-left:auto;font-size:.85rem;font-style:normal;
+ color:var(--muted);opacity:.5}
+.archive .chap .list{padding-left:2.6rem;margin:.2rem 0 .8rem}
 .intro{margin:1.5rem 0 2.5rem}
 .intro p{margin:0 0 .9rem;line-height:1.85}
 .intro p:last-child{margin-bottom:0}
