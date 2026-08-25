@@ -90,12 +90,44 @@ def parse_simple_page(path):
     html_parts = []
     _open = []
     sections = []
+    SPRIG_SVG = ('<svg class="pair-sprig" viewBox="0 0 20 12" aria-hidden="true">'
+     '<path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>'
+     '<ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/>'
+     '<ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg>')
+    in_cards = False
+    card_open = False
+    in_pairs = False
     for block in body_raw.split("\n\n"):
         block = block.strip()
         if not block:
             continue
-        if block.startswith("### "):
+        if block.startswith("@cards"):
+            cls = "cards two" if block.startswith("@cards2") else "cards"
+            html_parts.append(f'<div class="{cls}">')
+            in_cards, card_open = True, False
+        elif block.startswith("@pairs"):
+            html_parts.append('<div class="pairs">')
+            in_pairs = True
+        elif block.startswith("@end") and (in_cards or in_pairs):
+            if card_open:
+                html_parts.append("</div>")
+            html_parts.append("</div>")
+            in_cards = card_open = in_pairs = False
+        elif in_pairs and "|" in block:
+            a, b = [x.strip() for x in block.split("|", 1)]
+            html_parts.append(
+                f'<div class="pair"><span>{render_text(a)}</span>'
+                f'<span class="pair-and">and</span>'
+                f'<span>{render_text(b)}</span></div>')
+        elif block.startswith("### "):
+            if in_cards:
+                if card_open:
+                    html_parts.append("</div>")
+                html_parts.append('<div class="card">')
+                card_open = True
             html_parts.append(f"<h3>{render_text(block[4:].strip())}</h3>")
+        elif block.startswith("# "):
+            html_parts.append(f"<h1>{render_text(block[2:].strip())}</h1>")
         elif block.startswith("## "):
             _title = block[3:].strip()
             _anchor = slugify(_title)
@@ -138,6 +170,9 @@ def parse_simple_page(path):
             items = "".join(f"<li>{render_text(line[2:].strip())}</li>"
                             for line in block.split("\n") if line.strip().startswith("- "))
             html_parts.append(f"<ul>{items}</ul>")
+        elif in_cards and "\n" in block:
+            _lines = "<br>".join(render_text(x.strip()) for x in block.split("\n") if x.strip())
+            html_parts.append(f"<p>{_lines}</p>")
         else:
             html_parts.append(f"<p>{render_text(block)}</p>")
     while _open:
@@ -327,6 +362,28 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .archive .count{{margin-left:auto;font-size:.85rem;font-style:normal;
  color:var(--muted);opacity:.5}}
 .archive .chap .list{{padding-left:2.6rem;margin:.2rem 0 .8rem}}
+.cards{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:2.8rem 2.4rem;margin:2.2rem 0 1rem}}
+.cards.two{{grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem}}
+.card{{border-top:1px solid var(--tan);padding-top:.9rem}}
+.card h3{{font-size:1.18rem;font-weight:normal;margin:0;line-height:1.35}}
+.card p{{font-style:italic;color:var(--sage);font-size:.98rem;
+ margin:.7rem 0 0;line-height:1.85}}
+.card p:last-child{{font-style:normal;color:var(--muted);font-size:.92rem;
+ opacity:.8;margin-top:.9rem;line-height:1.6}}
+.pairs{{margin:2rem 0 1rem}}
+.pair{{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+ gap:1.2rem;margin:0 0 1.6rem}}
+.pair span{{font-style:italic;color:var(--green);font-size:1.1rem;text-align:center}}
+.pair-sprig{{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}}
+.pair-and{{font-style:italic;color:var(--sage);opacity:.7;font-size:.95rem}}
+#where-the-pattern-is-less-tidy,
+#where-the-pattern-is-less-tidy + p{{text-align:center}}
+@media (max-width:820px){{
+  .cards,.cards.two{{grid-template-columns:1fr;gap:2rem}}
+  .pair{{grid-template-columns:1fr;gap:.4rem}}
+  .pair-sprig{{transform:rotate(90deg);margin:0 auto}}
+}}
 .intro{{margin:1.5rem 0 2.5rem}}
 .intro p{{margin:0 0 .9rem;line-height:1.85}}
 .intro p:last-child{{margin-bottom:0}}
