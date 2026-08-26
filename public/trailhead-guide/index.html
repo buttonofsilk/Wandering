@@ -27,7 +27,7 @@ body.prose .wrap{max-width:min(94vw,58rem);padding-left:5rem;padding-right:5rem}
   body.prose .wrap{padding-left:1.25rem;padding-right:1.25rem}
 }
 body::before{content:"";position:fixed;inset:0;z-index:-1;
- background:url("/hero.png") no-repeat center center;background-size:cover;
+ background:url("/hero.jpg") no-repeat center center;background-size:cover;
  filter:grayscale(.25) sepia(.12);
  opacity:.16;pointer-events:none}
 body.wide .wrap{max-width:min(86vw,80rem)}
@@ -163,6 +163,11 @@ body.ways .podcast-links{margin:.7rem 0 0}
 .archive .count{margin-left:auto;font-size:.85rem;font-style:normal;
  color:var(--muted);opacity:.5}
 .archive .chap .list{padding-left:2.6rem;margin:.2rem 0 .8rem}
+body.list-cols .wrap ul{columns:14rem 3;column-gap:2.5rem;
+ margin:.6rem 0 1.6rem;padding-left:1.2rem}
+body.list-cols .wrap ul li{break-inside:avoid;padding:.12rem 0;
+ font-style:italic;color:var(--sage)}
+body.list-cols .wrap h2{margin-top:2rem}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
  gap:2.8rem 2.4rem;margin:2.2rem 0 1rem}
 .cards.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem}
@@ -173,17 +178,31 @@ body.ways .podcast-links{margin:.7rem 0 0}
 .card p:last-child{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}
 .pairs{margin:2rem 0 1rem}
-.pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
- gap:1.2rem;margin:0 0 1.6rem}
-.pair span{font-style:italic;color:var(--green);font-size:1.1rem;text-align:center}
+.pair{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+ gap:.65rem;margin:0 0 1.3rem}
+.pair span{font-style:italic;color:var(--green);font-size:1.1rem}
 .pair-sprig{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}
-.pair-and{font-style:italic;color:var(--sage);opacity:.7;font-size:.95rem}
+blockquote.verse{text-align:center;border:none;padding:0;
+ margin:1.4rem auto;max-width:34rem;font-style:italic;color:var(--sage);
+ font-size:1.15rem;line-height:1.75}
+blockquote.verse cite{display:block;font-style:normal;font-size:.9rem;
+ opacity:.8;margin-top:.5rem}
+.flourish{text-align:center;clear:both;margin:2.8rem 0 3.2rem;
+ font-size:1.9rem;line-height:1.4;color:var(--green);letter-spacing:.01em}
+@media (max-width:700px){.flourish{font-size:1.5rem;margin:2rem 0 2.2rem}}
+.content-photo.beside{float:left;max-width:15rem;
+ margin:.4rem 2.2rem 1.2rem 0;border:none}
+.content-photo.banner{max-width:100%;width:100%;margin:2.5rem 0;border:none}
+h2{clear:both}
+@media (max-width:700px){
+  .content-photo.beside{float:none;max-width:12rem;margin:1rem auto}
+}
+.pair-and{font-style:italic;color:var(--green);opacity:.8;font-size:1.1rem}
 #where-the-pattern-is-less-tidy,
 #where-the-pattern-is-less-tidy + p{text-align:center}
 @media (max-width:820px){
   .cards,.cards.two{grid-template-columns:1fr;gap:2rem}
-  .pair{grid-template-columns:1fr;gap:.4rem}
-  .pair-sprig{transform:rotate(90deg);margin:0 auto}
+  .pair{gap:.5rem}
 }
 .intro{margin:1.5rem 0 2.5rem}
 .intro p{margin:0 0 .9rem;line-height:1.85}
@@ -305,7 +324,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 
 <p class="back"><a href="/">&larr; Home</a> <span class="sep">&middot;</span> <a href="/exploring/">Exploring</a></p>
 
-<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
+<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
 <h1>Trailhead Guide</h1>
 <p>Foundations for understanding God&#x27;s Word.</p>
 <h2 id="1-all-scripture-is-god-breathed">1. All Scripture is God-breathed</h2>

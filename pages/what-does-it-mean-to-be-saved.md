@@ -7,13 +7,13 @@ back_to: Exploring
 back_url: /exploring/
 ---
 
-![A monarch chrysalis hanging from a branch](/chrysalis.png)
+@beside[A chrysalis hanging from a branch](/salvation-chrysalis.jpg)
 
 # What does it mean to be saved?
 
-> I am the way, and the truth, and the life. — John 14:6
+>> Jesus said to him, “I am the way, and the truth, and the life; no one comes to the Father but through Me.” | John 14:6
 
-Jesus saves.
+@flourish[Jesus saves.]
 
 ## Before we wander
 
@@ -143,7 +143,7 @@ What becomes clearer—or more complex—when you let these passages stand besid
 
 *[PLACEHOLDER — Hope's convictions, stated plainly and without defensiveness, distinguishing levels of confidence.]*
 
-*[PLACEHOLDER — valley image goes here, full width, no text over it.]*
+@banner[A valley at sunrise: an open Bible, a stream crossed by a log bridge, a path climbing to a cross on the hill](/valley.jpg)
 
 ## What are you wrestling with?
 

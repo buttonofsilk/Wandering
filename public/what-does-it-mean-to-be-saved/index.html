@@ -27,7 +27,7 @@ body.prose .wrap{max-width:min(94vw,58rem);padding-left:5rem;padding-right:5rem}
   body.prose .wrap{padding-left:1.25rem;padding-right:1.25rem}
 }
 body::before{content:"";position:fixed;inset:0;z-index:-1;
- background:url("/hero.png") no-repeat center center;background-size:cover;
+ background:url("/hero.jpg") no-repeat center center;background-size:cover;
  filter:grayscale(.25) sepia(.12);
  opacity:.16;pointer-events:none}
 body.wide .wrap{max-width:min(86vw,80rem)}
@@ -163,6 +163,11 @@ body.ways .podcast-links{margin:.7rem 0 0}
 .archive .count{margin-left:auto;font-size:.85rem;font-style:normal;
  color:var(--muted);opacity:.5}
 .archive .chap .list{padding-left:2.6rem;margin:.2rem 0 .8rem}
+body.list-cols .wrap ul{columns:14rem 3;column-gap:2.5rem;
+ margin:.6rem 0 1.6rem;padding-left:1.2rem}
+body.list-cols .wrap ul li{break-inside:avoid;padding:.12rem 0;
+ font-style:italic;color:var(--sage)}
+body.list-cols .wrap h2{margin-top:2rem}
 .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
  gap:2.8rem 2.4rem;margin:2.2rem 0 1rem}
 .cards.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem}
@@ -173,17 +178,31 @@ body.ways .podcast-links{margin:.7rem 0 0}
 .card p:last-child{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}
 .pairs{margin:2rem 0 1rem}
-.pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
- gap:1.2rem;margin:0 0 1.6rem}
-.pair span{font-style:italic;color:var(--green);font-size:1.1rem;text-align:center}
+.pair{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+ gap:.65rem;margin:0 0 1.3rem}
+.pair span{font-style:italic;color:var(--green);font-size:1.1rem}
 .pair-sprig{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}
-.pair-and{font-style:italic;color:var(--sage);opacity:.7;font-size:.95rem}
+blockquote.verse{text-align:center;border:none;padding:0;
+ margin:1.4rem auto;max-width:34rem;font-style:italic;color:var(--sage);
+ font-size:1.15rem;line-height:1.75}
+blockquote.verse cite{display:block;font-style:normal;font-size:.9rem;
+ opacity:.8;margin-top:.5rem}
+.flourish{text-align:center;clear:both;margin:2.8rem 0 3.2rem;
+ font-size:1.9rem;line-height:1.4;color:var(--green);letter-spacing:.01em}
+@media (max-width:700px){.flourish{font-size:1.5rem;margin:2rem 0 2.2rem}}
+.content-photo.beside{float:left;max-width:15rem;
+ margin:.4rem 2.2rem 1.2rem 0;border:none}
+.content-photo.banner{max-width:100%;width:100%;margin:2.5rem 0;border:none}
+h2{clear:both}
+@media (max-width:700px){
+  .content-photo.beside{float:none;max-width:12rem;margin:1rem auto}
+}
+.pair-and{font-style:italic;color:var(--green);opacity:.8;font-size:1.1rem}
 #where-the-pattern-is-less-tidy,
 #where-the-pattern-is-less-tidy + p{text-align:center}
 @media (max-width:820px){
   .cards,.cards.two{grid-template-columns:1fr;gap:2rem}
-  .pair{grid-template-columns:1fr;gap:.4rem}
-  .pair-sprig{transform:rotate(90deg);margin:0 auto}
+  .pair{gap:.5rem}
 }
 .intro{margin:1.5rem 0 2.5rem}
 .intro p{margin:0 0 .9rem;line-height:1.85}
@@ -305,10 +324,10 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 
 <p class="back"><a href="/">&larr; Home</a> <span class="sep">&middot;</span> <a href="/exploring/">Exploring</a></p>
 
-<img class="content-photo" src="/chrysalis.png" alt="A monarch chrysalis hanging from a branch">
+<img class="content-photo beside" src="/salvation-chrysalis.jpg" alt="A chrysalis hanging from a branch">
 <h1>What does it mean to be saved?</h1>
-<blockquote>I am the way, and the truth, and the life. — John 14:6</blockquote>
-<p>Jesus saves.</p>
+<blockquote class="verse">Jesus said to him, “I am the way, and the truth, and the life; no one comes to the Father but through Me.”John 14:6</blockquote>
+<p class="flourish">Jesus saves.</p>
 <h2 id="before-we-wander">Before we wander</h2>
 <div class="page-audio"><p class="audio-label">A note from Hope</p><audio controls preload="none" src="https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev/salvation-intro.mp3"></audio></div>
 <details><summary>Read the transcript instead</summary>
@@ -384,7 +403,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <p>*[PLACEHOLDER — a few sentences. God does not merely rescue us from something; He brings us into life with Him. Kept short.]*</p>
 <h2 id="where-i-have-landed">Where I have landed</h2>
 <p>*[PLACEHOLDER — Hope&#x27;s convictions, stated plainly and without defensiveness, distinguishing levels of confidence.]*</p>
-<p>*[PLACEHOLDER — valley image goes here, full width, no text over it.]*</p>
+<img class="content-photo banner" src="/valley.jpg" alt="A valley at sunrise: an open Bible, a stream crossed by a log bridge, a path climbing to a cross on the hill">
 <h2 id="what-are-you-wrestling-with">What are you wrestling with?</h2>
 <p>*[PLACEHOLDER — one sentence, then a quiet way to write.]*</p>
 <footer>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>

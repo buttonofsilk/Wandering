@@ -94,6 +94,8 @@ def parse_simple_page(path):
      '<path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/>'
      '<ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/>'
      '<ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg>')
+    FLOURISH_L = '<svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="16" cy="6" rx="7" ry="3.4" transform="rotate(-22 16 6)" fill="currentColor" opacity=".85"/><ellipse cx="16" cy="14" rx="7" ry="3.4" transform="rotate(22 16 14)" fill="currentColor" opacity=".85"/></svg>'
+    FLOURISH_R = '<svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="16" cy="6" rx="7" ry="3.4" transform="rotate(-22 16 6)" fill="currentColor" opacity=".85"/><ellipse cx="16" cy="14" rx="7" ry="3.4" transform="rotate(22 16 14)" fill="currentColor" opacity=".85"/></svg>'
     in_cards = False
     card_open = False
     in_pairs = False
@@ -133,6 +135,15 @@ def parse_simple_page(path):
             _anchor = slugify(_title)
             sections.append((_title, _anchor))
             html_parts.append(f'<h2 id="{_anchor}">{render_text(_title)}</h2>')
+        elif block.startswith(">> "):
+            _v = block[3:].strip()
+            if "|" in _v:
+                _v, _cite = _v.rsplit("|", 1)
+                _cite = f'{render_text(_cite.strip())}'
+            else:
+                _cite = ""
+            html_parts.append(
+                f'<blockquote class="verse">{render_text(_v.strip())}{_cite}</blockquote>')
         elif block.startswith("> "):
             html_parts.append(f"<blockquote>{render_text(block[2:].strip())}</blockquote>")
         elif block.startswith("~") and block.endswith("~") and len(block) > 1:
@@ -148,6 +159,20 @@ def parse_simple_page(path):
             _sum = _m.group(1) if _m else "Read more"
             html_parts.append(f'<details><summary>{render_text(_sum)}</summary>')
             _open.append("</details>")
+        elif block.startswith("@flourish["):
+            _m = re.match(r"@flourish\[([^\]]*)\]", block)
+            _txt = _m.group(1) if _m else ""
+            html_parts.append(f'<p class="flourish">{render_text(_txt)}</p>')
+        elif block.startswith("@beside[") or block.startswith("@banner["):
+            _kind = "beside" if block.startswith("@beside[") else "banner"
+            _m = re.match(r"@\w+\[([^\]]*)\]\(([^)]+)\)", block)
+            if _m:
+                _alt, _src = _m.groups()
+                html_parts.append(
+                    f'<img class="content-photo {_kind}" src="{html.escape(_src)}" '
+                    f'alt="{html.escape(_alt)}">')
+            else:
+                html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("@audio["):
             _m = re.match(r"@audio\[([^\]]*)\]\(([^)]+)\)", block)
             if _m:
@@ -226,7 +251,7 @@ body.prose .wrap{{max-width:min(94vw,58rem);padding-left:5rem;padding-right:5rem
   body.prose .wrap{{padding-left:1.25rem;padding-right:1.25rem}}
 }}
 body::before{{content:"";position:fixed;inset:0;z-index:-1;
- background:url("/hero.png") no-repeat center center;background-size:cover;
+ background:url("/hero.jpg") no-repeat center center;background-size:cover;
  filter:grayscale(.25) sepia(.12);
  opacity:.16;pointer-events:none}}
 body.wide .wrap{{max-width:min(86vw,80rem)}}
@@ -362,6 +387,11 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .archive .count{{margin-left:auto;font-size:.85rem;font-style:normal;
  color:var(--muted);opacity:.5}}
 .archive .chap .list{{padding-left:2.6rem;margin:.2rem 0 .8rem}}
+body.list-cols .wrap ul{{columns:14rem 3;column-gap:2.5rem;
+ margin:.6rem 0 1.6rem;padding-left:1.2rem}}
+body.list-cols .wrap ul li{{break-inside:avoid;padding:.12rem 0;
+ font-style:italic;color:var(--sage)}}
+body.list-cols .wrap h2{{margin-top:2rem}}
 .cards{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
  gap:2.8rem 2.4rem;margin:2.2rem 0 1rem}}
 .cards.two{{grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem}}
@@ -372,17 +402,31 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
 .card p:last-child{{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}}
 .pairs{{margin:2rem 0 1rem}}
-.pair{{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
- gap:1.2rem;margin:0 0 1.6rem}}
-.pair span{{font-style:italic;color:var(--green);font-size:1.1rem;text-align:center}}
+.pair{{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+ gap:.65rem;margin:0 0 1.3rem}}
+.pair span{{font-style:italic;color:var(--green);font-size:1.1rem}}
 .pair-sprig{{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}}
-.pair-and{{font-style:italic;color:var(--sage);opacity:.7;font-size:.95rem}}
+blockquote.verse{{text-align:center;border:none;padding:0;
+ margin:1.4rem auto;max-width:34rem;font-style:italic;color:var(--sage);
+ font-size:1.15rem;line-height:1.75}}
+blockquote.verse cite{{display:block;font-style:normal;font-size:.9rem;
+ opacity:.8;margin-top:.5rem}}
+.flourish{{text-align:center;clear:both;margin:2.8rem 0 3.2rem;
+ font-size:1.9rem;line-height:1.4;color:var(--green);letter-spacing:.01em}}
+@media (max-width:700px){{.flourish{{font-size:1.5rem;margin:2rem 0 2.2rem}}}}
+.content-photo.beside{{float:left;max-width:15rem;
+ margin:.4rem 2.2rem 1.2rem 0;border:none}}
+.content-photo.banner{{max-width:100%;width:100%;margin:2.5rem 0;border:none}}
+h2{{clear:both}}
+@media (max-width:700px){{
+  .content-photo.beside{{float:none;max-width:12rem;margin:1rem auto}}
+}}
+.pair-and{{font-style:italic;color:var(--green);opacity:.8;font-size:1.1rem}}
 #where-the-pattern-is-less-tidy,
 #where-the-pattern-is-less-tidy + p{{text-align:center}}
 @media (max-width:820px){{
   .cards,.cards.two{{grid-template-columns:1fr;gap:2rem}}
-  .pair{{grid-template-columns:1fr;gap:.4rem}}
-  .pair-sprig{{transform:rotate(90deg);margin:0 auto}}
+  .pair{{gap:.5rem}}
 }}
 .intro{{margin:1.5rem 0 2.5rem}}
 .intro p{{margin:0 0 .9rem;line-height:1.85}}
@@ -505,7 +549,7 @@ def pretty(d):
 def strip_page(title, crop, body_html, aspect=None):
     """Shared template for secondary pages: strip image + heading + content."""
     ratio_style = f"aspect-ratio:{aspect};" if aspect else ""
-    return f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="{ratio_style}object-position:center {crop}%">
+    return f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages" style="{ratio_style}object-position:center {crop}%">
 <h1>{html.escape(title)}</h1>
 {body_html}"""
 
@@ -543,7 +587,7 @@ def build():
                           if _also else "")
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
-        content = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+        content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <article>
 <h1>{html.escape(it['title'])}</h1>
 <div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{html.escape(it['scripture'])}</span></div>
@@ -558,7 +602,7 @@ def build():
             page(it["title"], content, it["body"][:160], bodyclass="prose", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
     home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<div class="home-split">
-<img class="hero" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+<img class="hero" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
 invitation to linger in Scripture long enough to notice who God is, what He is saying,
@@ -571,7 +615,7 @@ the rest of your day.</p>
     (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide", show_tag=True), encoding="utf-8")
 
     l = items[0]
-    arch = f"""<img class="strip" src="/hero.png" alt="An open Bible with a forest and stream growing from its pages">
+    arch = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <h1>Reflections</h1>
 <div class="intro">
 <p>These are my spoken reflections from my own time in Scripture &mdash; questions I
@@ -602,11 +646,11 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
 </div>
 <div class="paths">
 <a href="/your-guide/">
-  <img src="/hope-thumb.png" alt="">
+  <img src="/hope-thumb.jpg" alt="">
   <span>Learn about your guide</span>
 </a>
 <a href="/why-button-of-silk/">
-  <img src="/chrysalis.png" alt="">
+  <img src="/chrysalis.jpg" alt="">
   <span>Why Button of Silk?</span>
 </a>
 </div>"""
@@ -623,7 +667,7 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
     (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     guide_body = f"""<div class="about-intro">
-<img class="about-photo" src="/hope-photo.png" alt="A photo of Hope">
+<img class="about-photo" src="/hope-photo.jpg" alt="A photo of Hope">
 <p class="welcome-script">Welcome!</p>
 </div>
 <div class="letter">
@@ -675,7 +719,7 @@ different ways you can listen or receive the reflections.</p>
             for t, a in _rm.get("sections", []))
 
     exploration = f"""<div class="split">
-<img src="/hero.png" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
+<img src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
 <div class="split-menu">
 <h1>Exploring</h1>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
@@ -706,7 +750,9 @@ this wandering has gone so far.</p>
                 content = strip_page(meta["title"], crop, meta["body_html"], aspect=aspect)
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
-                page(meta["title"], content, bodyclass="prose",
+                page(meta["title"], content,
+                     bodyclass="prose" + (" list-cols" if
+                       str(meta.get("list_columns", "")).lower() in ("true", "yes", "1") else ""),
                      back_link=("&larr; " + meta.get("back_to", "Home"),
                                 meta.get("back_url", "/")),
                      noindex=str(meta.get("noindex", "")).lower() in ("true", "yes", "1")), encoding="utf-8")

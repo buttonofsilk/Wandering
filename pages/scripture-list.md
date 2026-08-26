@@ -3,6 +3,7 @@ title: The fuller Scripture list
 slug: scripture-list
 no_banner: true
 noindex: true
+list_columns: true
 back_to: What does it mean to be saved?
 back_url: /what-does-it-mean-to-be-saved/
 ---
@@ -123,8 +124,4 @@ back_url: /what-does-it-mean-to-be-saved/
 
 ## Hold these together
 
-@pairs
-
-Genesis 3 | Ephesians 2:1-3
-
-@end
+- Genesis 3 + Ephesians 2:1-3

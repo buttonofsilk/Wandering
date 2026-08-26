@@ -6,7 +6,7 @@ back_to: About
 back_url: /about/
 ---
 
-![A blue and purple monarch chrysalis hanging from a tree branch against a sky background](/chrysalis.png)
+![A blue and purple monarch chrysalis hanging from a tree branch against a sky background](/chrysalis.jpg)
 
 ## But why Button of Silk?
 
