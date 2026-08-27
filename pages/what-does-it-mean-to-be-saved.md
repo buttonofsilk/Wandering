@@ -175,9 +175,49 @@ Responding to Jesus is not the end of the journey. It is the beginning of learni
 
 Pray. Stay in His Word. Find other believers who will walk with you as you grow. Keep learning, and keep responding in obedience to what God shows you.
 
-## Where I have landed
+## What I believe
 
-*[PLACEHOLDER — Hope's convictions, stated plainly and without defensiveness, distinguishing levels of confidence.]*
+@audio[A note from Hope](where-i-have-landed.mp3)
+
+@details[Read the transcript instead]
+
+Hopefully, you've just read through a lot of Scripture.
+
+After years of wrestling with these passages, here is what I believe Scripture teaches us.
+
+I do not believe that salvation is earned. I believe it is received as a gift from God, made possible by the death and resurrection of Jesus.
+
+I believe that Jesus lived on earth, fully human and fully God, and having lived a sinless life, He died on the cross, taking our sins upon Himself and receiving the punishment we deserved. And three days later, He rose again, having overcome the Enemy.
+
+I believe that we are responsible to respond to this invitation. We have the choice to surrender to Him.
+
+And I believe that believing in Jesus is far more than agreeing that certain things are true. Instead, it should result in a change of master.
+
+James 2:19 gives us the warning:
+
+> You believe that God is one. You do well. But the demons also believe, and shudder.
+
+I believe that being baptized in the name of Jesus is important. At the same time, I am not willing to say that someone who has truly sought Him and was baptized in the name of the Father, Son, and Holy Spirit is therefore outside of salvation. Final judgment belongs to God, not me.
+
+I believe that baptism is far more important than just a public expression of belief. As you read in the Scripture supplied above, there seems to be something more happening when a believer is baptized.
+
+I believe that we receive the Holy Spirit, but that this can happen in any order God has ordained for each follower.
+
+I believe Scripture shows that speaking in tongues can be evidence of His indwelling, but it is not the only evidence. We are also told to look for the fruit of the Spirit in one another.
+
+I believe that the Holy Spirit teaches, convicts, empowers, transforms, produces fruit, and helps us live under Christ's lordship.
+
+Salvation is a gift of grace, but following Jesus is not passive. He calls us to obedience, surrender, and growth.
+
+Following Jesus has far-reaching implications in how we live our life. Every day we choose which master we will follow: Christ or our flesh.
+
+Some days this is easier than others.
+
+Discipleship and sanctification are lifelong pursuits.
+
+@end
+
+@flourish[In the end, Jesus saves, and we respond.]
 
 @banner[A valley at sunrise: an open Bible, a stream crossed by a log bridge, a path climbing to a cross on the hill](/valley.jpg)
 
