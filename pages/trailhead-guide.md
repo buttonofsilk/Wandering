@@ -8,13 +8,17 @@ back_url: /exploring/
 
 Foundations for understanding God's Word.
 
-## 1. All Scripture is God-breathed
+## 1. All Scripture is God-breathed and living
 
 Scripture comes from God, and because it comes from God, it carries authority.
 
 We do not only read the passages that are comfortable, familiar, or confirm what we already believe. We need to come willing to listen and to be corrected. Sometimes Scripture will make us stop, reconsider, and look again.
 
 > All Scripture is inspired by God and profitable for teaching, for reproof, for correction, for training in righteousness; so that the man of God may be adequate, equipped for every good work. — 2 Timothy 3:16-17
+
+God's Word is not simply something we study. It is living and active.
+
+> For the word of God is living and active and sharper than any two-edged sword, and piercing as far as the division of soul and spirit, of both joints and marrow, and able to judge the thoughts and intentions of the heart. — Hebrews 4:12
 
 ## 2. The Bible is first about God
 
@@ -36,19 +40,17 @@ We read a passage in light of the verses around it, the book it belongs to, and 
 
 Let Scripture stand beside Scripture. Follow the cross-references. Notice what repeats and what connects. Often, one passage helps us see another more clearly.
 
-## 5. Scripture shapes us
+## 5. Read in relationship with God and let Scripture shape you
 
 We are not only gathering information.
 
 God uses His Word to teach, correct, train, and equip us. Scripture is not only something we understand. As we come to know God in it, we are changed by what we find.
 
-We come willing not only to understand what Scripture says, but to respond to what we find there.
-
-## 6. Read in relationship with God
-
 We do not only study the text; we come before God in it.
 
 Pray. Ask Him to help you see clearly. Sit with what you do not understand instead of rushing past it. Ask questions. Listen. And when something becomes clear, be willing to respond.
+
+We come willing not only to understand what Scripture says, but to respond to what we find there.
 
 Slow down. Follow the thread. Leave room for wonder.
 

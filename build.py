@@ -173,6 +173,10 @@ def parse_simple_page(path):
                     f'alt="{html.escape(_alt)}">')
             else:
                 html_parts.append(f"<p>{render_text(block)}</p>")
+        elif block.startswith("@refs["):
+            _m = re.match(r"@refs\[([^\]]*)\]", block)
+            html_parts.append(
+                f'<p class="refs">{render_text(_m.group(1) if _m else "")}</p>')
         elif block.startswith("@audio["):
             _m = re.match(r"@audio\[([^\]]*)\]\(([^)]+)\)", block)
             if _m:
@@ -401,6 +405,8 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  margin:.7rem 0 0;line-height:1.85}}
 .card p:last-child{{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}}
+p.refs{{font-style:italic;color:var(--sage);font-size:.98rem;
+ margin:-.4rem 0 1.4rem;line-height:1.7}}
 .pairs{{margin:2rem 0 1rem}}
 .pair{{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
  gap:.65rem;margin:0 0 1.3rem}}

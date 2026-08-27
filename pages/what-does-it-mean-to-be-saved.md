@@ -173,7 +173,19 @@ What becomes clearer—or more complex—when you let these passages stand besid
 
 Responding to Jesus is not the end of the journey. It is the beginning of learning to live with Him as Lord.
 
+@refs[Luke 9:23-24; Romans 6:4-14; Colossians 2:6-7]
+
+Following Jesus does not mean we will never fail. When we do, Scripture calls us to repent, confess our sin, receive His forgiveness, and keep turning back toward Him.
+
+@refs[1 John 1:8-2:2; Hebrews 4:14-16]
+
+We are saved by grace, but Scripture also teaches that faith without works is dead. Obedience does not purchase salvation; it is part of what a living faith begins to produce.
+
+@refs[Ephesians 2:8-10; James 2:14-26]
+
 Pray. Stay in His Word. Find other believers who will walk with you as you grow. Keep learning, and keep responding in obedience to what God shows you.
+
+@refs[Acts 2:42-47; 2 Timothy 3:14-17; Hebrews 10:24-25; John 14:21-23]
 
 ## What I believe
 
