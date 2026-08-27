@@ -139,7 +139,7 @@ def parse_simple_page(path):
             _v = block[3:].strip()
             if "|" in _v:
                 _v, _cite = _v.rsplit("|", 1)
-                _cite = f'{render_text(_cite.strip())}'
+                _cite = f'<cite>{render_text(_cite.strip())}</cite>'
             else:
                 _cite = ""
             html_parts.append(
@@ -406,11 +406,17 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  gap:.65rem;margin:0 0 1.3rem}}
 .pair span{{font-style:italic;color:var(--green);font-size:1.1rem}}
 .pair-sprig{{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}}
+.wrap > h1{{text-align:center;clear:both;margin:1.5rem 0 1.2rem}}
 blockquote.verse{{text-align:center;border:none;padding:0;
  margin:1.4rem auto;max-width:34rem;font-style:italic;color:var(--sage);
  font-size:1.15rem;line-height:1.75}}
-blockquote.verse cite{{display:block;font-style:normal;font-size:.9rem;
- opacity:.8;margin-top:.5rem}}
+blockquote.verse cite{{display:block;font-style:normal;font-size:1.05rem;
+ opacity:.9;margin-top:1rem}}
+.content-photo.beside + blockquote.verse{{display:flex;flex-direction:column;
+ justify-content:center;min-height:19rem;margin-top:0}}
+@media (max-width:700px){{
+  .content-photo.beside + blockquote.verse{{display:block;min-height:0}}
+}}
 .flourish{{text-align:center;clear:both;margin:2.8rem 0 3.2rem;
  font-size:1.9rem;line-height:1.4;color:var(--green);letter-spacing:.01em}}
 @media (max-width:700px){{.flourish{{font-size:1.5rem;margin:2rem 0 2.2rem}}}}
@@ -418,12 +424,14 @@ blockquote.verse cite{{display:block;font-style:normal;font-size:.9rem;
  margin:.4rem 2.4rem 1.2rem 0;border:none}}
 .content-photo.banner{{max-width:100%;width:100%;margin:2.5rem 0;border:none}}
 h2{{clear:both}}
+blockquote.verse + h2{{margin-top:1.6rem}}
+.content-photo.banner + blockquote.verse{{margin-top:1rem;margin-bottom:.6rem}}
 @media (max-width:700px){{
   .content-photo.beside{{float:none;max-width:14rem;margin:1rem auto}}
 }}
 .pair-and{{font-style:italic;color:var(--green);opacity:.8;font-size:1.1rem}}
-#where-the-pattern-is-less-tidy,
-#where-the-pattern-is-less-tidy + p{{text-align:center}}
+#take-a-deeper-look,
+#take-a-deeper-look + p{{text-align:center}}
 @media (max-width:820px){{
   .cards,.cards.two{{grid-template-columns:1fr;gap:2rem}}
   .pair{{gap:.5rem}}

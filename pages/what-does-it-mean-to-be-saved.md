@@ -7,13 +7,11 @@ back_to: Exploring
 back_url: /exploring/
 ---
 
-@beside[A chrysalis hanging from a branch](/salvation-chrysalis.jpg)
-
 # What does it mean to be saved?
 
->> Jesus said to him, “I am the way, and the truth, and the life; no one comes to the Father but through Me.” | John 14:6
+@banner[A chrysalis hanging from a branch](/salvation-chrysalis.jpg)
 
-@flourish[Jesus saves.]
+>> Jesus said to him, “I am the way, and the truth, and the life; no one comes to the Father but through Me.” | John 14:6
 
 ## Before we wander
 
@@ -21,17 +19,53 @@ back_url: /exploring/
 
 @details[Read the transcript instead]
 
-*[PLACEHOLDER — transcript of the audio note.]*
+Salvation matters deeply, and because it matters, I want to be careful with how I approach it here.
+
+As I've thought over, prayed over, and fasted over this page, I've kept coming back to one thing: I want to make room for the Holy Spirit and for Scripture.
+
+Not just one passage or one familiar set of verses, but Scripture beside Scripture—the Old Testament alongside the New, the Gospels alongside Acts and the letters, the passages that seem wonderfully clear alongside the ones that make us slow down and look again.
+
+My hope is not to hand you a tidy formula and tell you what you're supposed to find. I want to invite you to look.
+
+To read the passages in context. Follow the cross-references. Ask questions. Notice what repeats. Notice what surprises you. Notice what challenges you.
+
+And when something doesn't seem to fit neatly with something else, pause. Stop. Pray, and keep looking.
+
+But I also don't want anything to be a barrier between you and Jesus.
+
+You do not have to understand every passage, settle every theological question, or finish this entire study before you can respond to Him.
+
+There is a difference between understanding what you are responding to and having mastered all there is to understand, and none of us has mastered it.
+
+So before you begin, I invite you to pray.
+
+Ask God to guide you as you walk through His Word. Ask Him to help you see what is actually there. Ask Him to reveal Himself to you.
+
+Throughout Scripture, God promises that when we seek Him wholeheartedly, He will be found. (Deuteronomy 4:29, Jeremiah 29:13, Acts 17:26-27)
+
+And in true Wandering Through God's Word with Wonder fashion, that's what I'm inviting you to do here:
+
+Open the Word. Look carefully. Ask questions. Pray. And seek Him.
+
+I do have convictions about what I believe these Scriptures show, and later on I'll share my beliefs. But first, I want to give the Holy Spirit and Scripture the floor.
+
+I believe God can meet you here, and I believe He will.
+
+I want to leave you with Titus 3:3-8:
+
+> For we too were once foolish, disobedient, deceived, enslaved to various lusts and pleasures, spending our life in malice and envy, hateful, hating one another. But when the kindness of God our Savior and His love for mankind appeared, He saved us, not on the basis of deeds which we did in righteousness, but in accordance with His mercy, by the washing of regeneration and renewing by the Holy Spirit, whom He richly poured out upon us through Jesus Christ our Savior, so that being justified by His grace, we would be made heirs according to the hope of eternal life. This statement is trustworthy; and concerning these things, I want you to speak confidently, so that those who have believed God will be careful to engage in good deeds. These things are good and beneficial for people."*
 
 @end
 
-*[PLACEHOLDER — short framing paragraph. Salvation is not complicated. Scripture is our foundation. This page is not organised around one denominational framework. These headings are a path through the Scriptures, not a timeline.]*
+Salvation is not complicated at its heart; Scripture tells us that we are sinful and, because of this, we are separated from life with God. Salvation is God bringing us from death into life with Him. Through Jesus' death and resurrection, He reconciles us to Himself and calls us to live under His Lordship and to respond to what He has done and to the life He is calling us into.
+
+My hope is that you will be able to see for yourself what Scripture says, what it invites us into, and what it asks of us.
 
 ## Your job is to…
 
 Read each Scripture. Read around it. Follow the cross-references. Hold passages together. Ask questions. Pray. Stay teachable.
 
-*[PLACEHOLDER — the "you do not have to resolve everything before you can come to Jesus" line, reworked so it rejects mastery rather than understanding.]*
+There is a difference between understanding what you are responding to and having mastered all there is to understand, and none of us has mastered it. You do not have to understand everything before you encounter God. Come with a heart that is willing to seek Him and respond to what He shows you.
 
 ## The path through Scripture
 
@@ -74,27 +108,27 @@ Mark 1:14-15
 
 What do you notice about how people are called to respond to God?
 
-### The Heart
-
-Acts 8:4-24
-Acts 8:26-39
-
-What similarities and differences do you notice in the way Simon and the Ethiopian eunuch respond?
-
-@end
-
-## Where the pattern is less tidy
-
-An invitation to look closer.
-
-@cards
-
 ### Baptism
 
 Matthew 28:18-20
 Acts 2:37-41
 
 What do you notice about baptism in these passages?
+
+@end
+
+## Take a Deeper Look
+
+Some questions deserve more than a quick answer.
+
+@cards
+
+### The Heart
+
+Acts 8:4-24
+Acts 8:26-39
+
+What similarities and differences do you notice in the way Simon and the Ethiopian eunuch respond?
 
 ### In the Name
 
@@ -137,7 +171,9 @@ What becomes clearer—or more complex—when you let these passages stand besid
 
 ## And the journey continues…
 
-*[PLACEHOLDER — a few sentences. God does not merely rescue us from something; He brings us into life with Him. Kept short.]*
+Responding to Jesus is not the end of the journey. It is the beginning of learning to live with Him as Lord.
+
+Pray. Stay in His Word. Find other believers who will walk with you as you grow. Keep learning, and keep responding in obedience to what God shows you.
 
 ## Where I have landed
 
@@ -147,4 +183,6 @@ What becomes clearer—or more complex—when you let these passages stand besid
 
 ## What are you wrestling with?
 
-*[PLACEHOLDER — one sentence, then a quiet way to write.]*
+Still thinking through something? Made a decision? Either way, I'd love to hear from you.
+
+You will hear many voices as you learn to follow Jesus. Mine is only one of them. Keep taking what you hear back to Scripture, keep asking God to teach you, and keep your heart willing to learn.

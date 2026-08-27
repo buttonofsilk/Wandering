@@ -93,6 +93,7 @@ back_url: /what-does-it-mean-to-be-saved/
 
 - Matthew 28:18-20
 - John 17:25-26
+- John 20:30-31
 - Acts 2:38
 - Acts 19:1-5
 - 1 Corinthians 6:9-11
