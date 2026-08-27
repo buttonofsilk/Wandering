@@ -2,10 +2,16 @@ name: Publish
 
 on:
   schedule:
+    # GitHub's scheduler is best-effort and does drop runs, so this
+    # fires several times through the early morning. A run with nothing
+    # to publish exits in seconds.
     # 09:00 UTC = 3am Mountain Daylight Time (summer)
     - cron: '0 9 * * *'
     # 10:00 UTC = 3am Mountain Standard Time (winter)
     - cron: '0 10 * * *'
+    - cron: '20 11 * * *'
+    - cron: '40 12 * * *'
+    - cron: '0 14 * * *'
   push:
     branches: [main]
   workflow_dispatch:
