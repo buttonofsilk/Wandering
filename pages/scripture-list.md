@@ -10,7 +10,7 @@ back_url: /what-does-it-mean-to-be-saved/
 
 # The fuller Scripture list
 
-*[PLACEHOLDER — a sentence or two. These are the broader passages behind each section. Not a reading assignment.]*
+Here are additional Scripture readings for each section for you to read if you would like a more in-depth study.
 
 ## Who God is
 
