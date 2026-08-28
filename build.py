@@ -54,7 +54,7 @@ def parse(path):
         meta[k] = v
     meta["slug"] = path.stem
     meta["body"] = body
-    for req in ("date", "title", "scripture", "audio"):
+    for req in ("date", "title", "scripture"):
         if req not in meta:
             raise ValueError(f"{path.name} is missing '{req}'")
     return meta
@@ -596,6 +596,9 @@ def build():
         walk = f'<nav class="walk">{_prev}{_here}{_next}</nav>'
         themes = it.get("themes") or []
         chips = "".join(f"<span>{html.escape(t)}</span>" for t in themes)
+        _aud = it.get("audio", "").strip()
+        audio_html = (f'<audio controls preload="none" src="{AUDIO_BASE}/{_aud}"></audio>'
+                      if _aud else "")
         _also = it.get("alongside", "").strip()
         alongside_html = (f'<div class="alongside">{html.escape(_also)}</div>'
                           if _also else "")
@@ -606,7 +609,7 @@ def build():
 <h1>{html.escape(it['title'])}</h1>
 <div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{html.escape(it['scripture'])}</span></div>
 {alongside_html}
-<audio controls preload="none" src="{AUDIO_BASE}/{it['audio']}"></audio>
+{audio_html}
 {body}
 <div class="themes">{chips}</div>
 </article>
@@ -629,6 +632,9 @@ the rest of your day.</p>
     (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide", show_tag=True), encoding="utf-8")
 
     l = items[0]
+    _la = l.get("audio", "").strip()
+    today_audio = (f'<audio controls preload="none" src="{AUDIO_BASE}/{_la}"></audio>'
+                   if _la else '')
     arch = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <h1>Reflections</h1>
 <div class="intro">
@@ -643,7 +649,7 @@ see what He has to show you as well.</p>
 <article class="today">
 <h3><a href="/{l['slug']}/">{html.escape(l['title'])}</a></h3>
 <div class="meta">{pretty(l['date'])} &middot; <span class="scripture">{html.escape(l['scripture'])}</span></div>
-<audio controls preload="none" src="{AUDIO_BASE}/{l['audio']}"></audio>
+{today_audio}
 </article>"""
     if len(items) > 1:
         arch += '<h2>Earlier reflections</h2>'
@@ -827,6 +833,7 @@ def write_feed(items):
     # Based on the newest reflection, not the clock, so feed.xml only changes
     # when content changes. A fresh timestamp every build guarantees a git
     # conflict between local builds and the scheduled Action.
+    items = [i for i in items if i.get("audio")]
     _newest = max((i["date"] for i in items), default="1970-01-01")
     now = format_datetime(datetime.strptime(_newest, "%Y-%m-%d").replace(tzinfo=timezone.utc))
     e = html.escape

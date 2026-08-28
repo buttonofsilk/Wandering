@@ -79,8 +79,7 @@ def main():
 
         m = re.search(r"^audio:\s*(.+)$", text, re.M)
         if not m:
-            print(f"SKIP {md_file.name}: no 'audio:' field found")
-            failed += 1
+            skipped += 1
             continue
 
         audio_file = m.group(1).strip()
