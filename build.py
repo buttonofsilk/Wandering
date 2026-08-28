@@ -17,6 +17,40 @@ EMAIL       = "hope@buttonofsilk.org"
 COVER       = SITE_URL + "/cover.jpg"
 TIMEZONE    = "America/Denver"
 
+import json as _json
+import urllib.parse
+_vf = Path(__file__).parent / "verses.json"
+VERSES = _json.loads(_vf.read_text(encoding="utf-8")) if _vf.exists() else {}
+_REF = re.compile(r"\b((?:[123]\s+)?[A-Z][a-z]+)\s+(\d+)(?::\d+)?(?:\s*-\s*\d+(?::\d+)?)?")
+
+
+def link_refs(text):
+    """Turn every Scripture reference into a link to the passage in NASB 1995."""
+    def one(m):
+        ref = m.group(0)
+        q = urllib.parse.quote_plus(ref)
+        return (f'<a href="https://www.biblegateway.com/passage/?search={q}'
+                f'&version=NASB1995" target="_blank" rel="noopener">{ref}</a>')
+    return _REF.sub(one, text)
+
+
+def expand_refs(text):
+    """Wrap any cached Scripture reference so its text can be opened."""
+    def one(m):
+        ref = m.group(0)
+        verse = VERSES.get(ref)
+        if not verse:
+            return ref
+        chap = f"{m.group(1)} {m.group(2)}".replace(" ", "+")
+        link = ("https://www.biblegateway.com/passage/?search="
+                f"{chap}&version=NASB1995")
+        return (f'<span class="ref"><button type="button" class="ref-open">'
+                f'{html.escape(ref)}</button>'
+                f'<span class="ref-text">{html.escape(verse)}'
+                f'<a href="{link}" target="_blank" rel="noopener">'
+                f'Read the whole chapter</a></span></span>')
+    return _REF.sub(one, text)
+
 SUBSCRIBE = """<p class="inbox-bridge">Prefer it in your inbox?</p>
 <form class="subscribe" action="https://buttondown.com/api/emails/embed-subscribe/Hopelittle414" method="post">
 <label class="sr-only" for="bd-email">Email address</label>
@@ -118,9 +152,9 @@ def parse_simple_page(path):
         elif in_pairs and "|" in block:
             a, b = [x.strip() for x in block.split("|", 1)]
             html_parts.append(
-                f'<div class="pair"><span>{render_text(a)}</span>'
+                f'<div class="pair"><span>{expand_refs(render_text(a))}</span>'
                 f'<span class="pair-and">and</span>'
-                f'<span>{render_text(b)}</span></div>')
+                f'<span>{expand_refs(render_text(b))}</span></div>')
         elif block.startswith("### "):
             if in_cards:
                 if card_open:
@@ -176,7 +210,7 @@ def parse_simple_page(path):
         elif block.startswith("@refs["):
             _m = re.match(r"@refs\[([^\]]*)\]", block)
             html_parts.append(
-                f'<p class="refs">{render_text(_m.group(1) if _m else "")}</p>')
+                f'<p class="refs">{expand_refs(render_text(_m.group(1) if _m else ""))}</p>')
         elif block.startswith("@audio["):
             _m = re.match(r"@audio\[([^\]]*)\]\(([^)]+)\)", block)
             if _m:
@@ -196,11 +230,17 @@ def parse_simple_page(path):
             else:
                 html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("- "):
+            items = "".join(f"<li>{link_refs(render_text(line[2:].strip()))}</li>"
+                            for line in block.split("\n")
+                            if line.strip().startswith("- "))
+            html_parts.append(f"<ul>{items}</ul>")
+        elif False:
             items = "".join(f"<li>{render_text(line[2:].strip())}</li>"
                             for line in block.split("\n") if line.strip().startswith("- "))
             html_parts.append(f"<ul>{items}</ul>")
         elif in_cards and "\n" in block:
-            _lines = "<br>".join(render_text(x.strip()) for x in block.split("\n") if x.strip())
+            _lines = "<br>".join(expand_refs(render_text(x.strip()))
+                                 for x in block.split("\n") if x.strip())
             html_parts.append(f"<p>{_lines}</p>")
         else:
             html_parts.append(f"<p>{render_text(block)}</p>")
@@ -405,6 +445,21 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  margin:.7rem 0 0;line-height:1.85}}
 .card p:last-child{{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}}
+.ref{{position:relative;display:inline-block}}
+.ref-open{{background:none;border:none;padding:0;font:inherit;color:inherit;
+ cursor:pointer;border-bottom:1px dotted var(--sage);text-align:left}}
+.ref-open:hover{{color:var(--green)}}
+.ref-text{{display:none;position:absolute;left:0;top:100%;z-index:40;
+ width:min(24rem,80vw);margin-top:.4rem;padding:1rem 1.1rem;
+ background:var(--paper);border:1px solid var(--tan);
+ box-shadow:0 8px 24px rgba(0,0,0,.12);border-radius:2px;
+ font-style:normal;color:var(--ink);font-size:.95rem;line-height:1.7;
+ text-align:left;white-space:normal}}
+.ref.open .ref-text{{display:block}}
+.ref-text a{{display:block;margin-top:.8rem;font-size:.85rem;
+ font-style:italic;color:var(--sage)}}
+@media print{{.ref-text{{display:block;position:static;width:auto;
+ box-shadow:none;border:none;padding:.4rem 0}}}}
 p.refs{{font-style:italic;color:var(--sage);font-size:.98rem;
  margin:-.4rem 0 1.4rem;line-height:1.7}}
 .pairs{{margin:2rem 0 1rem}}
@@ -554,6 +609,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {content}
 <footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
+<script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
 </html>"""
 

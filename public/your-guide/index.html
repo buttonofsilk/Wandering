@@ -177,6 +177,21 @@ body.list-cols .wrap h2{margin-top:2rem}
  margin:.7rem 0 0;line-height:1.85}
 .card p:last-child{font-style:normal;color:var(--muted);font-size:.92rem;
  opacity:.8;margin-top:.9rem;line-height:1.6}
+.ref{position:relative;display:inline-block}
+.ref-open{background:none;border:none;padding:0;font:inherit;color:inherit;
+ cursor:pointer;border-bottom:1px dotted var(--sage);text-align:left}
+.ref-open:hover{color:var(--green)}
+.ref-text{display:none;position:absolute;left:0;top:100%;z-index:40;
+ width:min(24rem,80vw);margin-top:.4rem;padding:1rem 1.1rem;
+ background:var(--paper);border:1px solid var(--tan);
+ box-shadow:0 8px 24px rgba(0,0,0,.12);border-radius:2px;
+ font-style:normal;color:var(--ink);font-size:.95rem;line-height:1.7;
+ text-align:left;white-space:normal}
+.ref.open .ref-text{display:block}
+.ref-text a{display:block;margin-top:.8rem;font-size:.85rem;
+ font-style:italic;color:var(--sage)}
+@media print{.ref-text{display:block;position:static;width:auto;
+ box-shadow:none;border:none;padding:.4rem 0}}
 p.refs{font-style:italic;color:var(--sage);font-size:.98rem;
  margin:-.4rem 0 1.4rem;line-height:1.7}
 .pairs{margin:2rem 0 1rem}
@@ -368,5 +383,6 @@ following the threads that make me pause, and inviting others to come wander wit
 </div>
 <footer>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
+<script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>
 </html>
