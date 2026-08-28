@@ -306,6 +306,11 @@ h3{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}
 .split-menu .sub-list li:hover::before{opacity:1}
 .split-menu .sub-list li a{font-size:1.1rem;color:var(--sage)}
 .split-menu .sub-list li a:hover{color:var(--green)}
+footer .foot-link{color:inherit;text-decoration:none;
+ border-bottom:1px dotted var(--tan)}
+footer .foot-link:hover{color:var(--green);border-bottom-color:var(--sage)}
+body.on-about .fl-about,body.on-guide .fl-guide{
+ pointer-events:none;border-bottom:none}
 footer .saved-link{display:block;margin-bottom:.8rem;font-size:1rem;
  font-style:italic;color:var(--sage);text-decoration:none}
 footer .saved-link:hover{color:var(--green)}
@@ -387,7 +392,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <ul><li><a href="https://www.biblegateway.com/passage/?search=Genesis+3&version=NASB1995" target="_blank" rel="noopener">Genesis 3</a></li><li><a href="https://www.biblegateway.com/passage/?search=Ezekiel+18&version=NASB1995" target="_blank" rel="noopener">Ezekiel 18</a></li><li><a href="https://www.biblegateway.com/passage/?search=Ezekiel+36&version=NASB1995" target="_blank" rel="noopener">Ezekiel 36</a></li><li><a href="https://www.biblegateway.com/passage/?search=Luke+15&version=NASB1995" target="_blank" rel="noopener">Luke 15</a></li><li><a href="https://www.biblegateway.com/passage/?search=John+3&version=NASB1995" target="_blank" rel="noopener">John 3</a></li><li><a href="https://www.biblegateway.com/passage/?search=John+19-20&version=NASB1995" target="_blank" rel="noopener">John 19-20</a></li><li><a href="https://www.biblegateway.com/passage/?search=Acts+2&version=NASB1995" target="_blank" rel="noopener">Acts 2</a></li><li><a href="https://www.biblegateway.com/passage/?search=Acts+8&version=NASB1995" target="_blank" rel="noopener">Acts 8</a></li><li><a href="https://www.biblegateway.com/passage/?search=Romans+3&version=NASB1995" target="_blank" rel="noopener">Romans 3</a></li><li><a href="https://www.biblegateway.com/passage/?search=Romans+4&version=NASB1995" target="_blank" rel="noopener">Romans 4</a></li><li><a href="https://www.biblegateway.com/passage/?search=Romans+5&version=NASB1995" target="_blank" rel="noopener">Romans 5</a></li><li><a href="https://www.biblegateway.com/passage/?search=Romans+6&version=NASB1995" target="_blank" rel="noopener">Romans 6</a></li></ul>
 <h2 id="hold-these-together">Hold these together</h2>
 <ul><li><a href="https://www.biblegateway.com/passage/?search=Genesis+3&version=NASB1995" target="_blank" rel="noopener">Genesis 3</a> + <a href="https://www.biblegateway.com/passage/?search=Ephesians+2%3A1-3&version=NASB1995" target="_blank" rel="noopener">Ephesians 2:1-3</a></li></ul>
-<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>

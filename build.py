@@ -586,6 +586,11 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 .split-menu .sub-list li:hover::before{{opacity:1}}
 .split-menu .sub-list li a{{font-size:1.1rem;color:var(--sage)}}
 .split-menu .sub-list li a:hover{{color:var(--green)}}
+footer .foot-link{{color:inherit;text-decoration:none;
+ border-bottom:1px dotted var(--tan)}}
+footer .foot-link:hover{{color:var(--green);border-bottom-color:var(--sage)}}
+body.on-about .fl-about,body.on-guide .fl-guide{{
+ pointer-events:none;border-bottom:none}}
 footer .saved-link{{display:block;margin-bottom:.8rem;font-size:1rem;
  font-style:italic;color:var(--sage);text-decoration:none}}
 footer .saved-link:hover{{color:var(--green)}}
@@ -633,7 +638,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
@@ -766,7 +771,7 @@ has to show you. Even if it surprises you. Unsettles you. Or challenges you.</p>
 
     about = strip_page("About Button of Silk", 55, about_body)
     d = OUT / "about"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose", back_link=("&larr; Home", "/")), encoding="utf-8")
+    (d / "index.html").write_text(page("About Button of Silk", about, bodyclass="prose on-about", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     guide_body = f"""<div class="about-intro">
 <img class="about-photo" src="/hope-photo.jpg" alt="A photo of Hope">
@@ -800,7 +805,7 @@ following the threads that make me pause, and inviting others to come wander wit
 </div>"""
     guide = strip_page("Learn About Your Guide", 55, guide_body)
     d = OUT / "your-guide"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Learn About Your Guide", guide, bodyclass="prose", back_link=("&larr; About", "/about/")), encoding="utf-8")
+    (d / "index.html").write_text(page("Learn About Your Guide", guide, bodyclass="prose on-guide", back_link=("&larr; About", "/about/")), encoding="utf-8")
 
     podcast_body = """<p class="lead">If you&rsquo;d like to keep wandering with me, here are the
 different ways you can listen or receive the reflections.</p>
