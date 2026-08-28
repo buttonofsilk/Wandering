@@ -210,6 +210,15 @@ def parse_simple_page(path):
                     f'alt="{html.escape(_alt)}">')
             else:
                 html_parts.append(f"<p>{render_text(block)}</p>")
+        elif block.startswith("@button["):
+            _m = re.match(r"@button\[([^\]]*)\]\(([^)]+)\)", block)
+            if _m:
+                _lab, _href = _m.groups()
+                html_parts.append(
+                    f'<p class="btn-row"><a class="btn" href="{html.escape(_href)}">'
+                    f'{render_text(_lab)}</a></p>')
+            else:
+                html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("@refs["):
             _m = re.match(r"@refs\[([^\]]*)\]", block)
             html_parts.append(
@@ -463,6 +472,13 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  font-style:italic;color:var(--sage)}}
 @media print{{.ref-text{{display:block;position:static;width:auto;
  box-shadow:none;border:none;padding:.4rem 0}}}}
+.btn-row{{text-align:center;margin:2rem 0 .8rem}}
+.btn{{display:inline-block;padding:.65rem 1.5rem;border:1px solid var(--tan);
+ border-radius:2rem;font-style:italic;font-size:1.05rem;color:var(--green);
+ text-decoration:none;background:transparent}}
+.btn:hover{{border-color:var(--sage);color:var(--sage)}}
+.btn-note{{text-align:center;font-size:.88rem;color:var(--muted);
+ opacity:.7;margin:0 0 1rem}}
 p.refs{{font-style:italic;color:var(--sage);font-size:.98rem;
  margin:-.4rem 0 1.4rem;line-height:1.7}}
 .pairs{{margin:2rem 0 1rem}}

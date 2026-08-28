@@ -237,3 +237,5 @@ Discipleship and sanctification are lifelong pursuits.
 Still thinking through something? Made a decision? Either way, I'd love to hear from you.
 
 You will hear many voices as you learn to follow Jesus. Mine is only one of them. Keep taking what you hear back to Scripture, keep asking God to teach you, and keep your heart willing to learn.
+
+You can write to me at [hope@buttonofsilk.org](mailto:hope@buttonofsilk.org).
