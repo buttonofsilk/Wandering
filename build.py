@@ -24,7 +24,7 @@ import json as _json
 import urllib.parse
 _vf = Path(__file__).parent / "verses.json"
 VERSES = _json.loads(_vf.read_text(encoding="utf-8")) if _vf.exists() else {}
-_REF = re.compile(r"\b((?:[123]\s+)?[A-Z][a-z]+)\s+(\d+)(?::\d+)?(?:\s*-\s*\d+(?::\d+)?)?")
+_REF = re.compile(r"\b((?:[123]\s+)?[A-Z][a-z]+)\s+(\d+)(?::\d+)?(?:\s*-\s*\d+(?::\d+)?)?(?:\s*,\s*\d+(?:\s*-\s*\d+)?(?!\s*[A-Z]))*")
 
 
 def link_refs(text):
@@ -335,6 +335,9 @@ details summary::before{{content:"";display:inline-block;width:0;height:0;
  border-bottom:.28rem solid transparent;opacity:.55;flex-shrink:0;
  margin-right:.5rem;transform-origin:.15rem 50%;transition:transform .15s}}
 details[open] > summary::before{{transform:rotate(90deg)}}
+.scripture a,.alongside a{{color:inherit;text-decoration:none;
+ border-bottom:1px dotted var(--sage)}}
+.scripture a:hover,.alongside a:hover{{color:var(--sage)}}
 .alongside{{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}}
 audio{{width:100%;margin:1.5rem 0}}
@@ -679,14 +682,14 @@ def build():
         audio_html = (f'<audio controls preload="none" src="{AUDIO_BASE}/{_aud}"></audio>'
                       if _aud else "")
         _also = it.get("alongside", "").strip()
-        alongside_html = (f'<div class="alongside">{html.escape(_also)}</div>'
+        alongside_html = (f'<div class="alongside">{link_refs(html.escape(_also))}</div>'
                           if _also else "")
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
         content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <article>
 <h1>{html.escape(it['title'])}</h1>
-<div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{html.escape(it['scripture'])}</span></div>
+<div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{link_refs(html.escape(it['scripture']))}</span></div>
 {alongside_html}
 {audio_html}
 {body}
