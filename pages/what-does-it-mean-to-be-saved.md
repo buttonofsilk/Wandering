@@ -186,6 +186,10 @@ Pray. Stay in His Word. Find other believers who will walk with you as you grow.
 
 @refs[Acts 2:42-47; 2 Timothy 3:14-17; Hebrews 10:24-25; John 14:21-23]
 
+You will hear many voices as you learn to follow Jesus. Mine is only one of them. Keep taking what you hear back to Scripture, keep asking God to teach you, and keep your heart willing to learn.
+
+@refs[John 21:20-23]
+
 ## What I believe
 
 @audio[A note from Hope](where-i-have-landed.mp3)
@@ -235,7 +239,5 @@ Discipleship and sanctification are lifelong pursuits.
 ## What are you wrestling with?
 
 Still thinking through something? Made a decision? Either way, I'd love to hear from you.
-
-You will hear many voices as you learn to follow Jesus. Mine is only one of them. Keep taking what you hear back to Scripture, keep asking God to teach you, and keep your heart willing to learn.
 
 You can write to me at [hope@buttonofsilk.org](mailto:hope@buttonofsilk.org).
