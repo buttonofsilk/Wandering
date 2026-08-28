@@ -13,6 +13,9 @@ SITE_DESC   = "Daily Scripture reflections that invite you to slow down, linger,
 SITE_URL    = "https://buttonofsilk.org"
 AUDIO_BASE  = "https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev"
 AUTHOR      = "Hope A Little"
+# Public byline on Apple and Spotify. The owner field below stays personal,
+# because that is the contact Apple uses to verify the feed.
+SHOW_AUTHOR = "Button of Silk"
 EMAIL       = "hope@buttonofsilk.org"
 COVER       = SITE_URL + "/cover.jpg"
 TIMEZONE    = "America/Denver"
@@ -912,7 +915,7 @@ def write_feed(items):
 <language>en-us</language>
 <copyright>Scripture quotations taken from the (NASB) New American Standard Bible, Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. www.Lockman.org</copyright>
 <lastBuildDate>{now}</lastBuildDate>
-<itunes:author>{e(AUTHOR)}</itunes:author>
+<itunes:author>{e(SHOW_AUTHOR)}</itunes:author>
 <itunes:summary>{e(SITE_DESC)}</itunes:summary>
 <itunes:type>episodic</itunes:type>
 <itunes:explicit>false</itunes:explicit>
