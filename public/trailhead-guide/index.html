@@ -296,6 +296,10 @@ h3{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}
 .split-menu .sub-list li:hover::before{opacity:1}
 .split-menu .sub-list li a{font-size:1.1rem;color:var(--sage)}
 .split-menu .sub-list li a:hover{color:var(--green)}
+footer .saved-link{display:block;margin-bottom:.8rem;font-size:1rem;
+ font-style:italic;color:var(--sage);text-decoration:none}
+footer .saved-link:hover{color:var(--green)}
+body.no-saved-link footer .saved-link{display:none}
 .translation-note{display:block;font-size:.72rem;font-style:italic;opacity:.65;
  margin:.6rem auto 0;max-width:34rem;line-height:1.55}
 .translation-note a{color:inherit;text-decoration:underline}
@@ -376,7 +380,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <p>We come willing not only to understand what Scripture says, but to respond to what we find there.</p>
 <p>Slow down. Follow the thread. Leave room for wonder.</p>
 <p>Invite the Holy Spirit to teach you as you read, and let God&#x27;s Word shape how you know Him and how you live.</p>
-<footer>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>

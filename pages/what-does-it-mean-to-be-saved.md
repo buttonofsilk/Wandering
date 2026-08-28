@@ -2,7 +2,6 @@
 title: What does it mean to be saved?
 slug: what-does-it-mean-to-be-saved
 no_banner: true
-noindex: true
 back_to: Exploring
 back_url: /exploring/
 ---

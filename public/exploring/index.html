@@ -296,6 +296,10 @@ h3{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}
 .split-menu .sub-list li:hover::before{opacity:1}
 .split-menu .sub-list li a{font-size:1.1rem;color:var(--sage)}
 .split-menu .sub-list li a:hover{color:var(--green)}
+footer .saved-link{display:block;margin-bottom:.8rem;font-size:1rem;
+ font-style:italic;color:var(--sage);text-decoration:none}
+footer .saved-link:hover{color:var(--green)}
+body.no-saved-link footer .saved-link{display:none}
 .translation-note{display:block;font-size:.72rem;font-style:italic;opacity:.65;
  margin:.6rem auto 0;max-width:34rem;line-height:1.55}
 .translation-note a{color:inherit;text-decoration:underline}
@@ -325,7 +329,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 }
 </style>
 </head>
-<body class="home wide">
+<body class="home wide no-saved-link">
 <div class="wrap">
 <div class="menu-corner">
 <div class="trail-wrap">
@@ -356,6 +360,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
+<li><a href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?<span class="tag-small">a walk through Scripture</span></a></li>
 <li class="group"><span>How to Wander</span>
 <ul class="sub-list">
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
@@ -367,7 +372,7 @@ this wandering has gone so far.</p>
 </ul>
 </div>
 </div>
-<footer>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>Button of Silk &middot; Hope A Little<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>

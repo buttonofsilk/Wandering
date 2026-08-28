@@ -564,6 +564,10 @@ h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
 .split-menu .sub-list li:hover::before{{opacity:1}}
 .split-menu .sub-list li a{{font-size:1.1rem;color:var(--sage)}}
 .split-menu .sub-list li a:hover{{color:var(--green)}}
+footer .saved-link{{display:block;margin-bottom:.8rem;font-size:1rem;
+ font-style:italic;color:var(--sage);text-decoration:none}}
+footer .saved-link:hover{{color:var(--green)}}
+body.no-saved-link footer .saved-link{{display:none}}
 .translation-note{{display:block;font-size:.72rem;font-style:italic;opacity:.65;
  margin:.6rem auto 0;max-width:34rem;line-height:1.55}}
 .translation-note a{{color:inherit;text-decoration:underline}}
@@ -607,7 +611,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>Button of Silk &middot; {html.escape(AUTHOR)}<span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
@@ -801,6 +805,7 @@ different ways you can listen or receive the reflections.</p>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
+<li><a href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?<span class="tag-small">a walk through Scripture</span></a></li>
 <li class="group"><span>How to Wander</span>
 <ul class="sub-list">
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
@@ -813,7 +818,7 @@ this wandering has gone so far.</p>
 </div>
 </div>"""
     d = OUT / "exploring"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Exploring", exploration, bodyclass="home wide", back_link=("&larr; Home", "/")), encoding="utf-8")
+    (d / "index.html").write_text(page("Exploring", exploration, bodyclass="home wide no-saved-link", back_link=("&larr; Home", "/")), encoding="utf-8")
 
     if PAGES.exists():
         for p in PAGES.glob("*.md"):
@@ -827,7 +832,10 @@ this wandering has gone so far.</p>
             d = OUT / meta["slug"]; d.mkdir(parents=True, exist_ok=True)
             (d / "index.html").write_text(
                 page(meta["title"], content,
-                     bodyclass="prose" + (" list-cols" if
+                     bodyclass="prose"
+                       + (" no-saved-link" if meta["slug"] in
+                          ("what-does-it-mean-to-be-saved", "scripture-list") else "")
+                       + (" list-cols" if
                        str(meta.get("list_columns", "")).lower() in ("true", "yes", "1") else ""),
                      back_link=("&larr; " + meta.get("back_to", "Home"),
                                 meta.get("back_url", "/")),
