@@ -18,3 +18,7 @@ Tools and guides worth your time as you study Scripture on your own.
 ## Book of John
 
 - [BibleProject: Guide to the Book of John](https://bibleproject.com/guides/book-of-john/)
+
+## Book of Isaiah
+
+- [BibleProject: Guide to Isaiah 1-39](https://bibleproject.com/videos/isaiah-1-39/)
