@@ -81,14 +81,27 @@ def parse(path):
     if not m:
         raise ValueError(f"Missing front matter in {path.name}")
     meta, body = {}, m.group(2).strip()
-    for line in m.group(1).split("\n"):
+    lines = m.group(1).split("\n")
+    i = 0
+    while i < len(lines):
+        line = lines[i]
         if not line.strip() or ":" not in line:
+            i += 1
             continue
         k, v = line.split(":", 1)
         k, v = k.strip(), v.strip()
+        if v == "|":
+            block = []
+            i += 1
+            while i < len(lines) and (lines[i].startswith("  ") or not lines[i].strip()):
+                block.append(lines[i][2:] if lines[i].startswith("  ") else "")
+                i += 1
+            meta[k] = "\n".join(block).strip("\n")
+            continue
         if v.startswith("[") and v.endswith("]"):
             v = [t.strip() for t in v[1:-1].split(",") if t.strip()]
         meta[k] = v
+        i += 1
     meta["slug"] = path.stem
     meta["body"] = body
     for req in ("date", "title", "scripture"):
@@ -689,6 +702,11 @@ def build():
         _also = it.get("alongside", "").strip()
         alongside_html = (f'<div class="alongside">{link_refs(html.escape(_also))}</div>'
                           if _also else "")
+        _tr = it.get("transcript", "").strip()
+        transcript_html = (
+            '<details><summary>Read the transcript instead</summary>'
+            + "".join(f"<p>{html.escape(p)}</p>" for p in _tr.split("\n\n") if p.strip())
+            + '</details>' if _tr else "")
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
         content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
@@ -698,6 +716,7 @@ def build():
 {alongside_html}
 {audio_html}
 {body}
+{transcript_html}
 <div class="themes">{chips}</div>
 </article>
 {walk}"""
@@ -951,7 +970,10 @@ def write_feed(items):
         dur  = it.get("duration", "")
         pub  = format_datetime(datetime.strptime(it["date"], "%Y-%m-%d")
                                .replace(tzinfo=timezone.utc))
-        desc = f"{it['scripture']} - {it['body']}"
+        desc = (f"{it['scripture']} - {it['body']}\n\n"
+                "Scripture quotations taken from the (NASB) New American Standard Bible, "
+                "Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by "
+                "permission. All rights reserved. www.Lockman.org")
         x.append(f"""<item>
 <title>{e(it['title'])}</title>
 <link>{SITE_URL}/{it['slug']}/</link>
