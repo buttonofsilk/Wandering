@@ -876,6 +876,7 @@ this wandering has gone so far.</p>
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
 <li><a href="/soap/">How to SOAP<span class="tag-small">a simple way to study Scripture</span></a></li>
 </ul></li>
+<li><a href="/worship/">Worship<span class="tag-small">music to turn toward God with</span></a></li>
 <li><a href="/resources/">Resources<span class="tag-small">books, guides, and studies worth your time</span></a>
 <ul class="sub-list">{resource_sections}</ul></li>
 </ul>
