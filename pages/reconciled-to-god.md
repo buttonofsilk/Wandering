@@ -56,11 +56,11 @@ I want to leave you with Titus 3:3-8:
 
 @end
 
-At it's heart, the message of salvation is clear: Scripture tells us that we are sinful and, because of this, we are separated from life with God. Salvation is God bringing us from death into life with Him. Through Jesus' death and resurrection, He reconciles us to Himself and calls us to live under His Lordship and to respond to what He has done and to the life He is calling us into.
+At its heart, the message of salvation is clear: Scripture tells us that we are sinful and, because of this, we are separated from life with God. Salvation is God bringing us from death into life with Him. Through Jesus' death and resurrection, He reconciles us to Himself and calls us to live under His Lordship and to respond to what He has done and to the life He is calling us into.
 
 My hope is that you will be able to see for yourself what Scripture says, what it invites us into, and what it asks of us.
 
-## Your job is to…
+## As you read…
 
 Read each Scripture. Read around it. Follow the cross-references. Hold passages together. Ask questions. Pray. Stay teachable.
 
@@ -118,7 +118,7 @@ What do you notice about baptism in these passages?
 
 ## Take a Deeper Look
 
-Some questions deserve more than a quick answer.
+Some parts of this picture come into focus when we hold several passages together. The next sections bring several places in Scripture alongside one another so we can look more carefully. 
 
 @cards
 
