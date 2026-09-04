@@ -283,6 +283,7 @@ NAV = """<div class="trail-wrap">
   Trail Guide
 </button>
 <div id="trail-panel" class="trail-panel">
+  <a class="tp-saved" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a>
   <a href="/reflections/">Reflections</a>
   <a href="/exploring/">Exploring</a>
   <a href="/ways-to-wander/">Ways to Wander</a>
@@ -432,6 +433,15 @@ body.ways .podcast-links{{margin:.7rem 0 0}}
  font-size:.95rem;cursor:pointer}}
 .subscribe button:hover{{color:var(--green);border-color:var(--sage)}}
 .subscribe .note{{color:var(--muted);font-size:.82rem;opacity:.7;margin-top:.9rem}}
+.home-saved{{text-align:center;margin:2.6rem auto 0;max-width:36rem}}
+.home-saved a{{font-style:italic;font-size:1.2rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);
+ padding-bottom:.2rem;line-height:1.7}}
+.home-saved a:hover{{color:var(--sage)}}
+.saved-here{{text-align:center;margin:2.8rem 0 0}}
+.saved-here a{{font-style:italic;font-size:1.15rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);padding-bottom:.2rem}}
+.saved-here a:hover{{color:var(--sage)}}
 .home-verse{{text-align:center;font-style:italic;color:var(--green);font-size:1.15rem;
  max-width:36rem;margin:1.2rem auto 0;line-height:1.7}}
 .new-here{{text-align:center;margin:1.4rem 0 1.2rem}}
@@ -576,6 +586,8 @@ blockquote.verse + h2{{margin-top:1.6rem}}
 .trail-panel.open{{opacity:1;pointer-events:auto;transform:translateY(0)}}
 .trail-panel a{{font-size:1.05rem;font-style:italic;color:var(--green);text-decoration:none}}
 .trail-panel a:hover{{color:var(--sage)}}
+.trail-panel a.tp-saved{{padding-bottom:.8rem;margin-bottom:.1rem;
+ border-bottom:1px solid var(--tan);line-height:1.45}}
 blockquote{{margin:2rem 0;padding:1rem 1.5rem;border-left:3px solid var(--sage);
  color:var(--sage);font-style:italic;font-size:1.1rem}}
 h3{{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}}
@@ -607,8 +619,9 @@ footer .foot-link{{color:inherit;text-decoration:none;
 footer .foot-link:hover{{color:var(--green);border-bottom-color:var(--sage)}}
 body.on-about .fl-about,body.on-guide .fl-guide{{
  pointer-events:none;border-bottom:none}}
-footer .saved-link{{display:block;margin-bottom:.8rem;font-size:1rem;
- font-style:italic;color:var(--sage);text-decoration:none}}
+footer .saved-link{{display:block;margin:0 auto 1.4rem;font-size:1.15rem;
+ font-style:italic;color:var(--green);text-decoration:none;
+ padding-bottom:.9rem;border-bottom:1px solid var(--tan);max-width:22rem}}
 footer .saved-link:hover{{color:var(--green)}}
 body.no-saved-link footer .saved-link{{display:none}}
 .translation-note{{display:block;font-size:.72rem;font-style:italic;opacity:.65;
@@ -654,7 +667,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
@@ -738,10 +751,11 @@ def build():
 {further_html}
 <div class="themes">{chips}</div>
 </article>
+<p class="saved-here"><a href="/reconciled-to-god/">What does it mean to be reconciled to God?</a></p>
 {walk}"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
-            page(it["title"], content, it["body"][:160], bodyclass="prose", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
+            page(it["title"], content, it["body"][:160], bodyclass="prose no-saved-link", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
     home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<div class="home-split">
 <img class="hero" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
@@ -753,8 +767,9 @@ you grow more comfortable opening the Bible for yourself, asking questions, foll
 the trails that make you pause, and carrying something from His Word with you into
 the rest of your day.</p>
 </section>
-</div>"""
-    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide", show_tag=True), encoding="utf-8")
+</div>
+<p class="home-saved"><a href="/reconciled-to-god/">Before you wander further &mdash; what does it mean to be reconciled to God?</a></p>"""
+    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide no-saved-link", show_tag=True), encoding="utf-8")
 
     l = items[0]
     _la = l.get("audio", "").strip()
@@ -870,7 +885,7 @@ different ways you can listen or receive the reflections.</p>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
-<li><a href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?<span class="tag-small">a walk through Scripture</span></a></li>
+<li><a href="/reconciled-to-god/">What does it mean to be reconciled to God?<span class="tag-small">a walk through Scripture</span></a></li>
 <li class="group"><span>How to Wander</span>
 <ul class="sub-list">
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
@@ -899,7 +914,7 @@ this wandering has gone so far.</p>
                 page(meta["title"], content,
                      bodyclass="prose"
                        + (" no-saved-link" if meta["slug"] in
-                          ("what-does-it-mean-to-be-saved", "scripture-list") else "")
+                          ("reconciled-to-god", "scripture-list") else "")
                        + (" list-cols" if
                        str(meta.get("list_columns", "")).lower() in ("true", "yes", "1") else ""),
                      back_link=("&larr; " + meta.get("back_to", "Home"),

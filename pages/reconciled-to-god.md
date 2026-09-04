@@ -1,12 +1,12 @@
 ---
-title: What does it mean to be saved?
-slug: what-does-it-mean-to-be-saved
+title: What does it mean to be reconciled to God?
+slug: reconciled-to-god
 no_banner: true
 back_to: Exploring
 back_url: /exploring/
 ---
 
-# What does it mean to be saved?
+# What does it mean to be reconciled to God?
 
 @banner[A chrysalis hanging from a branch](/salvation-chrysalis.jpg)
 
@@ -56,7 +56,7 @@ I want to leave you with Titus 3:3-8:
 
 @end
 
-Salvation is not complicated at its heart; Scripture tells us that we are sinful and, because of this, we are separated from life with God. Salvation is God bringing us from death into life with Him. Through Jesus' death and resurrection, He reconciles us to Himself and calls us to live under His Lordship and to respond to what He has done and to the life He is calling us into.
+At it's heart, the message of salvation is clear: Scripture tells us that we are sinful and, because of this, we are separated from life with God. Salvation is God bringing us from death into life with Him. Through Jesus' death and resurrection, He reconciles us to Himself and calls us to live under His Lordship and to respond to what He has done and to the life He is calling us into.
 
 My hope is that you will be able to see for yourself what Scripture says, what it invites us into, and what it asks of us.
 

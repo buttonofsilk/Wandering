@@ -4,7 +4,7 @@ slug: scripture-list
 no_banner: true
 list_columns: true
 back_to: What does it mean to be saved?
-back_url: /what-does-it-mean-to-be-saved/
+back_url: /reconciled-to-god/
 ---
 
 # The fuller Scripture list

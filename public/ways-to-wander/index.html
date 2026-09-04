@@ -139,6 +139,15 @@ body.ways .podcast-links{margin:.7rem 0 0}
  font-size:.95rem;cursor:pointer}
 .subscribe button:hover{color:var(--green);border-color:var(--sage)}
 .subscribe .note{color:var(--muted);font-size:.82rem;opacity:.7;margin-top:.9rem}
+.home-saved{text-align:center;margin:2.6rem auto 0;max-width:36rem}
+.home-saved a{font-style:italic;font-size:1.2rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);
+ padding-bottom:.2rem;line-height:1.7}
+.home-saved a:hover{color:var(--sage)}
+.saved-here{text-align:center;margin:2.8rem 0 0}
+.saved-here a{font-style:italic;font-size:1.15rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);padding-bottom:.2rem}
+.saved-here a:hover{color:var(--sage)}
 .home-verse{text-align:center;font-style:italic;color:var(--green);font-size:1.15rem;
  max-width:36rem;margin:1.2rem auto 0;line-height:1.7}
 .new-here{text-align:center;margin:1.4rem 0 1.2rem}
@@ -283,6 +292,8 @@ blockquote.verse + h2{margin-top:1.6rem}
 .trail-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
 .trail-panel a{font-size:1.05rem;font-style:italic;color:var(--green);text-decoration:none}
 .trail-panel a:hover{color:var(--sage)}
+.trail-panel a.tp-saved{padding-bottom:.8rem;margin-bottom:.1rem;
+ border-bottom:1px solid var(--tan);line-height:1.45}
 blockquote{margin:2rem 0;padding:1rem 1.5rem;border-left:3px solid var(--sage);
  color:var(--sage);font-style:italic;font-size:1.1rem}
 h3{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}
@@ -314,8 +325,9 @@ footer .foot-link{color:inherit;text-decoration:none;
 footer .foot-link:hover{color:var(--green);border-bottom-color:var(--sage)}
 body.on-about .fl-about,body.on-guide .fl-guide{
  pointer-events:none;border-bottom:none}
-footer .saved-link{display:block;margin-bottom:.8rem;font-size:1rem;
- font-style:italic;color:var(--sage);text-decoration:none}
+footer .saved-link{display:block;margin:0 auto 1.4rem;font-size:1.15rem;
+ font-style:italic;color:var(--green);text-decoration:none;
+ padding-bottom:.9rem;border-bottom:1px solid var(--tan);max-width:22rem}
 footer .saved-link:hover{color:var(--green)}
 body.no-saved-link footer .saved-link{display:none}
 .translation-note{display:block;font-size:.72rem;font-style:italic;opacity:.65;
@@ -356,6 +368,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
   Trail Guide
 </button>
 <div id="trail-panel" class="trail-panel">
+  <a class="tp-saved" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a>
   <a href="/reflections/">Reflections</a>
   <a href="/exploring/">Exploring</a>
   <a href="/ways-to-wander/">Ways to Wander</a>
@@ -386,7 +399,7 @@ different ways you can listen or receive the reflections.</p>
 <button type="submit">Subscribe</button>
 <p class="note">Just the Reflections, please</p>
 </form>
-<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>
