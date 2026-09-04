@@ -351,6 +351,9 @@ details[open] > summary::before{{transform:rotate(90deg)}}
 .scripture a,.alongside a{{color:inherit;text-decoration:none;
  border-bottom:1px dotted var(--sage)}}
 .scripture a:hover,.alongside a:hover{{color:var(--sage)}}
+.further{{margin:2rem 0 0;font-style:italic;color:var(--sage);font-size:.95rem}}
+.further a{{color:inherit;text-decoration:none;border-bottom:1px dotted var(--sage)}}
+.further a:hover{{color:var(--green)}}
 .alongside{{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}}
 audio{{width:100%;margin:1.5rem 0}}
@@ -707,6 +710,21 @@ def build():
             '<details><summary>Read the transcript instead</summary>'
             + "".join(f"<p>{html.escape(p)}</p>" for p in _tr.split("\n\n") if p.strip())
             + '</details>' if _tr else "")
+        _fur = it.get("further", "").strip()
+        _fparts = []
+        for _chunk in _fur.split(";"):
+            _chunk = _chunk.strip()
+            if not _chunk:
+                continue
+            _fm = re.match(r"\[([^\]]+)\]\(([^)]+)\)$", _chunk)
+            if _fm:
+                _flab, _furl = _fm.groups()
+                _fext = ' target="_blank" rel="noopener"' if _furl.startswith("http") else ""
+                _fparts.append(f'<a href="{html.escape(_furl)}"{_fext}>{html.escape(_flab)}</a>')
+            else:
+                _fparts.append(html.escape(_chunk))
+        further_html = ('<p class="further">If you want to keep going: '
+                        + " &middot; ".join(_fparts) + "</p>") if _fparts else ""
         body = "".join(f"<p>{html.escape(p)}</p>"
                        for p in it["body"].split("\n\n") if p.strip())
         content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
@@ -717,6 +735,7 @@ def build():
 {audio_html}
 {body}
 {transcript_html}
+{further_html}
 <div class="themes">{chips}</div>
 </article>
 {walk}"""
