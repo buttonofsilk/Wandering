@@ -26,6 +26,8 @@ BOOK  =(0.02,0.73,0.98,0.97)
 WASH  =0.25
 SIZE  =(1080,1920)
 SITE  ="buttonofsilk.org"
+MIN_EDGE=1080          # photos smaller than this look soft blown up to fill the frame
+USED   ="photos-used.txt"   # shuffle bag: no photo repeats until every one has had a turn
 
 def _font(name, size):
     for p in (f"/System/Library/Fonts/Supplemental/{name}",
@@ -170,10 +172,39 @@ def main():
     if not tagline:
         print(f"note: {src.name} has no tagline: — rendering title only")
 
-    pics = sorted(p for p in PHOTOS.iterdir()
-                  if p.suffix.lower() in (".jpg",".jpeg",".png"))
-    if not pics: raise SystemExit(f"No photos in {PHOTOS}")
-    photo = random.choice(pics)
+    cands = sorted(p for p in PHOTOS.iterdir()
+                   if p.suffix.lower() in (".jpg",".jpeg",".png"))
+    if not cands: raise SystemExit(f"No photos in {PHOTOS}")
+    pics, small = [], 0
+    for c in cands:
+        try:
+            with Image.open(c) as im:
+                w, h = ImageOps.exif_transpose(im).size
+        except Exception:
+            continue
+        if min(w, h) >= MIN_EDGE: pics.append(c)
+        else: small += 1
+    if not pics:
+        raise SystemExit(f"No photos at least {MIN_EDGE}px on the short edge in {PHOTOS}")
+    if small:
+        print(f"skipping {small} photo(s) under {MIN_EDGE}px — too small to look sharp")
+
+    # Shuffle bag: draw only from photos not yet used this cycle. When the bag
+    # empties, start a fresh cycle so every photo gets one turn before repeats.
+    bagfile = ROOT / USED
+    used = set()
+    if bagfile.exists():
+        used = {l.strip() for l in bagfile.read_text(encoding="utf-8").splitlines() if l.strip()}
+    names = {p.name for p in pics}
+    used &= names                        # forget photos that have since been removed
+    remaining = [p for p in pics if p.name not in used]
+    if not remaining:
+        print(f"all {len(pics)} photos used — starting a fresh cycle")
+        used, remaining = set(), list(pics)
+    photo = random.choice(remaining)
+    used.add(photo.name)
+    bagfile.write_text("\n".join(sorted(used)) + "\n", encoding="utf-8")
+    print(f"photo {len(used)} of {len(pics)} this cycle")
 
     OUT.mkdir(exist_ok=True)
     stem  = src.stem
