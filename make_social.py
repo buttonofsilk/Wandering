@@ -26,6 +26,9 @@ BOOK  =(0.02,0.73,0.98,0.97)
 WASH  =0.25
 SIZE  =(1080,1920)
 SITE  ="buttonofsilk.org"
+NOTICE=("Scripture quotations taken from the (NASB\u00ae) New American Standard Bible\u00ae, "
+        "Copyright \u00a9 1960, 1971, 1977, 1995 by The Lockman Foundation. "
+        "Used by permission. All rights reserved. www.Lockman.org")
 MIN_EDGE=1080          # photos smaller than this look soft blown up to fill the frame
 USED   ="photos-used.txt"   # shuffle bag: no photo repeats until every one has had a turn
 
@@ -104,11 +107,14 @@ def render_still(photo_path, title, tagline, scripture, out_path, hero=HERO):
     lht, lhg = int(ts*1.26), int(gs*1.5)
     tl = wrap(d, title, ft, mw)
     gl = wrap(d, tagline, fg, mw) if tagline else []
+    ns = max(11, int(W*0.0165)); fn = italic(ns); lhn = int(ns*1.42)
+    nl = wrap(d, NOTICE, fn, mw)
 
     top_pad = int(H*0.048)
     head_h  = ss + int(ss*0.95) + len(tl)*lht + (int(ts*0.30) + len(gl)*lhg if gl else 0)
     # keep the site name inside the safe zone; phone UI covers the bottom strip
-    url_y   = int(H*0.845)
+    n_top   = H - int(H*0.026) - len(nl)*lhn
+    url_y   = n_top - int(H*0.018) - ws
     gap     = int(H*0.034)
     avail   = url_y - int(H*0.030) - (top_pad + head_h + gap)
 
@@ -140,6 +146,7 @@ def render_still(photo_path, title, tagline, scripture, out_path, hero=HERO):
     if inset:
         d.rectangle([(W-pw)//2, py, (W-pw)//2+pw-1, py+phh-1], outline=TAN, width=2)
     d.text((W//2, url_y), SITE, font=fw, fill=GREEN, anchor="ma")
+    draw_lines(d, W//2, n_top, nl, fn, SAGE, lhn)
     base.save(out_path, quality=94)
     return out_path
 
