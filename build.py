@@ -391,7 +391,7 @@ ul.list .sub{{color:var(--muted);font-size:.88rem;margin-top:.2rem}}
 .today h3 a:hover{{text-decoration:underline}}
 .hero{{width:100%;max-width:none;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}}
 .home-split{{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
- align-items:center;margin-top:1.5rem}}
+ align-items:center;margin-top:4.5rem}}
 .home-split .hero{{margin-top:0}}
 .home-split .welcome{{padding-left:1.5rem}}
 .home-split .welcome p{{margin:0;font-size:1.15rem;line-height:1.9;max-width:34rem;
