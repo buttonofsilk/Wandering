@@ -232,6 +232,11 @@ def parse_simple_page(path):
                     f'{render_text(_lab)}</a></p>')
             else:
                 html_parts.append(f"<p>{render_text(block)}</p>")
+        elif block.startswith("@invite["):
+            _m = re.match(r"@invite\[([^\]]*)\]", block)
+            html_parts.append(
+                f'<p class="invite">{render_text(_m.group(1) if _m else "")}'
+                f'<a href="mailto:{EMAIL}">{EMAIL}</a></p>')
         elif block.startswith("@refs["):
             _m = re.match(r"@refs\[([^\]]*)\]", block)
             html_parts.append(
@@ -442,6 +447,11 @@ body.prose .strip{{width:100%;max-width:100%;margin-left:0;transform:none}}
 .sr-only{{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}}
 .inbox-bridge{{text-align:center;font-style:italic;color:var(--green);margin:1.1rem 0 0}}
+.invite{{text-align:center;font-style:italic;color:var(--sage);
+ margin:2.8rem auto 0;max-width:32rem;line-height:1.75;font-size:1.02rem}}
+.invite a{{display:inline-block;margin-top:.45rem;color:var(--green);
+ font-style:normal;text-decoration:none;border-bottom:1px dotted var(--sage)}}
+.invite a:hover{{color:var(--sage)}}
 body.ways h1{{text-align:center;font-size:2.3rem;margin-top:1.5rem}}
 body.ways .lead{{text-align:center;margin:.6rem auto 0;max-width:32rem}}
 body.ways .podcast-links{{margin:.7rem 0 0}}
@@ -890,7 +900,9 @@ different ways you can listen or receive the reflections.</p>
 <a href="https://podcasts.apple.com/us/podcast/wandering-through-gods-word-with-wonder/id6802110750" target="_blank" rel="noopener">Apple Podcasts<svg class="leaf" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/><ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/><ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg></a>
 <a href="https://open.spotify.com/show/0348miqvVzowiYrzkywtW4" target="_blank" rel="noopener">Spotify<svg class="leaf" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6 H13" stroke="currentColor" stroke-width="1.1" fill="none" stroke-linecap="round"/><ellipse cx="7" cy="3.4" rx="3.4" ry="1.8" transform="rotate(-24 7 3.4)" fill="currentColor" opacity=".85"/><ellipse cx="7" cy="8.6" rx="3.4" ry="1.8" transform="rotate(24 7 8.6)" fill="currentColor" opacity=".85"/></svg></a>
 </p>"""
-    podcast = strip_page("Ways to Wander", 100, podcast_body + SUBSCRIBE, aspect="5/2")
+    invite = (f'<p class="invite">I would love to hear from you.'
+              f'<a href="mailto:{EMAIL}">{EMAIL}</a></p>')
+    podcast = strip_page("Ways to Wander", 100, podcast_body + SUBSCRIBE + invite, aspect="5/2")
     d = OUT / "ways-to-wander"; d.mkdir(exist_ok=True)
     (d / "index.html").write_text(page("Ways to Wander", podcast, bodyclass="prose ways", back_link=("&larr; Home", "/")), encoding="utf-8")
 
