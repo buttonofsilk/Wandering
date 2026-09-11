@@ -114,9 +114,10 @@ body.prose .strip{width:100%;max-width:100%;margin-left:0;transform:none}
   .menu-corner{justify-content:center;margin-bottom:.8rem}
 }
 .enter-row + p.enter{margin-top:0.2rem}
-.signs{display:flex;justify-content:center;align-items:stretch;
- gap:1.1rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem}
-.sign{position:relative;display:flex;flex-direction:column;justify-content:center;
+.signs{position:relative;display:flex;justify-content:center;align-items:stretch;
+ gap:1.1rem;flex-wrap:wrap;margin:1.2rem auto 1.6rem;
+ max-width:50.2rem}
+.sign{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;
  min-width:0;max-width:16rem;flex:1 1 11rem;
  padding:.6rem 1.9rem .65rem 1.3rem;
  background:var(--paper);border-left:3px solid var(--sage);
@@ -125,6 +126,12 @@ body.prose .strip{width:100%;max-width:100%;margin-left:0;transform:none}
  drop-shadow(0 1px 0 var(--sage)) drop-shadow(0 -1px 0 var(--sage))
  drop-shadow(0 4px 5px rgba(26,45,29,.24));
  text-decoration:none;text-align:left}
+.vine,.vine-front{position:absolute;left:-3%;right:-3%;top:50%;
+ transform:translateY(-50%);width:106%;height:12rem;pointer-events:none;
+ overflow:visible;color:rgba(61,107,128,.46)}
+.vine{z-index:0}
+.vine-front{z-index:2}
+@media (max-width:760px){.vine,.vine-front{display:none}}
 .sign .lab{font-size:1.14rem;color:var(--green);line-height:1.25}
 .sign .sub{font-size:.85rem;font-style:italic;color:var(--sage);
  margin-top:.1rem;line-height:1.35}
