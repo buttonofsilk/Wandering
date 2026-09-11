@@ -782,7 +782,8 @@ def build():
 <div class="themes">{chips}</div>
 </article>
 <p class="saved-here"><a href="/reconciled-to-god/">What does it mean to be reconciled to God?</a></p>
-{walk}"""
+{walk}
+<p class="invite">I would love to hear from you.<a href="mailto:{EMAIL}">{EMAIL}</a></p>"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
             page(it["title"], content, it["body"][:160], bodyclass="prose no-saved-link", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
