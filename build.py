@@ -283,7 +283,7 @@ NAV = """<div class="trail-wrap">
   Trail Guide
 </button>
 <div id="trail-panel" class="trail-panel">
-  <a class="tp-saved" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a>
+  <a class="tp-saved" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a>
   <a href="/reflections/">Reflections</a>
   <a href="/exploring/">Exploring</a>
   <a href="/ways-to-wander/">Ways to Wander</a>
@@ -408,6 +408,24 @@ body.prose .strip{{width:100%;max-width:100%;margin-left:0;transform:none}}
   .menu-corner{{justify-content:center;margin-bottom:.8rem}}
 }}
 .enter-row + p.enter{{margin-top:0.2rem}}
+.signs{{display:flex;justify-content:center;align-items:stretch;
+ gap:1.1rem;flex-wrap:wrap;margin:1.2rem 0 1.6rem}}
+.sign{{position:relative;display:flex;flex-direction:column;justify-content:center;
+ min-width:0;max-width:16rem;flex:1 1 11rem;
+ padding:.6rem 1.9rem .65rem 1.3rem;
+ background:var(--paper);border:1px solid var(--tan);border-right:none;
+ clip-path:polygon(0 0,calc(100% - 1.1rem) 0,100% 50%,calc(100% - 1.1rem) 100%,0 100%);
+ text-decoration:none;text-align:left}}
+.sign .lab{{font-size:1.14rem;color:var(--green);line-height:1.25}}
+.sign .sub{{font-size:.85rem;font-style:italic;color:var(--sage);
+ margin-top:.1rem;line-height:1.35}}
+.sign:hover{{background:#F2EDDE}}
+.sign:hover .lab{{color:var(--sage)}}
+.sign.first{{background:#F1EEE2}}
+@media (max-width:760px){{
+  .signs{{flex-direction:column;align-items:stretch;gap:.7rem}}
+  .sign{{max-width:none;flex:0 0 auto}}
+}}
 .back{{text-align:center;margin:.2rem 0 0}}
 .back a{{display:inline-block;padding:.4rem .6rem;font-size:1.1rem;
  font-style:italic;color:var(--sage);text-decoration:none}}
@@ -667,7 +685,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
@@ -751,13 +769,17 @@ def build():
 {further_html}
 <div class="themes">{chips}</div>
 </article>
-<p class="saved-here"><a href="/reconciled-to-god/">What does it mean to be reconciled to God?</a></p>
+<p class="saved-here"><a href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?</a></p>
 {walk}"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
             page(it["title"], content, it["body"][:160], bodyclass="prose no-saved-link", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
-    home = """<p class="enter"><a href="/reflections/"> <svg class="sprig flip" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg> Begin Wandering <svg class="sprig" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 10 H34" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/><ellipse cx="12" cy="6" rx="5" ry="2.6" transform="rotate(-24 12 6)" fill="currentColor" opacity=".85"/><ellipse cx="12" cy="14" rx="5" ry="2.6" transform="rotate(24 12 14)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="6" rx="4.4" ry="2.3" transform="rotate(-24 24 6)" fill="currentColor" opacity=".85"/><ellipse cx="24" cy="14" rx="4.4" ry="2.3" transform="rotate(24 24 14)" fill="currentColor" opacity=".85"/></svg></a></p>\n<div class="home-split">
+    home = """<div class="signs">
+<a class="sign first" href="/reconciled-to-god/"><span class="lab">Reconciled to God</span><span class="sub">what does it mean to be saved?</span></a>
+<a class="sign" href="/reflections/"><span class="lab">Reflections</span><span class="sub">daily Scripture reflections</span></a>
+<a class="sign" href="/exploring/"><span class="lab">Exploring</span><span class="sub">ways to go deeper</span></a>
+</div>\n<div class="home-split">
 <img class="hero" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <section class="welcome">
 <p>Come slow down, open God&rsquo;s Word, and wonder with me. These reflections are an
@@ -768,8 +790,8 @@ the trails that make you pause, and carrying something from His Word with you in
 the rest of your day.</p>
 </section>
 </div>
-<p class="home-saved"><a href="/reconciled-to-god/">Before you wander further &mdash; what does it mean to be reconciled to God?</a></p>"""
-    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide no-saved-link", show_tag=True), encoding="utf-8")
+"""
+    (OUT / "index.html").write_text(page(SITE_TITLE, home, bodyclass="home wide", show_tag=True), encoding="utf-8")
 
     l = items[0]
     _la = l.get("audio", "").strip()
@@ -885,7 +907,7 @@ different ways you can listen or receive the reflections.</p>
 <p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
 this wandering has gone so far.</p>
 <ul>
-<li><a href="/reconciled-to-god/">What does it mean to be reconciled to God?<span class="tag-small">a walk through Scripture</span></a></li>
+<li><a href="/what-does-it-mean-to-be-saved/">What does it mean to be saved?<span class="tag-small">a walk through Scripture</span></a></li>
 <li class="group"><span>How to Wander</span>
 <ul class="sub-list">
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
@@ -914,7 +936,7 @@ this wandering has gone so far.</p>
                 page(meta["title"], content,
                      bodyclass="prose"
                        + (" no-saved-link" if meta["slug"] in
-                          ("reconciled-to-god", "scripture-list") else "")
+                          ("what-does-it-mean-to-be-saved", "scripture-list") else "")
                        + (" list-cols" if
                        str(meta.get("list_columns", "")).lower() in ("true", "yes", "1") else ""),
                      back_link=("&larr; " + meta.get("back_to", "Home"),
