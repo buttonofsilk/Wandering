@@ -29,3 +29,10 @@ Tools and guides worth your time as you study Scripture on your own.
 ## Book of Isaiah
 
 - [BibleProject: Guide to Isaiah 1-39](https://bibleproject.com/videos/isaiah-1-39/)
+
+## Reading Alongside Isaiah
+
+I don't quote from it, but I lean on it often. When a passage is knotted — like the run from Ahaz through Hezekiah in Isaiah 7 and 8 — this is where I go to understand the history and the shape of what I'm reading.
+
+- [The Prophecy of Isaiah, by J. Alec Motyer](https://www.ivpress.com/the-prophecy-of-isaiah-ebook) — a one-volume commentary. Detailed, but written so you don't need Hebrew to follow it.
+

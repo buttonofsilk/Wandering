@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Wandering Through God's Word with Wonder - site generator."""
 
-import os, re, html, shutil
+import os, re, sys, html, shutil
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from email.utils import format_datetime
@@ -343,6 +343,10 @@ h2{{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}}
 .band-full{{width:100vw;max-width:none;margin-left:50%;
  transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}}
 .page-audio{{margin:1.2rem 0 2rem}}
+.graphic{{margin:2.2rem 0;padding:0}}
+.graphic img{{width:100%;height:auto;display:block;border:1px solid var(--tan)}}
+.graphic figcaption{{text-align:center;font-style:italic;color:var(--sage);
+ font-size:.88rem;margin-top:.5rem}}
 .page-audio audio{{width:100%;max-width:32rem;display:block}}
 .audio-label{{font-style:italic;color:var(--sage);font-size:.95rem;margin:0 0 .5rem}}
 details{{margin:1rem 0 2rem}}
@@ -730,6 +734,12 @@ def build():
                 shutil.copy(f, OUT / f.name)
 
     today = datetime.now(ZoneInfo(TIMEZONE)).strftime("%Y-%m-%d")
+    # --preview builds future-dated reflections too, so a page can be checked
+    # before its publish date. Never commit the result — rebuild plainly first.
+    if "--preview" in sys.argv:
+        today = "9999-12-31"
+        print("PREVIEW BUILD - future reflections included. "
+              "Run 'python3 build.py' again before committing.")
     every = sorted((parse(p) for p in SRC.glob("*.md")),
                    key=lambda x: x["date"], reverse=True)
     items = [it for it in every if it["date"] <= today]
@@ -754,6 +764,15 @@ def build():
         _also = it.get("alongside", "").strip()
         alongside_html = (f'<div class="alongside">{link_refs(html.escape(_also))}</div>'
                           if _also else "")
+        _gfx = it.get("graphic", "").strip()
+        _gfull = it.get("graphic_full", "").strip() or _gfx
+        _galt = it.get("graphic_alt", "").strip() or it["title"]
+        graphic_html = (
+            f'<figure class="graphic">'
+            f'<a href="/{html.escape(_gfull)}" target="_blank" rel="noopener">'
+            f'<img src="/{html.escape(_gfx)}" alt="{html.escape(_galt)}" loading="lazy">'
+            f'</a><figcaption>Open the full size graphic</figcaption></figure>'
+            if _gfx else "")
         _tr = it.get("transcript", "").strip()
         transcript_html = (
             '<details><summary>Read the transcript instead</summary>'
@@ -783,6 +802,7 @@ def build():
 {alongside_html}
 {audio_html}
 {body}
+{graphic_html}
 {transcript_html}
 {further_html}
 <div class="themes">{chips}</div>
