@@ -249,7 +249,7 @@ def parse_simple_page(path):
                 _lab = f'<p class="audio-label">{render_text(_label)}</p>' if _label else ""
                 html_parts.append(
                     f'<div class="page-audio">{_lab}'
-                    f'<audio controls preload="none" src="{html.escape(_url)}"></audio></div>')
+                    f'<audio controls preload="metadata" src="{html.escape(_url)}"></audio></div>')
             else:
                 html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("!["):
@@ -760,7 +760,7 @@ def build():
         themes = it.get("themes") or []
         chips = "".join(f"<span>{html.escape(t)}</span>" for t in themes)
         _aud = it.get("audio", "").strip()
-        audio_html = (f'<audio controls preload="none" src="{AUDIO_BASE}/{_aud}"></audio>'
+        audio_html = (f'<audio controls preload="metadata" src="{AUDIO_BASE}/{_aud}"></audio>'
                       if _aud else "")
         _also = it.get("alongside", "").strip()
         alongside_html = (f'<div class="alongside">{link_refs(html.escape(_also))}</div>'
@@ -844,7 +844,7 @@ the rest of your day.</p>
 
     l = items[0]
     _la = l.get("audio", "").strip()
-    today_audio = (f'<audio controls preload="none" src="{AUDIO_BASE}/{_la}"></audio>'
+    today_audio = (f'<audio controls preload="metadata" src="{AUDIO_BASE}/{_la}"></audio>'
                    if _la else '')
     arch = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <h1>Reflections</h1>
