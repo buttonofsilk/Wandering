@@ -68,6 +68,12 @@ details[open] > summary::before{transform:rotate(90deg)}
 .alongside{color:var(--muted);font-style:italic;font-size:.85rem;
  opacity:.8;margin:-1.1rem 0 1.5rem}
 audio{width:100%;margin:1.5rem 0}
+audio::-webkit-media-controls-enclosure{background:var(--paper);
+ border:1px solid var(--tan);border-radius:2rem}
+audio::-webkit-media-controls-panel{background:var(--paper)}
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display{color:var(--green);
+ font-family:Georgia,serif;text-shadow:none}
 .themes{margin-top:2rem}
 .walk{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start;
  margin:2.5rem 0 0;padding-top:1.5rem;border-top:1px solid var(--tan)}
@@ -425,7 +431,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <h1>What It Means to Believe</h1>
 <div class="meta">July 31, 2026 &middot; <span class="scripture"><a href="https://www.biblegateway.com/passage/?search=John+14%3A1-6&version=NASB1995" target="_blank" rel="noopener">John 14:1-6</a></span></div>
 
-<audio controls preload="metadata" src="https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev/2026-07-31.mp3"></audio>
+<audio controls preload="metadata" src="https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev/2026-07-31.mp3" data-title="What It Means to Believe" data-scr="John 14:1-6"></audio>
 <p>Jesus tells His disciples not to let their hearts be troubled, but to believe in God and believe in Him. Looking more closely at the word believe reveals something deeper than simply accepting that something is true—it carries the idea of placing our trust in, relying on, and even casting ourselves upon God, especially when worry and uncertainty feel heavy.</p>
 
 
@@ -437,6 +443,7 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <p class="invite">I would love to hear from you.<a href="mailto:hope@buttonofsilk.org">hope@buttonofsilk.org</a></p>
 <footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
+<script>(function(){var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){navigator.mediaSession.metadata=new MediaMetadata({title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}]});navigator.mediaSession.setActionHandler("seekbackward",function(){a.currentTime=Math.max(0,a.currentTime-15);});navigator.mediaSession.setActionHandler("seekforward",function(){a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);});});})();</script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>
 </html>
