@@ -213,6 +213,18 @@ def parse_simple_page(path):
             _m = re.match(r"@flourish\[([^\]]*)\]", block)
             _txt = _m.group(1) if _m else ""
             html_parts.append(f'<p class="flourish">{render_text(_txt)}</p>')
+        elif block.startswith("@graphic["):
+            _m = re.match(r"@graphic\[([^\]]*)\]\(([^)]+)\)(?:\(([^)]+)\))?", block)
+            if _m:
+                _alt, _src, _full = _m.groups()
+                _full = _full or _src
+                html_parts.append(
+                    f'<figure class="graphic inset">'
+                    f'<a href="{html.escape(_full)}" target="_blank" rel="noopener">'
+                    f'<img src="{html.escape(_src)}" alt="{html.escape(_alt)}" loading="lazy">'
+                    f'</a><figcaption>Open the full size image</figcaption></figure>')
+            else:
+                html_parts.append(f"<p>{render_text(block)}</p>")
         elif block.startswith("@beside[") or block.startswith("@banner["):
             _kind = "beside" if block.startswith("@beside[") else "banner"
             _m = re.match(r"@\w+\[([^\]]*)\]\(([^)]+)\)", block)
@@ -344,6 +356,7 @@ h2{{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}}
  transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}}
 .page-audio{{margin:1.2rem 0 2rem}}
 .graphic{{margin:2.2rem 0;padding:0}}
+.graphic.inset{{max-width:30rem;margin-left:auto;margin-right:auto}}
 .graphic img{{width:100%;height:auto;display:block;border:1px solid var(--tan)}}
 .graphic figcaption{{text-align:center;font-style:italic;color:var(--sage);
  font-size:.88rem;margin-top:.5rem}}
@@ -972,6 +985,7 @@ this wandering has gone so far.</p>
 <ul class="sub-list">
 <li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
 <li><a href="/soap/">How to SOAP<span class="tag-small">a simple way to study Scripture</span></a></li>
+<li><a href="/how-i-use-ai/">How I Use AI<span class="tag-small">what it does and does not do here</span></a></li>
 </ul></li>
 <li><a href="/worship/">Worship<span class="tag-small">music to turn toward God with</span></a></li>
 <li><a href="/resources/">Resources<span class="tag-small">books, guides, and studies worth your time</span></a>
