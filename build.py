@@ -318,7 +318,7 @@ def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_
 <meta name="description" content="{html.escape(desc or SITE_DESC)}">{'<meta name="robots" content="noindex, nofollow">' if noindex else ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;600&family=Kalam:wght@400;700&family=Lato:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <link rel="alternate" type="application/rss+xml" title="{html.escape(SITE_TITLE)}" href="/feed.xml">
 <script src="/trail.js" defer></script>
 <style>
@@ -448,6 +448,36 @@ body.prose .strip{{width:100%;max-width:100%;margin-left:0;transform:none}}
  drop-shadow(0 1px 0 var(--sage)) drop-shadow(0 -1px 0 var(--sage))
  drop-shadow(0 4px 5px rgba(26,45,29,.24));
  text-decoration:none;text-align:left}}
+.exp{{display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);
+ gap:3rem;align-items:center;margin-top:1.5rem}}
+.exp > img{{width:100%;height:auto;display:block;border:1px solid var(--tan)}}
+.exp h1{{font-weight:600;font-size:2.1rem;margin:0 0 .3rem;text-align:left}}
+.exploring-lead{{font-style:italic;color:var(--sage);margin:0 0 1rem}}
+.trail{{position:relative;height:31rem;margin:1.2rem 0 0}}
+.trail svg{{position:absolute;inset:0;width:100%;height:100%;overflow:visible}}
+.stop{{position:absolute;left:0;right:0;transform:translateY(-50%);
+ text-decoration:none;display:block}}
+.stop .dot{{position:absolute;top:50%;margin-top:-.53rem;margin-left:-.53rem;
+ width:1.05rem;height:1.05rem;border-radius:50%;background:var(--paper);
+ border:3px solid var(--sage);box-shadow:0 1px 3px rgba(26,45,29,.22)}}
+.stop .tx{{position:absolute;top:50%;transform:translateY(-50%);
+ display:block;max-width:19rem}}
+.stop .nm{{display:block;font-family:"Kalam",Georgia,serif;font-size:1.34rem;
+ color:var(--green);line-height:1.15}}
+.stop .ds{{display:block;font-family:"Lato",Georgia,serif;font-style:italic;
+ font-size:.88rem;color:var(--sage);line-height:1.35}}
+.stop:hover .dot{{background:var(--sage)}}
+.stop:hover .nm{{color:var(--sage)}}
+@media (max-width:760px){{
+  .exp{{grid-template-columns:1fr;gap:1.5rem}}
+  .trail{{height:auto;padding-left:1.7rem}}
+  .trail svg{{display:none}}
+  .stop{{position:static;transform:none;padding:.9rem 0;
+   border-bottom:1px solid rgba(232,230,223,.8)}}
+  .stop:last-child{{border-bottom:none}}
+  .stop .dot{{position:absolute;left:0 !important;margin-left:0;top:1.5rem}}
+  .stop .tx{{position:static;transform:none;max-width:none}}
+}}
 .vine,.vine-front{{position:absolute;left:-3%;right:-3%;top:50%;
  transform:translateY(-50%);width:106%;height:12rem;pointer-events:none;
  overflow:visible;color:rgba(61,107,128,.46)}}
@@ -973,24 +1003,23 @@ different ways you can listen or receive the reflections.</p>
             f'<li><a href="/resources/#{a}">{html.escape(t)}</a></li>'
             for t, a in _rm.get("sections", []))
 
-    exploration = f"""<div class="split">
-<img src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages" style="object-position:center 45%">
-<div class="split-menu">
+    exploration = """<div class="exp">
+<img src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
+<div>
 <h1>Exploring</h1>
-<p>A place to go deeper&mdash;tools for studying Scripture on your own, and where
-this wandering has gone so far.</p>
-<ul>
-<li><a href="/reconciled-to-god/">What does it mean to be reconciled to God?<span class="tag-small">a walk through Scripture</span></a></li>
-<li class="group"><span>How to Wander</span>
-<ul class="sub-list">
-<li><a href="/trailhead-guide/">Trailhead Guide<span class="tag-small">foundations for understanding God's Word</span></a></li>
-<li><a href="/soap/">How to SOAP<span class="tag-small">a simple way to study Scripture</span></a></li>
-<li><a href="/how-i-use-ai/">How I Use AI<span class="tag-small">what it does and does not do here</span></a></li>
-</ul></li>
-<li><a href="/worship/">Worship<span class="tag-small">music to turn toward God with</span></a></li>
-<li><a href="/resources/">Resources<span class="tag-small">books, guides, and studies worth your time</span></a>
-<ul class="sub-list">{resource_sections}</ul></li>
-</ul>
+<p class="exploring-lead">Ways to go deeper &mdash; and where this wandering has gone so far.</p>
+<div class="trail">
+<svg viewBox="0 0 100 600" preserveAspectRatio="none" aria-hidden="true">
+<path d="M29 38 C25.3 55.3,18.6 107.3,19 142 C19.4 176.7,30.4 211.3,30 246 C29.6 280.7,18.4 315.3,18 350 C17.6 384.7,27.9 420.0,29 454 C30.1 488.0,23.9 537.3,21 554" fill="none" stroke="#D8D4C6" stroke-width="7"
+ stroke-linecap="round" stroke-dasharray="0.1 13" vector-effect="non-scaling-stroke"/>
+</svg>
+<a class="stop" href="/reconciled-to-god/" style="top:6.33%"><span class="dot" style="left:29%"></span><span class="tx" style="left:33%"><span class="nm">Reconciled to God</span><span class="ds">what it means to be saved</span></span></a>
+<a class="stop" href="/trailhead-guide/" style="top:23.67%"><span class="dot" style="left:19%"></span><span class="tx" style="left:23%"><span class="nm">Trailhead Guide</span><span class="ds">foundations for reading Scripture</span></span></a>
+<a class="stop" href="/soap/" style="top:41.00%"><span class="dot" style="left:30%"></span><span class="tx" style="left:34%"><span class="nm">How to SOAP</span><span class="ds">a simple way to study</span></span></a>
+<a class="stop" href="/worship/" style="top:58.33%"><span class="dot" style="left:18%"></span><span class="tx" style="left:22%"><span class="nm">Worship</span><span class="ds">music to turn toward God with</span></span></a>
+<a class="stop" href="/resources/" style="top:75.67%"><span class="dot" style="left:29%"></span><span class="tx" style="left:33%"><span class="nm">Resources</span><span class="ds">books and studies worth your time</span></span></a>
+<a class="stop" href="/how-i-use-ai/" style="top:92.33%"><span class="dot" style="left:21%"></span><span class="tx" style="left:25%"><span class="nm">How I Use AI</span><span class="ds">what it does and does not do</span></span></a>
+</div>
 </div>
 </div>"""
     d = OUT / "exploring"; d.mkdir(exist_ok=True)
