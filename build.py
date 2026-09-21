@@ -19,6 +19,11 @@ SHOW_AUTHOR = "Button of Silk"
 EMAIL       = "hope@buttonofsilk.org"
 COVER       = SITE_URL + "/cover.jpg"
 TIMEZONE    = "America/Denver"
+# Shown on any reflection with "support: true" in its front matter.
+SUPPORT_URL  = "/safety-and-help/"
+SUPPORT_TEXT = ("This reflection touches on abuse and misused authority. "
+                "If that is close to home, there is ")
+SUPPORT_LINK = "help and a list of resources"
 
 import json as _json
 import urllib.parse
@@ -198,6 +203,8 @@ def parse_simple_page(path):
             html_parts.append(f"<blockquote>{render_text(block[2:].strip())}</blockquote>")
         elif block.startswith("~") and block.endswith("~") and len(block) > 1:
             html_parts.append(f'<p class="signature">{render_text(block[1:-1].strip())}</p>')
+        elif block.startswith("@safety"):
+            html_parts.append('<div class="safety">'); _open.append("</div>")
         elif block.startswith("@wide"):
             html_parts.append('<div class="band-wide">'); _open.append("</div>")
         elif block.startswith("@full"):
@@ -591,6 +598,32 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  font-style:italic;color:var(--sage)}}
 @media print{{.ref-text{{display:block;position:static;width:auto;
  box-shadow:none;border:none;padding:.4rem 0}}}}
+.trail-aside{{margin:1.7rem 0 0;padding-top:1.1rem;
+ border-top:1px solid var(--tan);font-style:italic;color:var(--sage);
+ font-size:.95rem;line-height:1.7}}
+.trail-aside a{{color:var(--green)}}
+.safety{{background:var(--paper);border:1px solid var(--sage);
+ border-left:4px solid var(--sage);padding:1.15rem 1.35rem;
+ margin:1.4rem 0 2.2rem;border-radius:2px}}
+.safety p{{margin:0 0 .7rem;font-size:1rem;line-height:1.7;color:var(--ink)}}
+.safety p:last-child{{margin-bottom:0}}
+.safety p:first-child{{font-weight:600;font-size:1.08rem;color:var(--green)}}
+.safety a{{color:var(--green)}}
+.support{{margin:-.4rem 0 1.7rem;padding:.6rem .95rem;
+ border-left:2px solid var(--tan);font-style:italic;color:var(--sage);
+ font-size:.95rem;line-height:1.7}}
+.support a{{color:var(--green)}}
+.exitbar{{display:none}}
+body.quick-exit .exitbar{{display:inline-flex;align-items:center;gap:.45rem;
+ position:fixed;top:.85rem;right:.85rem;z-index:80;padding:.5rem 1.05rem;
+ border-radius:2rem;background:var(--paper);border:1px solid var(--sage);
+ font-family:Georgia,serif;font-size:.95rem;font-style:italic;
+ color:var(--green);text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.14)}}
+body.quick-exit .exitbar:hover{{background:var(--sage);color:var(--cream)}}
+@media (max-width:720px){{
+  body.quick-exit .exitbar{{top:auto;bottom:.85rem;right:.85rem}}
+}}
+@media print{{.exitbar{{display:none !important}}}}
 .btn-row{{text-align:center;margin:2rem 0 .8rem}}
 .btn{{display:inline-block;padding:.65rem 1.5rem;border:1px solid var(--tan);
  border-radius:2rem;font-style:italic;font-size:1.05rem;color:var(--green);
@@ -744,6 +777,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 </style>
 </head>
 <body class="{bodyclass}">
+<a class="exitbar" href="https://www.google.com" rel="noopener">Quick exit &times;</a>
 <div class="wrap">
 <div class="menu-corner">
 {nav}
@@ -760,6 +794,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 </div>
 <script>(function(){{var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){{navigator.mediaSession.metadata=new MediaMetadata({{title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}}]}});navigator.mediaSession.setActionHandler("seekbackward",function(){{a.currentTime=Math.max(0,a.currentTime-15);}});navigator.mediaSession.setActionHandler("seekforward",function(){{a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);}});}});}})();</script>
+<script>document.addEventListener("click",function(e){{var x=e.target.closest(".exitbar");if(x){{e.preventDefault();window.location.replace(x.href);}}}});</script>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
 </html>"""
@@ -814,6 +849,10 @@ def build():
                       f'data-title="{html.escape(it["title"])}" '
                       f'data-scr="{html.escape(it["scripture"])}"></audio>'
                       if _aud else "")
+        _sup = str(it.get("support", "")).lower() in ("true", "yes", "1")
+        support_html = (f'<p class="support">{SUPPORT_TEXT}'
+                        f'<a href="{SUPPORT_URL}">{SUPPORT_LINK}</a>.</p>'
+                        if _sup else "")
         _also = it.get("alongside", "").strip()
         alongside_html = (f'<div class="alongside">{link_refs(html.escape(_also))}</div>'
                           if _also else "")
@@ -853,6 +892,7 @@ def build():
 <h1>{html.escape(it['title'])}</h1>
 <div class="meta">{pretty(it['date'])} &middot; <span class="scripture">{link_refs(html.escape(it['scripture']))}</span></div>
 {alongside_html}
+{support_html}
 {audio_html}
 {body}
 {graphic_html}
@@ -1020,6 +1060,7 @@ different ways you can listen or receive the reflections.</p>
 <a class="stop" href="/resources/" style="top:75.67%"><span class="dot" style="left:29%"></span><span class="tx" style="left:33%"><span class="nm">Resources</span><span class="ds">books and studies worth your time</span></span></a>
 <a class="stop" href="/how-i-use-ai/" style="top:92.33%"><span class="dot" style="left:21%"></span><span class="tx" style="left:25%"><span class="nm">How I Use AI</span><span class="ds">what it does and does not do</span></span></a>
 </div>
+<p class="trail-aside">If you are walking through abuse, or through authority that has been used against you, <a href="/safety-and-help/">there is help and a list of resources here</a>.</p>
 </div>
 </div>"""
     d = OUT / "exploring"; d.mkdir(exist_ok=True)
@@ -1040,6 +1081,8 @@ different ways you can listen or receive the reflections.</p>
                      bodyclass="prose"
                        + (" no-saved-link" if meta["slug"] in
                           ("reconciled-to-god", "scripture-list") else "")
+                       + (" quick-exit" if
+                       str(meta.get("quick_exit", "")).lower() in ("true", "yes", "1") else "")
                        + (" list-cols" if
                        str(meta.get("list_columns", "")).lower() in ("true", "yes", "1") else ""),
                      back_link=("&larr; " + meta.get("back_to", "Home"),
@@ -1130,7 +1173,9 @@ def write_feed(items):
         dur  = it.get("duration", "")
         pub  = format_datetime(datetime.strptime(it["date"], "%Y-%m-%d")
                                .replace(tzinfo=timezone.utc))
-        desc = (f"{it['scripture']} - {it['body']}\n\n"
+        _supn = (f"\n\n{SUPPORT_TEXT}{SUPPORT_LINK} at {SITE_URL}{SUPPORT_URL}"
+                 if str(it.get("support", "")).lower() in ("true", "yes", "1") else "")
+        desc = (f"{it['scripture']} - {it['body']}{_supn}\n\n"
                 "Scripture quotations taken from the (NASB) New American Standard Bible, "
                 "Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by "
                 "permission. All rights reserved. www.Lockman.org")
