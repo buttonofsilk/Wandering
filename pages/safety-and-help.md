@@ -136,11 +136,14 @@ But I do want to say this clearly:
 
 You and your children deserve and need to be safe.
 
-Danger is not limited to physical violence. Abuse can also look like repeated criticism, belittling, humiliation, gaslighting, withholding, intimidation, manipulation, isolation, monitoring, spiritual pressure, financial control, sexual coercion, or other patterns that steadily erode a person’s safety, dignity, freedom, or sense of self.
+Danger is not limited to physical violence. Emotional, verbal, sexual, financial, spiritual, and coercive patterns can also cause real harm and require serious attention.
 
 ### Pray.
 
+Not in the sense of the “just pray about it” response you may have heard before, but rather:
+
 Ask God to give you wisdom, discernment, courage, and guidance for the next best step in your particular situation.
+
 
 ### Tell someone safe.
 
@@ -179,6 +182,8 @@ You may have difficult decisions ahead of you, and other people may have strong 
 If you are not sure whether what you are experiencing "counts" as abuse, you can still reach out for help. You do not have to wait until the situation becomes an emergency, and you do not have to prove that it is bad enough before you are allowed to ask questions.
 
 ## Immediate Abuse and Safety Support
+
+You do not need every resource below; choose the kind of support that fits what you need right now.
 
 ### The National Domestic Violence Hotline
 
