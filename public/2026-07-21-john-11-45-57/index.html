@@ -282,10 +282,11 @@ body.list-cols .wrap h2{margin-top:2rem}
  font-style:italic;color:var(--sage)}
 @media print{.ref-text{display:block;position:static;width:auto;
  box-shadow:none;border:none;padding:.4rem 0}}
-.trail-aside{margin:1.7rem 0 0;padding-top:1.1rem;
- border-top:1px solid var(--tan);font-style:italic;color:var(--sage);
- font-size:.95rem;line-height:1.7}
-.trail-aside a{color:var(--green)}
+.trail-aside{margin:1.4rem auto 0;padding-top:0;max-width:34rem;
+ text-align:center;font-style:italic;color:var(--sage);
+ font-size:.88rem;line-height:1.7;opacity:.85}
+.trail-aside a{color:var(--sage);border-bottom:1px dotted var(--sage)}
+.trail-aside a:hover{color:var(--green)}
 .safety{background:var(--paper);border:1px solid var(--sage);
  border-left:4px solid var(--sage);padding:1.15rem 1.35rem;
  margin:1.4rem 0 2.2rem;border-radius:2px}
@@ -503,8 +504,10 @@ footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 <nav class="walk"><a class="prev" href="/2026-07-20-john-11-38-46/"><span class="dir">&larr; Previous</span><span class="ttl">John 11:38-46</span></a><span class="here">John 11:45-57</span><a class="next" href="/2026-07-22-john-12-1-11/"><span class="dir">Next &rarr;</span><span class="ttl">John 12:1-11</span></a></nav>
 <p class="invite">I would love to hear from you.<a href="mailto:hope@buttonofsilk.org">hope@buttonofsilk.org</a></p>
 <footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+
 </div>
 <script>(function(){var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){navigator.mediaSession.metadata=new MediaMetadata({title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}]});navigator.mediaSession.setActionHandler("seekbackward",function(){a.currentTime=Math.max(0,a.currentTime-15);});navigator.mediaSession.setActionHandler("seekforward",function(){a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);});});})();</script>
+<script>window.addEventListener("pageshow",function(e){if(e.persisted){window.scrollTo(0,0);}});</script>
 <script>document.addEventListener("click",function(e){var x=e.target.closest(".exitbar");if(x){e.preventDefault();window.location.replace(x.href);}});</script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
 </body>

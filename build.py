@@ -315,7 +315,7 @@ NAV = """<div class="trail-wrap">
 </div>
 </div>"""
 
-def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None, new_here=False, noindex=False):
+def page(title, content, desc=None, bodyclass="", nav=NAV, show_tag=False, back_link=None, new_here=False, noindex=False, after_footer=""):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -598,10 +598,11 @@ body.list-cols .wrap h2{{margin-top:2rem}}
  font-style:italic;color:var(--sage)}}
 @media print{{.ref-text{{display:block;position:static;width:auto;
  box-shadow:none;border:none;padding:.4rem 0}}}}
-.trail-aside{{margin:1.7rem 0 0;padding-top:1.1rem;
- border-top:1px solid var(--tan);font-style:italic;color:var(--sage);
- font-size:.95rem;line-height:1.7}}
-.trail-aside a{{color:var(--green)}}
+.trail-aside{{margin:1.4rem auto 0;padding-top:0;max-width:34rem;
+ text-align:center;font-style:italic;color:var(--sage);
+ font-size:.88rem;line-height:1.7;opacity:.85}}
+.trail-aside a{{color:var(--sage);border-bottom:1px dotted var(--sage)}}
+.trail-aside a:hover{{color:var(--green)}}
 .safety{{background:var(--paper);border:1px solid var(--sage);
  border-left:4px solid var(--sage);padding:1.15rem 1.35rem;
  margin:1.4rem 0 2.2rem;border-radius:2px}}
@@ -792,8 +793,10 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
 <footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+{after_footer}
 </div>
 <script>(function(){{var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){{navigator.mediaSession.metadata=new MediaMetadata({{title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}}]}});navigator.mediaSession.setActionHandler("seekbackward",function(){{a.currentTime=Math.max(0,a.currentTime-15);}});navigator.mediaSession.setActionHandler("seekforward",function(){{a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);}});}});}})();</script>
+<script>window.addEventListener("pageshow",function(e){{if(e.persisted){{window.scrollTo(0,0);}}}});</script>
 <script>document.addEventListener("click",function(e){{var x=e.target.closest(".exitbar");if(x){{e.preventDefault();window.location.replace(x.href);}}}});</script>
 <script>document.addEventListener("click",function(e){{var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){{if(!b||o!==b.parentNode)o.classList.remove("open");}});if(b)b.parentNode.classList.toggle("open");}});</script>
 </body>
@@ -1060,11 +1063,11 @@ different ways you can listen or receive the reflections.</p>
 <a class="stop" href="/resources/" style="top:75.67%"><span class="dot" style="left:29%"></span><span class="tx" style="left:33%"><span class="nm">Resources</span><span class="ds">books and studies worth your time</span></span></a>
 <a class="stop" href="/how-i-use-ai/" style="top:92.33%"><span class="dot" style="left:21%"></span><span class="tx" style="left:25%"><span class="nm">How I Use AI</span><span class="ds">what it does and does not do</span></span></a>
 </div>
-<p class="trail-aside">If you are walking through abuse, or through authority that has been used against you, <a href="/safety-and-help/">there is help and a list of resources here</a>.</p>
 </div>
 </div>"""
+    exploring_aside = '<p class="trail-aside">If you are walking through abuse, or through authority that has been used against you, <a href="/safety-and-help/">there is help and a list of resources here</a>.</p>'
     d = OUT / "exploring"; d.mkdir(exist_ok=True)
-    (d / "index.html").write_text(page("Exploring", exploration, bodyclass="home wide no-saved-link", back_link=("&larr; Home", "/")), encoding="utf-8")
+    (d / "index.html").write_text(page("Exploring", exploration, bodyclass="home wide no-saved-link", back_link=("&larr; Home", "/"), after_footer=exploring_aside), encoding="utf-8")
 
     if PAGES.exists():
         for p in PAGES.glob("*.md"):
