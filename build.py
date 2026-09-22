@@ -914,6 +914,7 @@ def build():
         further_html = ('<p class="further">If you want to keep going: '
                         + " &middot; ".join(_fparts) + "</p>") if _fparts else ""
         def render_body_block(block):
+            block = block.strip()
             if block.startswith("@image["):
                 m = re.match(r"@image\[([^\]]*)\]\(([^)]+)\)", block)
                 if m:
@@ -950,6 +951,9 @@ def build():
             return f"<p>{html.escape(block)}</p>"
         body = "".join(render_body_block(p)
                        for p in it["body"].split("\n\n") if p.strip())
+        it["body_plain"] = "\n\n".join(
+            p for p in it["body"].split("\n\n")
+            if p.strip() and not p.strip().startswith(("@image[", "@compare[")))
         content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <article>
 <h1>{html.escape(it['title'])}</h1>
@@ -968,7 +972,7 @@ def build():
 <p class="invite">I would love to hear from you.<a href="mailto:{EMAIL}">{EMAIL}</a></p>"""
         d = OUT / it["slug"]; d.mkdir(parents=True, exist_ok=True)
         (d / "index.html").write_text(
-            page(it["title"], content, it["body"][:160], bodyclass="prose no-saved-link", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
+            page(it["title"], content, it["body_plain"][:160], bodyclass="prose no-saved-link", back_link=("&larr; All Reflections", "/reflections/"), new_here=True), encoding="utf-8")
 
     home = """<div class="signs">
 <svg class="vine" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true">
@@ -1238,7 +1242,7 @@ def write_feed(items):
                                .replace(tzinfo=timezone.utc))
         _supn = (f"\n\n{SUPPORT_TEXT}{SUPPORT_LINK} at {SITE_URL}{SUPPORT_URL}"
                  if str(it.get("support", "")).lower() in ("true", "yes", "1") else "")
-        desc = (f"{it['scripture']} - {it['body']}{_supn}\n\n"
+        desc = (f"{it['scripture']} - {it.get('body_plain', it['body'])}{_supn}\n\n"
                 "Scripture quotations taken from the (NASB) New American Standard Bible, "
                 "Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by "
                 "permission. All rights reserved. www.Lockman.org")
