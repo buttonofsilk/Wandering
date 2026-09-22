@@ -393,6 +393,31 @@ audio::-webkit-media-controls-panel{{background:var(--paper)}}
 audio::-webkit-media-controls-current-time-display,
 audio::-webkit-media-controls-time-remaining-display{{color:var(--green);
  font-family:Georgia,serif;text-shadow:none}}
+.body-image{{width:100%;height:auto;display:block;margin:1.8rem 0;
+ border:1px solid var(--tan)}}
+.compare{{margin:2.2rem 0;border:1px solid var(--tan);border-radius:2px;
+ overflow:hidden}}
+.compare-row{{display:grid;grid-template-columns:1fr 1.4fr 1.4fr}}
+.compare-row:not(:last-child){{border-bottom:1px solid var(--tan)}}
+.compare-head{{background:var(--green);color:var(--cream);
+ font-style:italic;font-size:.95rem}}
+.compare-head .compare-cell{{padding:.7rem .9rem}}
+.compare-cell{{padding:.85rem .9rem;font-size:.95rem;line-height:1.65;
+ border-right:1px solid var(--tan)}}
+.compare-cell:last-child{{border-right:none}}
+.compare-row:not(.compare-head) .compare-cell:first-child{{
+ background:var(--paper);font-style:italic;color:var(--sage);font-weight:600}}
+.compare-label{{display:none}}
+@media (max-width:700px){{
+  .compare-head{{display:none}}
+  .compare-row{{display:block;padding:.9rem 1rem;
+   border-bottom:2px solid var(--tan)}}
+  .compare-cell{{padding:.3rem 0;border-right:none;display:block}}
+  .compare-row:not(.compare-head) .compare-cell:first-child{{
+   background:none;font-size:1.02rem;margin-bottom:.3rem}}
+  .compare-label{{display:block;font-style:italic;color:var(--sage);
+   font-size:.82rem;margin-top:.6rem}}
+}}
 .themes{{margin-top:2rem}}
 .walk{{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start;
  margin:2.5rem 0 0;padding-top:1.5rem;border-top:1px solid var(--tan)}}
@@ -888,7 +913,42 @@ def build():
                 _fparts.append(html.escape(_chunk))
         further_html = ('<p class="further">If you want to keep going: '
                         + " &middot; ".join(_fparts) + "</p>") if _fparts else ""
-        body = "".join(f"<p>{html.escape(p)}</p>"
+        def render_body_block(block):
+            if block.startswith("@image["):
+                m = re.match(r"@image\[([^\]]*)\]\(([^)]+)\)", block)
+                if m:
+                    alt, src = m.groups()
+                    return (f'<img class="body-image" src="/{html.escape(src)}" '
+                            f'alt="{html.escape(alt)}" loading="lazy">')
+                return f"<p>{html.escape(block)}</p>"
+            if block.startswith("@compare["):
+                head = re.match(r"@compare\[([^\]]*)\]\n?(.*)", block, re.S)
+                cols = [c.strip() for c in head.group(1).split("|")]
+                rows_txt = head.group(2).strip()
+                if rows_txt.endswith("@end"):
+                    rows_txt = rows_txt[:-4].rstrip()
+                rows = []
+                for line in rows_txt.split("\n"):
+                    if not line.strip():
+                        continue
+                    cells = [c.strip() for c in line.split("|")]
+                    rows.append(cells)
+                out = ['<div class="compare">']
+                out.append('<div class="compare-row compare-head">')
+                for c in cols:
+                    out.append(f'<div class="compare-cell">{html.escape(c)}</div>')
+                out.append('</div>')
+                for cells in rows:
+                    out.append('<div class="compare-row">')
+                    for i, cell in enumerate(cells):
+                        lbl = (f'<span class="compare-label">{html.escape(cols[i])}</span>'
+                               if i > 0 and i < len(cols) else "")
+                        out.append(f'<div class="compare-cell">{lbl}{html.escape(cell)}</div>')
+                    out.append('</div>')
+                out.append('</div>')
+                return "".join(out)
+            return f"<p>{html.escape(block)}</p>"
+        body = "".join(render_body_block(p)
                        for p in it["body"].split("\n\n") if p.strip())
         content = f"""<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
 <article>
