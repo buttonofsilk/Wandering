@@ -817,7 +817,7 @@ footer{{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
 {f'<p class="back"><a href="/">&larr; Home</a>' + ('' if back_link[1] == "/" else f' <span class="sep">&middot;</span> <a href="{back_link[1]}">{back_link[0].replace(chr(38) + "larr; ", "")}</a>') + '</p>' if back_link else ''}
 {'<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>' if new_here else ''}
 {content}
-<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">{html.escape(AUTHOR)}</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995, 2020 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
 {after_footer}
 </div>
 <script>(function(){{var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){{navigator.mediaSession.metadata=new MediaMetadata({{title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}}]}});navigator.mediaSession.setActionHandler("seekbackward",function(){{a.currentTime=Math.max(0,a.currentTime-15);}});navigator.mediaSession.setActionHandler("seekforward",function(){{a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);}});}});}})();</script>
@@ -1225,7 +1225,7 @@ def write_feed(items):
 <link>{SITE_URL}</link>
 <description>{e(SITE_DESC)}</description>
 <language>en-us</language>
-<copyright>Scripture quotations taken from the (NASB) New American Standard Bible, Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by permission. All rights reserved. www.Lockman.org</copyright>
+<copyright>Scripture quotations taken from the (NASB) New American Standard Bible, Copyright 1960, 1971, 1977, 1995, 2020 by The Lockman Foundation. Used by permission. All rights reserved. www.Lockman.org</copyright>
 <lastBuildDate>{now}</lastBuildDate>
 <itunes:author>{e(SHOW_AUTHOR)}</itunes:author>
 <itunes:summary>{e(SITE_DESC)}</itunes:summary>
@@ -1244,7 +1244,7 @@ def write_feed(items):
                  if str(it.get("support", "")).lower() in ("true", "yes", "1") else "")
         desc = (f"{it['scripture']} - {it.get('body_plain', it['body'])}{_supn}\n\n"
                 "Scripture quotations taken from the (NASB) New American Standard Bible, "
-                "Copyright 1960, 1971, 1977, 1995 by The Lockman Foundation. Used by "
+                "Copyright 1960, 1971, 1977, 1995, 2020 by The Lockman Foundation. Used by "
                 "permission. All rights reserved. www.Lockman.org")
         x.append(f"""<item>
 <title>{e(it['title'])}</title>
