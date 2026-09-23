@@ -5,7 +5,7 @@ back_to: About
 back_url: /about/
 ---
 
-@banner[A monarch chrysalis, anchored by its button of silk](/chrysalis.jpg)
+![A monarch chrysalis, anchored by its button of silk](/chrysalis.jpg)
 
 # But Why Button of Silk?
 
@@ -109,4 +109,4 @@ And now it's where I record the daily reflections for Wandering Through God's Wo
 
 @end
 
-@banner[My secret place, clothes and all...where I abide in Christ.](/hope-closet.jpg)
+![My secret place, clothes and all...where I abide in Christ.](/hope-closet.jpg)
