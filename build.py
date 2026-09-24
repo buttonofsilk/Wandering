@@ -1192,7 +1192,9 @@ def build_archive(rest):
         for c in sorted(chapters):
             entries = sorted(chapters[c], key=lambda i: i["date"])
             openc = " open" if (bi == 0 and c == newest_ch) else ""
-            label = f"{b} {c}" if c else b
+            _override = next((e.get("chapter_label", "").strip()
+                              for e in entries if e.get("chapter_label", "").strip()), "")
+            label = _override if _override else (f"{b} {c}" if c else b)
             out.append(f'<details class="chap"{openc}>')
             out.append(f'<summary>{html.escape(label)}'
                        f'<span class="count">{len(entries)}</span></summary>')
