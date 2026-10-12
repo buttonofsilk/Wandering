@@ -44,7 +44,7 @@ jobs:
       - name: Build the site
         run: python3 build.py
 
-      -       - name: Publish anything that changed
+      - name: Publish anything that changed
         run: |
           git config user.name "Button of Silk"
           git config user.email "hope@buttonofsilk.org"
