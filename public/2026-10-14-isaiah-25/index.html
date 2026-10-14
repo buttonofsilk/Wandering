@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Stronghold and a Refuge</title>
+<meta name="description" content="After days of judgment, Isaiah 25 gives us room to linger over praise: God is a stronghold for the helpless, a refuge from the storm, and the One who will swall">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;600&family=Kalam:wght@400;700&family=Lato:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="alternate" type="application/rss+xml" title="Wandering Through God&#x27;s Word with Wonder" href="/feed.xml">
+<script src="/trail.js" defer></script>
+<style>
+:root {
+  --green:#1A2D1D; --sage:#3D6B80; --cream:#FCFCFB;
+  --tan:#E8E6DF; --ink:#1A2D1D; --muted:#1A2D1D;
+  --paper:#F7F3E8;
+}
+*{box-sizing:border-box}
+body{margin:0;overflow-x:hidden;background:var(--cream);color:var(--ink);
+ font:1.05rem/1.7 Georgia,"Times New Roman",serif}
+.wrap{max-width:40rem;margin:0 auto;padding:2rem 1.75rem 4rem;
+ background:rgba(251,249,244,.94);border-radius:2px}
+body.home .wrap{max-width:min(86vw,60rem)}
+body.prose .wrap{max-width:min(94vw,58rem);padding-left:5rem;padding-right:5rem}
+@media (max-width:720px){
+  body.prose .wrap{padding-left:1.25rem;padding-right:1.25rem}
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;
+ background:url("/hero.jpg") no-repeat center center;background-size:cover;
+ filter:grayscale(.25) sepia(.12);
+ opacity:.16;pointer-events:none}
+body.wide .wrap{max-width:min(86vw,80rem)}
+a{color:var(--green)}
+header.site{text-align:center;padding:0.5rem 0 0.5rem}
+header.site img{max-width:44rem;width:100%;height:auto}
+header.site .tag{color:var(--sage);font-style:italic;font-weight:600;margin-top:.5rem}
+h1{color:var(--green);font-weight:600;font-size:1.9rem;line-height:1.3;margin:0 0 .3rem}
+h2{color:var(--green);font-weight:600;font-size:1.35rem;margin:2.5rem 0 .5rem}
+.meta{color:var(--muted);font-size:1.12rem;margin-bottom:1.5rem}
+.scripture{color:var(--sage);font-style:italic}
+.band-wide{width:min(94vw,72rem);max-width:none;margin-left:50%;
+ transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}
+.band-full{width:100vw;max-width:none;margin-left:50%;
+ transform:translateX(-50%);margin-top:2.5rem;margin-bottom:2.5rem}
+.page-audio{margin:1.2rem 0 2rem}
+.graphic{margin:2.2rem 0;padding:0}
+.graphic.inset{max-width:30rem;margin-left:auto;margin-right:auto}
+.graphic img{width:100%;height:auto;display:block;border:1px solid var(--tan)}
+.graphic figcaption{text-align:center;font-style:italic;color:var(--sage);
+ font-size:.88rem;margin-top:.5rem}
+.page-audio audio{width:100%;max-width:32rem;display:block}
+.audio-label{font-style:italic;color:var(--sage);font-size:.95rem;margin:0 0 .5rem}
+details{margin:1rem 0 2rem}
+details summary{cursor:pointer;font-style:italic;color:var(--sage);
+ font-size:.95rem;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"";display:inline-block;width:0;height:0;
+ border-left:.4rem solid var(--sage);border-top:.28rem solid transparent;
+ border-bottom:.28rem solid transparent;opacity:.55;flex-shrink:0;
+ margin-right:.5rem;transform-origin:.15rem 50%;transition:transform .15s}
+details[open] > summary::before{transform:rotate(90deg)}
+.scripture a,.alongside a{color:inherit;text-decoration:none;
+ border-bottom:1px dotted var(--sage)}
+.scripture a:hover,.alongside a:hover{color:var(--sage)}
+.further{margin:2rem 0 0;font-style:italic;color:var(--sage);font-size:.95rem}
+.further a{color:inherit;text-decoration:none;border-bottom:1px dotted var(--sage)}
+.further a:hover{color:var(--green)}
+.alongside{color:var(--muted);font-style:italic;font-size:.85rem;
+ opacity:.8;margin:-1.1rem 0 1.5rem}
+audio{width:100%;margin:1.5rem 0}
+audio::-webkit-media-controls-enclosure{background:var(--paper);
+ border:1px solid var(--tan);border-radius:2rem}
+audio::-webkit-media-controls-panel{background:var(--paper)}
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display{color:var(--green);
+ font-family:Georgia,serif;text-shadow:none}
+.body-image{width:100%;height:auto;display:block;margin:1.8rem 0;
+ border:1px solid var(--tan)}
+.compare{margin:2.2rem 0;border:1px solid var(--tan);border-radius:2px;
+ overflow:hidden}
+.compare-row{display:grid;grid-template-columns:1fr 1.4fr 1.4fr}
+.compare-row:not(:last-child){border-bottom:1px solid var(--tan)}
+.compare-head{background:var(--green);color:var(--cream);
+ font-style:italic;font-size:.95rem}
+.compare-head .compare-cell{padding:.7rem .9rem}
+.compare-cell{padding:.85rem .9rem;font-size:.95rem;line-height:1.65;
+ border-right:1px solid var(--tan)}
+.compare-cell:last-child{border-right:none}
+.compare-row:not(.compare-head) .compare-cell:first-child{
+ background:var(--paper);font-style:italic;color:var(--sage);font-weight:600}
+.compare-label{display:none}
+@media (max-width:700px){
+  .compare-head{display:none}
+  .compare-row{display:block;padding:.9rem 1rem;
+   border-bottom:2px solid var(--tan)}
+  .compare-cell{padding:.3rem 0;border-right:none;display:block}
+  .compare-row:not(.compare-head) .compare-cell:first-child{
+   background:none;font-size:1.02rem;margin-bottom:.3rem}
+  .compare-label{display:block;font-style:italic;color:var(--sage);
+   font-size:.82rem;margin-top:.6rem}
+}
+.themes{margin-top:2rem}
+.walk{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:start;
+ margin:2.5rem 0 0;padding-top:1.5rem;border-top:1px solid var(--tan)}
+.walk a{display:flex;flex-direction:column;gap:.2rem;text-decoration:none}
+.walk a.next{align-items:flex-end;text-align:right;grid-column:3}
+.walk .here{font-style:italic;color:var(--muted);opacity:.6;font-size:.95rem;
+ text-align:center;white-space:nowrap;padding-top:1.1rem}
+.walk .dir{font-size:.85rem;font-style:italic;color:var(--sage);opacity:.8}
+.walk .ttl{font-size:1.05rem;font-style:italic;color:var(--green);line-height:1.4}
+.walk a:hover .ttl{color:var(--sage)}
+@media (max-width:560px){
+  .walk{grid-template-columns:1fr;gap:1rem;text-align:center}
+  .walk a,.walk a.next{align-items:center;text-align:center;grid-column:1}
+  .walk .here{padding-top:0;order:-1}
+}
+.themes span{display:inline-block;background:var(--tan);color:var(--green);
+ font-size:.8rem;padding:.2rem .7rem;border-radius:1rem;margin:0 .3rem .3rem 0}
+ul.list{list-style:none;padding:0}
+ul.list li{padding:1rem 0;border-bottom:1px solid var(--tan)}
+ul.list a{text-decoration:none;font-size:1.15rem}
+ul.list a:hover{text-decoration:underline}
+ul.list .sub{color:var(--muted);font-size:.88rem;margin-top:.2rem}
+.welcome p{margin:1.5rem 0}
+.today h3{margin:0 0 .3rem;font-size:1.4rem}
+.today h3 a{text-decoration:none;color:var(--green)}
+.today h3 a:hover{text-decoration:underline}
+.hero{width:100%;max-width:none;aspect-ratio:2/1;height:auto;object-fit:cover;object-position:center 78%;display:block;margin-top:1.5rem}
+.home-split{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
+ align-items:center;margin-top:4.5rem}
+.home-split .hero{margin-top:0}
+.home-split .welcome{padding-left:1.5rem}
+.home-split .welcome p{margin:0;font-size:1.15rem;line-height:1.9;max-width:34rem;
+ text-indent:1.4rem}
+@media (max-width:760px){
+  .home-split{grid-template-columns:1fr;gap:1.5rem}
+}
+.strip{width:100%;aspect-ratio:7/2;height:auto;object-fit:cover;object-position:center 30%;display:block;margin:1.5rem 0 1.5rem}
+body.prose .strip{width:100%;max-width:100%;margin-left:0;transform:none}
+.sprig{width:2.2rem;height:1.1rem;vertical-align:middle;color:var(--sage);display:inline-block}
+.sprig.flip{transform:scaleX(-1)}
+.enter{text-align:center;margin:0.4rem 0 0.8rem}
+.enter a{display:inline-block;text-decoration:none;font-size:1.5rem;color:var(--green)}
+.enter a:hover{color:var(--sage)}
+.enter a:hover .sprig{color:var(--green)}
+.enter-row{text-align:center;margin:0.6rem 0 0}
+.menu-corner{display:flex;justify-content:flex-end;margin:0 0 .3rem}
+@media (max-width:600px){
+  .menu-corner{justify-content:center;margin-bottom:.8rem}
+}
+.enter-row + p.enter{margin-top:0.2rem}
+.signs{position:relative;display:flex;justify-content:center;align-items:stretch;
+ gap:1.1rem;flex-wrap:wrap;margin:1.2rem auto 1.6rem;
+ max-width:50.2rem}
+.sign{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;
+ min-width:0;max-width:16rem;flex:1 1 11rem;
+ padding:.6rem 1.9rem .65rem 1.3rem;
+ background:var(--paper);border-left:3px solid var(--sage);
+ clip-path:polygon(0 0,calc(100% - 1.1rem) 0,100% 50%,calc(100% - 1.1rem) 100%,0 100%);
+ filter:drop-shadow(1px 0 0 var(--sage)) drop-shadow(-1px 0 0 var(--sage))
+ drop-shadow(0 1px 0 var(--sage)) drop-shadow(0 -1px 0 var(--sage))
+ drop-shadow(0 4px 5px rgba(26,45,29,.24));
+ text-decoration:none;text-align:left}
+.exp{display:grid;grid-template-columns:minmax(0,42%) minmax(0,1fr);
+ gap:3rem;align-items:center;margin-top:1.5rem}
+.exp > img{width:100%;height:auto;display:block;border:1px solid var(--tan)}
+.exp h1{font-weight:600;font-size:2.1rem;margin:0 0 .3rem;text-align:left}
+.exploring-lead{font-style:italic;color:var(--sage);margin:0 0 1rem}
+.trail{position:relative;height:31rem;margin:1.2rem 0 0}
+.trail svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.stop{position:absolute;left:0;right:0;transform:translateY(-50%);
+ text-decoration:none;display:block}
+.stop .dot{position:absolute;top:50%;margin-top:-.53rem;margin-left:-.53rem;
+ width:1.05rem;height:1.05rem;border-radius:50%;background:var(--paper);
+ border:3px solid var(--sage);box-shadow:0 1px 3px rgba(26,45,29,.22)}
+.stop .tx{position:absolute;top:50%;transform:translateY(-50%);
+ display:block;max-width:19rem}
+.stop .nm{display:block;font-family:"Kalam",Georgia,serif;font-size:1.34rem;
+ color:var(--green);line-height:1.15}
+.stop .ds{display:block;font-family:"Lato",Georgia,serif;font-style:italic;
+ font-size:.88rem;color:var(--sage);line-height:1.35}
+.stop:hover .dot{background:var(--sage)}
+.stop:hover .nm{color:var(--sage)}
+@media (max-width:760px){
+  .exp{grid-template-columns:1fr;gap:1.5rem}
+  .trail{height:auto;padding-left:1.7rem}
+  .trail svg{display:none}
+  .stop{position:static;transform:none;padding:.9rem 0;
+   border-bottom:1px solid rgba(232,230,223,.8)}
+  .stop:last-child{border-bottom:none}
+  .stop .dot{position:absolute;left:0 !important;margin-left:0;top:1.5rem}
+  .stop .tx{position:static;transform:none;max-width:none}
+}
+.vine,.vine-front{position:absolute;left:-3%;right:-3%;top:50%;
+ transform:translateY(-50%);width:106%;height:12rem;pointer-events:none;
+ overflow:visible;color:rgba(61,107,128,.46)}
+.vine{z-index:0}
+.vine-front{z-index:2}
+@media (max-width:760px){.vine,.vine-front{display:none}}
+.sign .lab{font-size:1.14rem;color:var(--green);line-height:1.25}
+.sign .sub{font-size:.85rem;font-style:italic;color:var(--sage);
+ margin-top:.1rem;line-height:1.35}
+.sign:hover{background:#F2EDDE}
+.sign:hover .lab{color:var(--sage)}
+@media (max-width:760px){
+  .signs{flex-direction:column;align-items:stretch;gap:.7rem}
+  .sign{max-width:none;flex:0 0 auto}
+}
+.back{text-align:center;margin:.2rem 0 0}
+.back a{display:inline-block;padding:.4rem .6rem;font-size:1.1rem;
+ font-style:italic;color:var(--sage);text-decoration:none}
+.back a:hover{color:var(--green)}
+.back .sep{color:var(--tan);margin:0 .3rem}
+.podcast-links{display:flex;gap:2.2rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0 0}
+.podcast-links a{color:var(--green);text-decoration:none;font-style:italic;font-size:1.1rem}
+.podcast-links a:hover{color:var(--sage)}
+.leaf{width:1.4rem;height:.85rem;vertical-align:middle;color:var(--sage);
+ display:inline-block;margin-left:.35rem;opacity:.7}
+.podcast-links a:hover .leaf{color:var(--green);opacity:1}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+ overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.inbox-bridge{text-align:center;font-style:italic;color:var(--green);margin:1.1rem 0 0}
+.invite{text-align:center;font-style:italic;color:var(--sage);
+ margin:1.8rem auto 0;max-width:32rem;line-height:1.7;font-size:1.02rem}
+.invite a{display:table;margin:.15rem auto 0;color:var(--green);
+ font-style:normal;text-decoration:none;border-bottom:1px dotted var(--sage)}
+.invite a:hover{color:var(--sage)}
+body.ways h1{text-align:center;font-size:2.3rem;margin-top:1.5rem}
+body.ways .lead{text-align:center;margin:.6rem auto 0;max-width:32rem}
+body.ways .podcast-links{margin:.7rem 0 0}
+.subscribe{margin:.8rem 0 1rem;text-align:center}
+.subscribe input[type=email]{padding:.55rem .8rem;border:1px solid var(--tan);background:var(--paper);
+ color:var(--ink);font-family:Georgia,serif;font-size:1rem;width:100%;max-width:20rem}
+.subscribe button{display:block;margin:.7rem auto 0;padding:.5rem 1.3rem;background:transparent;
+ color:var(--sage);border:1px solid var(--tan);font-family:Georgia,serif;font-style:italic;
+ font-size:.95rem;cursor:pointer}
+.subscribe button:hover{color:var(--green);border-color:var(--sage)}
+.subscribe .note{color:var(--muted);font-size:.82rem;opacity:.7;margin-top:.9rem}
+.home-saved{text-align:center;margin:2.6rem auto 0;max-width:36rem}
+.home-saved a{font-style:italic;font-size:1.2rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);
+ padding-bottom:.2rem;line-height:1.7}
+.home-saved a:hover{color:var(--sage)}
+.saved-here{text-align:center;margin:2.8rem 0 0}
+.saved-here a{font-style:italic;font-size:1.15rem;color:var(--green);
+ text-decoration:none;border-bottom:1px dotted var(--sage);padding-bottom:.2rem}
+.saved-here a:hover{color:var(--sage)}
+.home-verse{text-align:center;font-style:italic;color:var(--green);font-size:1.15rem;
+ max-width:36rem;margin:1.2rem auto 0;line-height:1.7}
+.new-here{text-align:center;margin:1.4rem 0 1.2rem}
+.new-here a{display:inline-block;padding:.6rem 1.3rem;border:1px solid var(--tan);
+ border-radius:2rem;background:transparent;font-size:1.05rem;font-style:italic;
+ color:var(--green);text-decoration:none}
+.new-here a:hover{border-color:var(--sage);color:var(--sage)}
+.new-here a:hover{color:var(--sage);opacity:1}
+.content-photo{max-width:22rem;width:100%;height:auto;display:block;margin:1.5rem auto;
+ border:1px solid var(--tan)}
+#but-why-button-of-silk{font-family:"Great Vibes",cursive;font-size:2.4rem;font-weight:normal;color:var(--green);text-align:center}
+.signature{font-family:"Great Vibes",cursive;font-size:4rem;color:var(--green);text-align:right;margin-top:1.5rem}
+.about-intro{display:flex;gap:2.5rem;align-items:center;margin:2rem 0}
+.about-photo{width:9rem;height:11rem;object-fit:cover;border-radius:6px;
+ border:1px solid var(--tan);flex-shrink:0}
+.about-intro-text p{margin:0 0 .8rem}
+.about-footer{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--tan)}
+.orientation{margin-bottom:1rem}
+.archive{margin-top:1rem}
+.archive details{border:none;margin:0}
+.archive .book > summary{font-size:1.25rem;color:var(--green);
+ padding:.7rem 0;border-bottom:1px solid var(--tan);cursor:pointer;
+ list-style:none;display:flex;align-items:center}
+.archive .chap > summary{font-size:1.05rem;font-style:italic;color:var(--sage);
+ padding:.5rem 0 .5rem 1.4rem;cursor:pointer;list-style:none;
+ display:flex;align-items:center}
+.archive summary::-webkit-details-marker{display:none}
+.archive .count{margin-left:auto;font-size:.85rem;font-style:normal;
+ color:var(--muted);opacity:.5}
+.archive .chap .list{padding-left:2.6rem;margin:.2rem 0 .8rem}
+body.list-cols .wrap ul{columns:14rem 3;column-gap:2.5rem;
+ margin:.6rem 0 1.6rem;padding-left:1.2rem}
+body.list-cols .wrap ul li{break-inside:avoid;padding:.12rem 0;
+ font-style:italic;color:var(--sage)}
+body.list-cols .wrap h2{margin-top:2rem}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:2.8rem 2.4rem;margin:2.2rem 0 1rem}
+.cards.two{grid-template-columns:repeat(2,minmax(0,1fr));gap:3rem}
+.card{border-top:1px solid var(--tan);padding-top:.9rem}
+.card h3{font-size:1.18rem;font-weight:normal;margin:0;line-height:1.35}
+.card p{font-style:italic;color:var(--sage);font-size:.98rem;
+ margin:.7rem 0 0;line-height:1.85}
+.card p:last-child{font-style:normal;color:var(--muted);font-size:.92rem;
+ opacity:.8;margin-top:.9rem;line-height:1.6}
+.ref{position:relative;display:inline-block}
+.ref-open{background:none;border:none;padding:0;font:inherit;color:inherit;
+ cursor:pointer;border-bottom:1px dotted var(--sage);text-align:left}
+.ref-open:hover{color:var(--green)}
+.ref-text{display:none;position:absolute;left:0;top:100%;z-index:40;
+ width:min(24rem,80vw);margin-top:.4rem;padding:1rem 1.1rem;
+ background:var(--paper);border:1px solid var(--tan);
+ box-shadow:0 8px 24px rgba(0,0,0,.12);border-radius:2px;
+ font-style:normal;color:var(--ink);font-size:.95rem;line-height:1.7;
+ text-align:left;white-space:normal}
+.ref.open .ref-text{display:block}
+.ref-text a{display:block;margin-top:.8rem;font-size:.85rem;
+ font-style:italic;color:var(--sage)}
+@media print{.ref-text{display:block;position:static;width:auto;
+ box-shadow:none;border:none;padding:.4rem 0}}
+.trail-aside{margin:1.4rem auto 0;padding-top:0;max-width:34rem;
+ text-align:center;font-style:italic;color:var(--sage);
+ font-size:.88rem;line-height:1.7;opacity:.85}
+.trail-aside a{color:var(--sage);border-bottom:1px dotted var(--sage)}
+.trail-aside a:hover{color:var(--green)}
+.safety{background:var(--paper);border:1px solid var(--sage);
+ border-left:4px solid var(--sage);padding:1.15rem 1.35rem;
+ margin:1.4rem 0 2.2rem;border-radius:2px}
+.safety p{margin:0 0 .7rem;font-size:1rem;line-height:1.7;color:var(--ink)}
+.safety p:last-child{margin-bottom:0}
+.safety p:first-child{font-weight:600;font-size:1.08rem;color:var(--green)}
+.safety a{color:var(--green)}
+.support{margin:-.4rem 0 1.7rem;padding:.6rem .95rem;
+ border-left:2px solid var(--tan);font-style:italic;color:var(--sage);
+ font-size:.95rem;line-height:1.7}
+.support a{color:var(--green)}
+.exitbar{display:none}
+body.quick-exit .exitbar{display:inline-flex;align-items:center;gap:.45rem;
+ position:fixed;top:.85rem;right:.85rem;z-index:80;padding:.5rem 1.05rem;
+ border-radius:2rem;background:var(--paper);border:1px solid var(--sage);
+ font-family:Georgia,serif;font-size:.95rem;font-style:italic;
+ color:var(--green);text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.14)}
+body.quick-exit .exitbar:hover{background:var(--sage);color:var(--cream)}
+@media (max-width:720px){
+  body.quick-exit .exitbar{top:auto;bottom:.85rem;right:.85rem}
+}
+@media print{.exitbar{display:none !important}}
+.btn-row{text-align:center;margin:2rem 0 .8rem}
+.btn{display:inline-block;padding:.65rem 1.5rem;border:1px solid var(--tan);
+ border-radius:2rem;font-style:italic;font-size:1.05rem;color:var(--green);
+ text-decoration:none;background:transparent}
+.btn:hover{border-color:var(--sage);color:var(--sage)}
+.btn-note{text-align:center;font-size:.88rem;color:var(--muted);
+ opacity:.7;margin:0 0 1rem}
+p.refs{font-style:italic;color:var(--sage);font-size:.98rem;
+ margin:-.4rem 0 1.4rem;line-height:1.7}
+.pairs{margin:2rem 0 1rem}
+.pair{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;
+ gap:.65rem;margin:0 0 1.3rem}
+.pair span{font-style:italic;color:var(--green);font-size:1.1rem}
+.pair-sprig{width:1.9rem;height:1.15rem;color:var(--sage);opacity:.6;display:block}
+.wrap > h1{text-align:center;clear:both;margin:1.5rem 0 1.2rem}
+blockquote.verse{text-align:center;border:none;padding:0;
+ margin:1.4rem auto;max-width:34rem;font-style:italic;color:var(--sage);
+ font-size:1.15rem;line-height:1.75}
+blockquote.verse cite{display:block;font-style:normal;font-size:1.05rem;
+ opacity:.9;margin-top:1rem}
+.content-photo.beside + blockquote.verse{display:flex;flex-direction:column;
+ justify-content:center;min-height:19rem;margin-top:0}
+@media (max-width:700px){
+  .content-photo.beside + blockquote.verse{display:block;min-height:0}
+}
+.flourish{text-align:center;clear:both;margin:2.8rem 0 3.2rem;
+ font-size:1.9rem;line-height:1.4;color:var(--green);letter-spacing:.01em}
+@media (max-width:700px){.flourish{font-size:1.5rem;margin:2rem 0 2.2rem}}
+.content-photo.beside{float:left;max-width:19rem;
+ margin:.4rem 2.4rem 1.2rem 0;border:none}
+.content-photo.banner{max-width:100%;width:100%;margin:2.5rem 0;border:none}
+h2{clear:both}
+blockquote.verse + h2{margin-top:1.6rem}
+.content-photo.banner + blockquote.verse{margin-top:1rem;margin-bottom:.6rem}
+@media (max-width:700px){
+  .content-photo.beside{float:none;max-width:14rem;margin:1rem auto}
+}
+.pair-and{font-style:italic;color:var(--green);opacity:.8;font-size:1.1rem}
+#take-a-deeper-look,
+#take-a-deeper-look + p{text-align:center}
+@media (max-width:820px){
+  .cards,.cards.two{grid-template-columns:1fr;gap:2rem}
+  .pair{gap:.5rem}
+}
+.intro{margin:1.5rem 0 2.5rem}
+.intro p{margin:0 0 .9rem;line-height:1.85}
+.intro p:last-child{margin-bottom:0}
+.lost{text-align:center;padding:3rem 0 4rem}
+.lost h1{font-size:2rem;font-weight:normal;margin:0 0 1rem}
+.lost p{color:var(--muted);opacity:.8}
+.lost-links{display:flex;gap:2rem;justify-content:center;margin-top:2.5rem}
+.lost-links a{font-style:italic;font-size:1.1rem;text-decoration:none}
+.come-curious{font-style:italic;margin-top:1rem}
+.paths{display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center;margin:2.5rem 0 1rem}
+.paths a{display:flex;flex-direction:column;align-items:center;gap:.7rem;
+ text-decoration:none;font-style:italic;font-size:1.05rem;color:var(--green);
+ width:11rem;text-align:center}
+.paths img{width:8rem;height:8rem;object-fit:cover;object-position:center;
+ border-radius:50%;border:1px solid var(--tan);display:block}
+.paths a[href="/why-button-of-silk/"] img{object-position:64% 48%}
+.paths a[href="/your-guide/"] img{object-position:center}
+.about-photo{object-position:center 30%}
+.paths a:hover{color:var(--sage)}
+.paths a:hover img{border-color:var(--sage)}
+.about-footer p{color:var(--muted);font-size:.95rem}
+.welcome-script{font-family:"Great Vibes",cursive;font-size:4rem;color:var(--green);margin:0}
+.letter p{margin:0 0 1rem}
+@media (max-width:600px){
+  .about-intro{flex-direction:column;align-items:center;text-align:center}
+  .about-photo{width:11rem;height:13rem}
+}
+.trail-wrap{position:relative;display:inline-block}
+.trail-toggle{display:inline-flex;align-items:center;gap:.55rem;
+ background:transparent;border:1px solid var(--sage);padding:.6rem 1.1rem;border-radius:2rem;
+ font-family:Georgia,serif;font-size:1.05rem;font-style:italic;color:var(--green);cursor:pointer}
+.trail-toggle:hover{border-color:var(--sage);color:var(--sage)}
+.trail-panel{position:absolute;top:calc(100% + .5rem);right:0;left:auto;
+ transform:translateY(-8px);
+ width:14rem;background:var(--paper);border:1px solid var(--tan);
+ box-shadow:0 8px 24px rgba(0,0,0,.10);z-index:50;padding:1rem 1.2rem;
+ display:flex;flex-direction:column;gap:.8rem;
+ opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.trail-panel.open{opacity:1;pointer-events:auto;transform:translateY(0)}
+.trail-panel a{font-size:1.05rem;font-style:italic;color:var(--green);text-decoration:none}
+.trail-panel a:hover{color:var(--sage)}
+.trail-panel a.tp-saved{padding-bottom:.8rem;margin-bottom:.1rem;
+ border-bottom:1px solid var(--tan);line-height:1.45}
+blockquote{margin:2rem 0;padding:1rem 1.5rem;border-left:3px solid var(--sage);
+ color:var(--sage);font-style:italic;font-size:1.1rem}
+h3{color:var(--green);font-weight:600;font-size:1.1rem;margin:1.8rem 0 .3rem}
+.wrap ul:not(.list){margin:.5rem 0 1.5rem;padding-left:1.4rem}
+.wrap ul:not(.list) li{margin-bottom:.4rem}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;margin-top:1.5rem}
+.split img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.split-menu h1{margin-top:0}
+.split-menu ul{list-style:none;padding:0;margin:1.5rem 0 0}
+.split-menu li{padding:.9rem 0;border-bottom:1px solid var(--tan)}
+.split-menu li a{font-size:1.35rem;text-decoration:none}
+.split-menu li a:hover{color:var(--sage)}
+.split-menu li.soon{color:var(--muted);opacity:.55}
+.split-menu li.soon span{font-size:1.35rem}
+.split-menu li.group > span{font-size:1.35rem;color:var(--green)}
+.split-menu li.group .sub-list li a{font-size:1.2rem;color:var(--green)}
+.split-menu li.group .sub-list li a:hover{color:var(--sage)}
+.split-menu .tag-small{display:block;font-size:.95rem;font-style:italic;color:var(--sage);margin-top:.25rem}
+.split-menu .sub-list{list-style:none;padding:0 0 0 1.2rem;margin:.5rem 0 0;border:none}
+.split-menu .sub-list li{padding:.4rem 0 .4rem 1.9rem;border:none;position:relative}
+.split-menu .sub-list li::before{content:"";position:absolute;left:0;top:.62rem;
+ width:1.05rem;height:1.05rem;opacity:.55;
+ background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='%233D6B80'%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(45 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(45 12 12)'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(90 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(90 12 12)'/%3E%3Cellipse cx='12' cy='5.8' rx='1.9' ry='3.7' transform='rotate(135 12 12)'/%3E%3Cellipse cx='12' cy='18.2' rx='1.9' ry='3.7' transform='rotate(135 12 12)'/%3E%3C/g%3E%3Ccircle cx='12' cy='12' r='2.4' fill='%231A2D1D'/%3E%3C/svg%3E") no-repeat center/contain}
+.split-menu .sub-list li:hover::before{opacity:1}
+.split-menu .sub-list li a{font-size:1.1rem;color:var(--sage)}
+.split-menu .sub-list li a:hover{color:var(--green)}
+footer .foot-link{color:inherit;text-decoration:none;
+ border-bottom:1px dotted var(--tan)}
+footer .foot-link:hover{color:var(--green);border-bottom-color:var(--sage)}
+body.on-about .fl-about,body.on-guide .fl-guide{
+ pointer-events:none;border-bottom:none}
+footer .saved-link{display:block;margin:0 auto 1.4rem;font-size:1.15rem;
+ font-style:italic;color:var(--green);text-decoration:none;
+ padding-bottom:.9rem;border-bottom:1px solid var(--tan);max-width:22rem}
+footer .saved-link:hover{color:var(--green)}
+body.no-saved-link footer .saved-link{display:none}
+.translation-note{display:block;font-size:.72rem;font-style:italic;opacity:.65;
+ margin:.6rem auto 0;max-width:34rem;line-height:1.55}
+.translation-note a{color:inherit;text-decoration:underline}
+@media (max-width:640px){
+  .split{grid-template-columns:1fr}
+  .split img{aspect-ratio:16/9}
+}
+footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--tan);
+ text-align:center;color:var(--sage);font-size:.85rem}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;line-height:1.5}
+  body::before{display:none}
+  .wrap{max-width:100%;background:none;padding:0;border-radius:0}
+  body.prose .wrap,body.home .wrap,body.wide .wrap{max-width:100%;
+   padding-left:0;padding-right:0}
+  .menu-corner,.trail-wrap,.back,.new-here,.subscribe,.inbox-bridge,
+  .walk,.strip,.hero,.paths,.enter,.podcast-links,.lost-links{display:none}
+  header.site img{max-width:11rem;filter:grayscale(1)}
+  a{color:#000;text-decoration:none}
+  h1,h2,h3{page-break-after:avoid;color:#000}
+  li,blockquote,.card{page-break-inside:avoid}
+  details{display:block}
+  details>summary{display:none}
+  details>*{display:block !important}
+  footer{border-top:1px solid #999;color:#000;font-size:8pt;margin-top:2rem}
+  .translation-note{opacity:1;max-width:100%}
+}
+</style>
+</head>
+<body class="prose no-saved-link">
+<a class="exitbar" href="https://www.google.com" rel="noopener">Quick exit &times;</a>
+<div class="wrap">
+<div class="menu-corner">
+<div class="trail-wrap">
+<button class="trail-toggle" aria-label="Open trail guide">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
+  Trail Guide
+</button>
+<div id="trail-panel" class="trail-panel">
+  <a class="tp-saved" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a>
+  <a href="/reflections/">Reflections</a>
+  <a href="/exploring/">Exploring</a>
+  <a href="/ways-to-wander/">Ways to Wander</a>
+  <a href="/about/">About</a>
+</div>
+</div>
+</div>
+<header class="site">
+  <a href="/"><img src="/wordmark.png" alt="Wandering Through God&#x27;s Word with Wonder"></a>
+  
+  
+</header>
+
+<p class="back"><a href="/">&larr; Home</a> <span class="sep">&middot;</span> <a href="/reflections/">All Reflections</a></p>
+<p class="new-here"><a href="/trailhead-guide/">New here? Start with the Trailhead Guide &rarr;</a></p>
+<img class="strip" src="/hero.jpg" alt="An open Bible with a forest and stream growing from its pages">
+<article>
+<h1>A Stronghold and a Refuge</h1>
+<div class="meta">October 14, 2026 &middot; <span class="scripture"><a href="https://www.biblegateway.com/passage/?search=Isaiah+25&version=NASB1995" target="_blank" rel="noopener">Isaiah 25</a></span></div>
+<div class="alongside"><a href="https://www.biblegateway.com/passage/?search=Revelation+1%3A15&version=NASB1995" target="_blank" rel="noopener">Revelation 1:15</a></div>
+
+<audio controls preload="metadata" src="https://pub-6c9bf33f564e4cc0ac3329b9f8469991.r2.dev/2026-10-14.mp3" data-title="A Stronghold and a Refuge" data-scr="Isaiah 25"></audio>
+<p>After days of judgment, Isaiah 25 gives us room to linger over praise: God is a stronghold for the helpless, a refuge from the storm, and the One who will swallow up death and wipe tears from every face. Sitting with those words led us simply to worship—to think about the songs we sing, what they say about God, and the beauty of spending time in His Word without needing every reading to produce a grand insight.</p>
+
+<details><summary>Read the transcript instead</summary><p>Good morning. Today we are in Isaiah 25.</p><p>And after many days of judgment, and many days of being told by the Lord that, you know, if we&#x27;re prideful, if we are dependent upon ourselves, if we trust others instead of God, if we put other things before Him—like, it&#x27;s been day after day of Him explaining that judgment will come, and then what that judgment looks like.</p><p>And that has been—it&#x27;s been a little brutal, guys.</p><p>I love that I&#x27;ve gotten better at, like, seeing God as all of the things all mixed up together with His character of, you know, just and merciful and righteous and loving and grace and all of these things.</p><p>And we finally get to 25, in which it&#x27;s finally mostly positive.</p><p>Verses 10 through 12, Isaiah, you know, goes back to, you know, striking down people.</p><p>But we have nine and a half verses of just God&#x27;s goodness and the praise for His favor.</p><p>And it&#x27;s a song.</p><p>I assume that this was probably sung back then.</p><p>I think it would be beautiful to hear this song.</p><p>Of course, I think anything that&#x27;s worship is beautiful.</p><p>I love—I love being able to worship God with music.</p><p>Some of my favorite verses today, ones that really jumped out to me, were verse 4:</p><p>&quot;For You have been a stronghold for the helpless,
+A stronghold for the poor in his distress,
+A refuge from the storm, a shade from the heat;
+For the breath of the ruthless
+Is like a rain storm against a wall.&quot;</p><p>I love just the dream of God being our stronghold.</p><p>And then we have verse 7:</p><p>&quot;And on this mountain He will destroy the covering which is over all peoples,
+The veil which is stretched over all nations.&quot;</p><p>Verse 8:</p><p>&quot;He will swallow up death for all time,
+And the Lord GOD will wipe tears away from all faces,
+And He will remove the disgrace of His people from all the earth;
+For the LORD has spoken.&quot;</p><p>The disgrace of His people.</p><p>But I love the imagery of God wiping our tears away.</p><p>Powerful.</p><p>Mighty.</p><p>In Revelation, it talks about how His voice is like that of seven rivers.</p><p>Just so loud and so powerful and strong.</p><p>And yet He will wipe the tears away from all the faces.</p><p>He will.</p><p>And death—</p><p>Death is hard.</p><p>Saying goodbye to people is so hard.</p><p>I don&#x27;t know.</p><p>As I&#x27;ve been sitting here with this, it made me stop and think about the difference between worship songs.</p><p>There are songs that are about God, and we praise Him.</p><p>We talk about His names.</p><p>We sing about His character and what He does.</p><p>Then there are songs that help our heart posture come into alignment with God.</p><p>Then, I don&#x27;t know.</p><p>I feel like some of our music today is more about talking about us to Him.</p><p>And I don&#x27;t know.</p><p>It&#x27;s not the same as talking about Him.</p><p>I really miss the old simpler songs.</p><p>The &quot;Amazing Grace.&quot;</p><p>&quot;The Old Rugged Cross.&quot;</p><p>&quot;His Eye Is on the Sparrow.&quot;</p><p>They&#x27;re just—I don&#x27;t know.</p><p>They&#x27;re simpler.</p><p>They&#x27;re more direct.</p><p>And they just—the stories behind them.</p><p>I—I have somewhere, I have two whole volumes that talk about the hymns of God and the praise songs and what stories led to them.</p><p>And just some of those songs came out of terrible tragedy.</p><p>And &quot;Just as I Am&quot; came from a woman who was really sick and hardly ever left her house because of the illness.</p><p>And—and she was invited somewhere, and he goes, &quot;You come just as you are.&quot;</p><p>And that made her think about her God and how He accepts us just as we are.</p><p>I love that.</p><p>And I love having a period of time—</p><p>And it looks like—I&#x27;m excited also for tomorrow because it also looks like chapter 26 is more about God.</p><p>And then we have 27, which is God&#x27;s blessing for Israel.</p><p>So we could have a few days of talking about God&#x27;s blessings, who He is.</p><p>And I guess it&#x27;s another day where I just got to sit with God&#x27;s Word.</p><p>Got to enjoy reading it.</p><p>It made me think about worship and the songs I choose to play.</p><p>But it wasn&#x27;t—</p><p>I was just getting the opportunity to sit with God and think about who He is.</p><p>Did anything jump out of this for you?</p><p>Anything different?</p><p>I really enjoy hearing what you guys learned from these chapters too.</p><p>Oh dear Heavenly Father, Lord, as this chapter says, You are worthy to be praised.</p><p>You are our stronghold and a refuge from the storm.</p><p>And I think that—thank You, but that is who You are.</p><p>Lord, that we would have ears to hear and eyes to see.</p><p>That we would be filled with Your discernment, Lord.</p><p>Oh Lord, please be with us as we go out and do the things You placed in front of us.</p><p>That we would be good workers.</p><p>That we would be good caretakers.</p><p>That we would be good stewards of what You have given us.</p><p>Please help us be present for the people in our lives and to love on them.</p><p>Oh Lord, it is in the precious name of Jesus I pray. Amen.</p><p>Thank you for joining me today as we wander through God&#x27;s Word with wonder.</p></details>
+
+<div class="themes"><span>Worship</span><span>God&#x27;s Character</span><span>Faith &amp; Trust</span></div>
+</article>
+<p class="saved-here"><a href="/reconciled-to-god/">What does it mean to be reconciled to God?</a></p>
+<nav class="walk"><a class="prev" href="/2026-10-13-isaiah-24/"><span class="dir">&larr; Previous</span><span class="ttl">Isaiah 24</span></a><span class="here">Isaiah 25</span><span></span></nav>
+<p class="invite">I would love to hear from you.<a href="mailto:hope@buttonofsilk.org">hope@buttonofsilk.org</a></p>
+<footer><a class="saved-link" href="/reconciled-to-god/">What does it mean to be reconciled to God?</a><a class="foot-link fl-about" href="/about/">Button of Silk</a> &middot; <a class="foot-link fl-guide" href="/your-guide/">Hope A Little</a><span class="translation-note">Scripture quotations taken from the (NASB&reg;) New American Standard Bible&reg;, Copyright &copy; 1960, 1971, 1977, 1995, 2020 by The Lockman Foundation. Used by permission. All rights reserved. <a href="https://www.lockman.org" target="_blank" rel="noopener">www.Lockman.org</a></span></footer>
+
+</div>
+<script>(function(){var a=document.querySelector("audio[data-title]");if(a===null)return;if(("mediaSession" in navigator)===false)return;a.addEventListener("play",function(){navigator.mediaSession.metadata=new MediaMetadata({title:a.dataset.title,artist:a.dataset.scr,album:"Wandering Through God’s Word with Wonder",artwork:[{src:"/cover.jpg",sizes:"3000x3000",type:"image/jpeg"}]});navigator.mediaSession.setActionHandler("seekbackward",function(){a.currentTime=Math.max(0,a.currentTime-15);});navigator.mediaSession.setActionHandler("seekforward",function(){a.currentTime=Math.min(a.duration||1e9,a.currentTime+30);});});})();</script>
+<script>window.addEventListener("pageshow",function(e){if(e.persisted){window.scrollTo(0,0);}});</script>
+<script>document.addEventListener("click",function(e){var x=e.target.closest(".exitbar");if(x){e.preventDefault();window.location.replace(x.href);}});</script>
+<script>document.addEventListener("click",function(e){var b=e.target.closest(".ref-open");document.querySelectorAll(".ref.open").forEach(function(o){if(!b||o!==b.parentNode)o.classList.remove("open");});if(b)b.parentNode.classList.toggle("open");});</script>
+</body>
+</html>
