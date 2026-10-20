@@ -5,6 +5,8 @@ scripture: Ecclesiastes 3:1-8
 tagline: Take his life as an example for being wildly in love with Jesus and sharing Him wherever we go.
 themes: [Suffering & Perseverance, Love & Service, Faith & Trust]
 audio: 2026-10-20.mp3
+size: 5698221
+duration: 474
 transcript: |
   Good morning. Today we are pausing Isaiah, and we're going to be in Ecclesiastes 3:1-8.
 
